@@ -57,7 +57,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     public function executeFull()
     {
         $collectionProducts = $this->_catalogCollection->create();
-        $collectionPages = $this->_fishpigPostCollection->create();
+        $collectionPages = $this->_fishpigPostCollection->create()->addPostTypeFilter('products');
 
         $pageIds = [];
         $associatedIds = [];
