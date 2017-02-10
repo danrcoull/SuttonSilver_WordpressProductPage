@@ -1,0 +1,21 @@
+{
+    "name": "suttonsilver/module-wordpressproductpage",
+    "description": "",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Daniel Coull",
+            "email": "d.coull@suttonsilver.co.uk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "SuttonSilver\\WordpressProductPage\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
