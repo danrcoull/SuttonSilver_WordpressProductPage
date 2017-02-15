@@ -70,6 +70,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
             $associatedIds[] = $pId = $this->createUpdateWpPage($product);
 
             $product->setData('associated_page', $pId);
+            $product->setData('url_key',$product->getUrlKey());
             $product->save();
 
         }
@@ -81,9 +82,6 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
 
         $diff = array_diff($pageIds,$associatedIds );
         $this->deleteWpPages($diff);
-        $this->_logger->addDebug('Page Ids:'.print_r($pageIds,true));
-        $this->_logger->addDebug('Associated Ids:'.print_r($associatedIds,true));
-        $this->_logger->addDebug('Unassociated Ids:'.print_r($diff,true));
 
     }
 
@@ -120,7 +118,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $url =$this->_storeManager->getStore()->getBaseUrl();
 
         $newPost = null;
-        $newPost = clone $this->_fishpigPost;
+        $newPost = $this->_fishpigPost;
 
         $newPost->load($product->getData('associated_page'));
 
@@ -140,7 +138,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     {
         foreach($ids as $id) {
             $newPost = null;
-            $newPost = clone $this->_fishpigPost;
+            $newPost = $this->_fishpigPost;
             $newPost->load($id);
             $newPost->setPostName('__trashed');
             $newPost->setPostStatus('trash');
