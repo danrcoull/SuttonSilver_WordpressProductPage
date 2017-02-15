@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<wordpress>
+    <shortcodes>
+        <shortcode id="product" class="SuttonSilver\WordpressProductPage\Shortcode\Product" sortOrder="40" />
+    </shortcodes>
+</wordpress>

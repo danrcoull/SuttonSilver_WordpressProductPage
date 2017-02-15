@@ -22,7 +22,6 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         \FishPig\WordPress\Model\Post $fishpigPost,
         \Magento\Framework\Logger\Monolog $logger, //log injection
         \FishPig\WordPress\Model\ResourceModel\Post\CollectionFactory $fishpigPostCollection,
-        \FishPig\WordPress\Model\Post $fishpigPost,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $catalogCollection,
         \Magento\Catalog\Api\ProductRepositoryInterfaceFactory $productRepositoryFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -96,10 +95,10 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
      */
     public function executeList(array $ids)
     {
-        foreach($ids as $product)
+        foreach($ids as $id)
         {
-            $product = clone $this->_productRepositoryFactory->create();
-            $product = $product->getById($product);
+            $product = $this->_productRepositoryFactory->create();
+            $product = $product->getById($id);
             $associatedIds[] = $this->createUpdateWpPage($product);
         }
     }
@@ -118,7 +117,6 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
 
     public function createUpdateWpPage($product)
     {
-        //die(var_dump($product->getName()));
         $url =$this->_storeManager->getStore()->getBaseUrl();
 
         $newPost = null;
@@ -133,8 +131,6 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost->setGuid($url.'?p=' . $newPost->getId() . '&post_type=' . $newPost->getPostType());
         $newPost->setPostStatus('publish');
         $newPost->save();
-
-
 
         return $newPost->getId();
 

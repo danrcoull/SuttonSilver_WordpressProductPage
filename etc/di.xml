@@ -3,4 +3,6 @@
 	<type name="Magento\Framework\App\FrontControllerInterface">
 		<plugin disabled="false" name="SuttonSilver_WordpressProductPage_Plugin_Magento_Framework_App_FrontControllerInterface" sortOrder="10" type="SuttonSilver\WordpressProductPage\Plugin\Magento\Framework\App\FrontControllerInterface"/>
 	</type>
+
+	<preference for="FishPig\WordPress\Helper\Filter" type="SuttonSilver\WordpressProductPage\Helper\Filter" />
 </config>
