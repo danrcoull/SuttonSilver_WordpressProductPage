@@ -70,7 +70,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
             $associatedIds[] = $pId = $this->createUpdateWpPage($product);
 
             $product->setData('associated_page', $pId);
-            $product->setData('url_key',$product->getUrlKey());
+            $product->setData('url_key', $product->getUrlKey());
             $product->save();
 
         }
