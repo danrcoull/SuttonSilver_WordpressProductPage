@@ -5,4 +5,5 @@
 	</type>
 
 	<preference for="FishPig\WordPress\Helper\Filter" type="SuttonSilver\WordpressProductPage\Helper\Filter" />
+	<preference for="Magento\Catalog\Block\Product\View" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" />
 </config>
