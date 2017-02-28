@@ -24,7 +24,7 @@ class FrontControllerInterface
         $this->state = $state;
     }
 
-    /***public function aroundDispatch(
+    public function aroundDispatch(
         \Magento\Framework\App\FrontControllerInterface $subject,
         \Closure $proceed,
         \Magento\Framework\App\RequestInterface $request
@@ -38,12 +38,12 @@ class FrontControllerInterface
         )
         {
             $resultRedirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
-            $resultRedirect->setUrl(str_replace('/products','',$url));
+            $resultRedirect->setUrl(str_replace('/products/wordpress-','',$url));
             return $resultRedirect;
         }else {
             $result = $proceed($request);
         }
 
         return $result;
-    }**/
+    }
 }
