@@ -125,7 +125,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost->setPostTitle($product->getName());
 
         $newPost->setPostType('products');
-        $newPost->setPostName($product->getUrlKey());
+        $newPost->setPostName('wordpress-'.$product->getUrlKey());
         $newPost->setGuid($url.'?p=' . $newPost->getId() . '&post_type=' . $newPost->getPostType());
         $newPost->setPostStatus('publish');
         $newPost->save();
@@ -140,7 +140,6 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
             $newPost = null;
             $newPost = $this->_fishpigPost;
             $newPost->load($id);
-            $newPost->setPostName('__trashed');
             $newPost->setPostStatus('trash');
             $newPost->save();
         }

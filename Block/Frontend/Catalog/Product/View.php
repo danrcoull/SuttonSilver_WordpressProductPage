@@ -7,6 +7,7 @@ use Magento\Catalog\Model\Product;
 class View extends \Magento\Catalog\Block\Product\View {
 
     protected $_fishpig;
+    protected $_filter;
 
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
@@ -19,17 +20,32 @@ class View extends \Magento\Catalog\Block\Product\View {
         \Magento\Customer\Model\Session $customerSession,
         ProductRepositoryInterface $productRepository,
         \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency,
-        \FishPig\WordPress\Model\PostFactory $fishpigPost,
+        \FishPig\WordPress\Model\App\Factory $factory,
+        \SuttonSilver\WordpressProductPage\Helper\Filter $filter,
         array $data = []
     )
     {
-        $this->_fishpig = $fishpigPost;
+        $this->_fishpig = $factory;
+        $this->_filter = $filter;
+
         parent::__construct($context, $urlEncoder, $jsonEncoder, $string, $productHelper, $productTypeConfig, $localeFormat, $customerSession, $productRepository, $priceCurrency, $data);
     }
 
     public function getPost() {
-        $id = $this->getData('associated_page');
-        $post = $this->_fishpig->create()->load($id);
+        $id = $this->getProduct()->getData('associated_page');
+        $factory = $this->_fishpig->getFactory('Post')->create();
+        $post = $factory->load($id);
         return $post;
+    }
+
+    public function getPostById($id)
+    {
+        $post = $this->_fishpig->getFactory('Post')->create()->load($id);
+        return $post;
+    }
+
+    public function getFilter()
+    {
+        return $this->_filter;
     }
 }

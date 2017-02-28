@@ -24,7 +24,7 @@ class FrontControllerInterface
         $this->state = $state;
     }
 
-    public function aroundDispatch(
+    /***public function aroundDispatch(
         \Magento\Framework\App\FrontControllerInterface $subject,
         \Closure $proceed,
         \Magento\Framework\App\RequestInterface $request
@@ -45,5 +45,5 @@ class FrontControllerInterface
         }
 
         return $result;
-    }
+    }**/
 }

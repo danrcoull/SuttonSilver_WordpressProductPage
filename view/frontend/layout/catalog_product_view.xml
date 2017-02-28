@@ -13,8 +13,24 @@
     <update handle="catalog_product_opengraph" />
     <update handle="page_calendar"/>
     <body>
-        <referenceContainer name="sidebar.additional">
-            <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart" as="addtocart" template="product/view/addtocart.phtml"/>
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content" template="product/view/content.phtml" />
         </referenceContainer>
+
+        <referenceContainer name="sidebar.main">
+            <container name="addto.cart.sidebar" htmlTag="div" htmlClass="siderbar-cart" />
+        </referenceContainer>
+
+        <move element="catalog.product.related" destination="content" after="product.info.content" />
+        <move element="catalog.product.upsell" destination="content" after="product.info.content" />
+        <move element="product.info.price" destination="addto.cart.sidebar" />
+
+        <referenceContainer name="product.info.main" remove="true" />
+        <referenceContainer name="product.info.media" remove="true" />
+        <referenceContainer name="product.info.stock.sku" remove="true" />
+        <referenceContainer name="content.aside" remove="true" />
+
+        <referenceBlock name="product.info.details" remove="true" />
+        <referenceBlock name="wishlist_sidebar" remove="true" />
     </body>
 </page>

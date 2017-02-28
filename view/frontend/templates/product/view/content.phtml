@@ -1,7 +1,4 @@
 <?php
 $post = $this->getPost();
-$content = $post->getMetaValue('main_content');
-?>
+echo $post->clean($post->getMainContent());
 
-
-this is the new content...
