@@ -33,12 +33,12 @@ class FrontControllerInterface
         $baseUrl = $this->storeManager->getStore()->getBaseUrl();
         $url = $this->urlInterface->getCurrentUrl();
         if(
-            strpos($url, "product") &&
+            strpos($url, "products/wordpress-") &&
             $this->state->getAreaCode() == \Magento\Framework\App\Area::AREA_FRONTEND
         )
         {
             $resultRedirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
-            $resultRedirect->setUrl(str_replace('/products/wordpress-','',$url));
+            $resultRedirect->setUrl(str_replace('products/wordpress-','',$url));
             return $resultRedirect;
         }else {
             $result = $proceed($request);
