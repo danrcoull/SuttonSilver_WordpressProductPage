@@ -5,7 +5,8 @@ class Post extends \FishPig\WordPress\Model\Post {
 
     public function getMainContent(){
         $all = $this->getAllMetaValues();
-        return $this->_filter->process($this->getMetaValue('main_content', $this));
+        $content =  $this->_filter->process($this->getMetaValue('main_content', $this));
+        return $content;
     }
 
     public function clean($content)

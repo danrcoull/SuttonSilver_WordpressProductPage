@@ -1,6 +1,7 @@
 <?php
 namespace SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Boolean;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product;
 
@@ -8,6 +9,8 @@ class View extends \Magento\Catalog\Block\Product\View {
 
     protected $_fishpig;
     protected $_filter;
+
+    private $productId;
 
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
@@ -32,7 +35,13 @@ class View extends \Magento\Catalog\Block\Product\View {
     }
 
     public function getPost() {
-        $id = $this->getProduct()->getData('associated_page');
+        if($this->getProductId()) {
+            $product = $this->productRepository->getById($this->getProductId());
+        }else {
+            $product = $this->getProduct();
+        }
+        $id = $product->getData('associated_page');
+
         $factory = $this->_fishpig->getFactory('Post')->create();
         $post = $factory->load($id);
         return $post;
@@ -48,4 +57,15 @@ class View extends \Magento\Catalog\Block\Product\View {
     {
         return $this->_filter;
     }
+
+    public function getProductId(){
+        return $this->productId;
+    }
+
+    public function setProductId($id)
+    {
+        $this->productId = $id;
+        return $this;
+    }
+
 }
