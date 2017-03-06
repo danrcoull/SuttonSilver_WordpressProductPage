@@ -13,9 +13,9 @@
     <update handle="catalog_product_opengraph" />
     <update handle="page_calendar"/>
     <body>
-        <referenceContainer name="content">
+        <referenceContainer name="product.info.content">
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundles"
-                   template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml" after="product.info.content" />
+                   template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml"  />
         </referenceContainer>
         <referenceContainer name="before.body.end">
             <block class="Magento\Framework\View\Element\Template" name="product.info.bundles.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />

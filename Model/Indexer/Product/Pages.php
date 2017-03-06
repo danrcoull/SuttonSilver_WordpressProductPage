@@ -97,7 +97,10 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         {
             $product = $this->_productRepositoryFactory->create();
             $product = $product->getById($id);
-            $associatedIds[] = $this->createUpdateWpPage($product);
+            $id =  $this->createUpdateWpPage($product);
+            $product->setData('associated_page', $id);
+            $product->setData('url_key', $product->getUrlKey());
+            $product->save();
         }
     }
 
@@ -110,7 +113,10 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     public function executeRow($id)
     {
         $product = $this->_productRepositoryFactory->create()->getById($id);
-        $this->createUpdateWpPage($product);
+        $id = $this->createUpdateWpPage($product);
+        $product->setData('associated_page', $id);
+        $product->setData('url_key', $product->getUrlKey());
+        $product->save();
     }
 
     public function createUpdateWpPage($product)

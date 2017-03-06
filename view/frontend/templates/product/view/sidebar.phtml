@@ -1,0 +1,43 @@
+<?php
+$post = $this->getPost();
+$contentBefore = $post->getMetaValue('product_blocks_before_units');
+$contentAfter = $post->getMetaValue('product_blocks_after_units');
+?>
+<nav id="productScroll" class="">
+    <ul class="nav nav-pills nav-stacked">
+        <li><a href="#introduction" class="circle"><span>Introduction</span></a></li>
+        <?php
+        if ($contentBefore != null) {
+            foreach ($contentBefore as $row) {
+                foreach ($row as $field) {
+                    if ($field instanceof WP_Post) {
+                        $id = preg_replace("/[^-[:^punct:]]/", "",strtolower(str_replace(" ","-",$field->post_title)));
+                        ?>
+                        <li><a href="#<?php echo $id; ?>" class="circle"><span><?php echo $field->post_title; ?></a></span>
+                        </li>
+                        <?php
+                    }
+                }
+            }
+        }
+        ?>
+        <li><a href="#units" class="circle"><span>Units</a></span></li>
+        <?php
+
+        if ($contentAfter != null) {
+            foreach ($contentAfter as $row) {
+                foreach ($row as $field) {
+                    if ($field instanceof WP_Post) {
+                        $id = preg_replace("/[^-[:^punct:]]/", "",strtolower(str_replace(" ","-",$field->post_title)));
+                        ?>
+                        <li><a href="#<?php echo $id; ?>" class="circle"><span><?php echo $field->post_title; ?></a></span>
+                        </li>
+                        <?php
+                    }
+                }
+            }
+        }
+        ?>
+        <li><a href="#related" class="circle"><span>Related</a></span></li>
+    </ul>
+</nav>

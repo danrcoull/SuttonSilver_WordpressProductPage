@@ -54,7 +54,7 @@ class InstallData implements InstallDataInterface
                 'comparable' => false,
                 'visible_on_front' => false,
                 'used_in_product_listing' => false,
-                'unique' => true,
+                'unique' => false,
                 'apply_to' => '',
                 'system' => 1,
                 'group' => 'General',

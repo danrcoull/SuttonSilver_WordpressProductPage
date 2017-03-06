@@ -1,4 +1,32 @@
 <?php
-$post = $this->getPost();
-echo $post->clean($post->getMainContent());
+    $post = $this->getPost();
+    $contentBefore =  $post->getMetaValue('product_blocks_before_units');
+    $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
+
+    echo $post->clean($post->getMainContent());
+
+    if($contentBefore != null) {
+        foreach ($contentBefore as $row) {
+            foreach ($row as $field) {
+                if ($field instanceof WP_Post) {
+                    $newPost = $this->getPostById($field->ID);
+                    echo $post->clean($newPost->getMainContent());
+                }
+            }
+        }
+    }
+
+    echo $block->getChildHtml('product.info.bundles');
+
+    if($contentAfter != null) {
+        foreach ($contentAfter as $row) {
+            foreach ($row as $field) {
+                if ($field instanceof WP_Post) {
+                    $newPost = $this->getPostById($field->ID);
+                    echo $post->clean($newPost->getMainContent());
+                }
+            }
+        }
+    }
+?>
 

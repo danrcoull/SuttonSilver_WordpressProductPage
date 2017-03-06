@@ -12,17 +12,35 @@
     <update handle="catalog_product_opengraph" />
     <update handle="page_calendar"/>
     <body>
+
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content" template="SuttonSilver_WordpressProductPage::product/view/content.phtml" />
+            <container name="product.info.related" htmlTag="div" htmlId="related" htmlClass="wrapper-block related-container" />
         </referenceContainer>
 
         <referenceContainer name="sidebar.main">
             <container name="addto.cart.sidebar" htmlTag="div" htmlClass="siderbar-cart" />
+            <block class="Magento\Catalog\Block\Product\View" name="product.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
         </referenceContainer>
 
-        <move element="catalog.product.related" destination="content" after="product.info.content" />
-        <move element="catalog.product.upsell" destination="content" after="product.info.content" />
         <move element="product.info.price" destination="addto.cart.sidebar" />
+
+
+        <referenceBlock name="catalog.product.related">
+            <action method='setTemplate'>
+                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/list/items.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="catalog.product.upsell">
+            <action method='setTemplate'>
+                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/list/items.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <move element="catalog.product.related" destination="product.info.related" />
+        <move element="catalog.product.upsell" destination="product.info.related" />
+        <move element="page.main.title" destination="content" before="product.info.content" />
 
         <referenceContainer name="product.info.main" remove="true" />
         <referenceContainer name="product.info.media" remove="true" />
