@@ -7,6 +7,7 @@ var config = {
     map: {
         '*': {
             ajaxproduct: 'SuttonSilver_WordpressProductPage/js/ajaxproduct',
+            scrollnav: 'SuttonSilver_WordpressProductPage/js/scrollnav'
         }
     }
 };

@@ -19,11 +19,14 @@
         </referenceContainer>
 
         <referenceContainer name="sidebar.main">
-            <container name="addto.cart.sidebar" htmlTag="div" htmlClass="siderbar-cart" />
+            <container name="addto.cart.sidebar" htmlTag="div" htmlClass="siderbar-cart" >
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart" template="SuttonSilver_WordpressProductPage::product/view/addtocart.phtml" after="product.info.price"/>
+            </container>
             <block class="Magento\Catalog\Block\Product\View" name="product.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
         </referenceContainer>
 
-        <move element="product.info.price" destination="addto.cart.sidebar" />
+        <move element="product.info.price" destination="addto.cart.sidebar" before="product.info.addtocart" />
+
 
 
         <referenceBlock name="catalog.product.related">
@@ -41,6 +44,7 @@
         <move element="catalog.product.related" destination="product.info.related" />
         <move element="catalog.product.upsell" destination="product.info.related" />
         <move element="page.main.title" destination="content" before="product.info.content" />
+
 
         <referenceContainer name="product.info.main" remove="true" />
         <referenceContainer name="product.info.media" remove="true" />

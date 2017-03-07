@@ -1,0 +1,82 @@
+define([
+    "jquery",
+    'bootstrapjs'
+], function($) {
+    "use strict";
+
+    var scrollNav = {
+        options: {
+            parPosition: []
+
+        },
+        _init: function () {
+            $('.wrapper-block').each(function () {
+                scrollNav.options.parPosition.push($(this).offset().top);
+            });
+
+            scrollNav._onClick();
+            scrollNav._onScroll();
+            scrollNav._stick();
+        },
+        _onClick: function (event) {
+            $('#productScroll a').on('click', function (event) {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top
+                }, 500);
+                $('#productScroll a').removeClass('active');
+                $(this).addClass('active');
+
+                event.preventDefault();
+            });
+            return this;
+        },
+        _stick: function() {
+            var $sticky = $('.sidebar');
+            var $stickyrStopper = $('.main');
+            if (!!$sticky.offset()) { // make sure ".sticky" element exists
+
+                var generalSidebarHeight = $sticky.innerHeight();
+                var stickyTop = $sticky.offset().top;
+                var stickOffset = 50;
+                var stickyStopperPosition = $stickyrStopper.offset().top + $stickyrStopper.height();
+                var stopPoint = stickyStopperPosition - generalSidebarHeight - stickOffset;
+                var diff = stopPoint + stickOffset;
+
+                $(window).on('scroll', function () { // scroll event
+                    var windowTop = $(window).scrollTop(); // returns number
+                    console.log(diff);
+                    console.log(stopPoint);
+                    console.log(windowTop);
+
+                    if (windowTop <  diff - generalSidebarHeight && windowTop > stickyTop - generalSidebarHeight) {
+
+                        $sticky.css({"margin-top": (windowTop +stickOffset)});
+                    } else if(windowTop == stickyTop){
+                        $sticky.css({"margin-top" : 0});
+                    }
+                });
+            }
+        },
+        _onScroll: function (event) {
+            $(window).on('scroll', function () {
+                var position = $(document).scrollTop() + 100,
+                    index = -1;
+                for (var i = 0; i < scrollNav.options.parPosition.length; i++) {
+                    if (position <= scrollNav.options.parPosition[i]) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index == -1) {
+                    index = 0;
+                }
+
+                $('#productScroll a').removeClass('active');
+                $('#productScroll a:eq(' + index + ')').addClass('active');
+            });
+            return this;
+        }
+    };
+
+    return scrollNav;
+});
