@@ -8,10 +8,13 @@
 
 /** @var $block \Magento\Catalog\Block\Product\View */
 ?>
-<?php $_product = $block->getProduct(); ?>
+<?php $_product = $block->getProduct();
+$post = $block->getPost();
+?>
 <?php $buttonTitle = __('Add to Cart'); ?>
 <?php if ($_product->isSaleable()): ?>
 <div class="box-tocart">
+    <div class="inner">
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()): ?>
         <div class="field qty">
@@ -37,6 +40,18 @@
             </button>
             <?php echo $block->getChildHtml('', true) ?>
         </div>
+    </div>
+    <div class="application">
+        <p><span class="underline-text">
+                <a href="<?php echo $post->getMetaValue('application_form'); ?>" download="<?php echo $post->getPostName();?>">
+                    Download Application Form
+                </a>
+            </span>
+        </p>
+    </div>
+    </div>
+    <div class="cart-footer">
+            <a class="single-units btn-blue-standard" href="#">Single Units From £120</a>
     </div>
 </div>
 <?php endif; ?>
