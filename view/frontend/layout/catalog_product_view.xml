@@ -12,6 +12,8 @@
     <update handle="catalog_product_opengraph" />
     <update handle="page_calendar"/>
     <body>
+        <attribute name="itemtype" value="http://schema.org/Product" />
+        <attribute name="itemscope" value="itemscope"/>
 
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content" template="SuttonSilver_WordpressProductPage::product/view/content.phtml" />
@@ -33,6 +35,7 @@
             <action method='setTemplate'>
                 <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/list/items.phtml</argument>
             </action>
+
         </referenceBlock>
 
         <referenceBlock name="catalog.product.upsell">

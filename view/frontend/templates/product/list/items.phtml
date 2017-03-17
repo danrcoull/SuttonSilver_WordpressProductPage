@@ -179,13 +179,34 @@ switch ($type = $block->getType()) {
                         </div>
                             <div class="content">
 
+                                <?php $post = $this->getPostById($_item->load($_item->getId())->getData('associated_page'));
+                                   echo  $post->getName();
+                                ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <div class="inner">
-                        <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-                    </div>
+                         <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
+                            <div class="actions">
+                                <?php
+
+                                ?>
+                                    <a class="action tocart primary btn-blue-standard"
+                                       href="<?php echo $_item->getProductUrl(); ?>"
+                                       title="<?php /* @escapeNotVerified */ echo __('View') ?>">
+                                        <span><?php /* @escapeNotVerified */ echo __('View') ?></span>
+                                    </a>
+                                    <form data-role="tocart-form" action="<?php echo $this->getAddToCartUrl($_item); ?>" method="post" class="add-to-cart-related">
+                                    <?php echo $block->getBlockHtml('formkey')?>
+                                        <button class="action tocart primary btn-blue-standard"
+                                                data-post='<?php /* @escapeNotVerified */ echo $block->getPostData($_item); ?>'
+                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart1') ?>">
+                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                        </button>
+                                    </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <?php endforeach ?>
