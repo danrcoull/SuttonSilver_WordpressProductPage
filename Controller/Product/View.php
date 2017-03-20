@@ -40,16 +40,27 @@ class View extends \Magento\Framework\App\Action\Action
             $title = $title->setTemplate('Magento_Theme::html/title.phtml')->toHtml();
 
             $main = $layout
-                ->createBlock('\Magento\Catalog\Block\Product\View')
+                ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
                 ->setProductId($productId)
                 ->setTemplate('SuttonSilver_WordpressProductPage::product/view/content.phtml')
                 ->toHtml();
 
+            $main2 = $layout
+                ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ProductList\Related')
+                ->setProductId($productId)
+                ->setType('related')
+                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-items.phtml')
+                ->toHtml();
 
-            $sidebar = '';
+            $sidebar = $layout
+                ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
+                ->setProductId($productId)
+                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml')
+                ->toHtml();
+
 
             $data['title'] = $title;
-            $data['main'] = $main;
+            $data['main'] = $main.$main2;
             $data['sidebar'] = $sidebar;
 
         }

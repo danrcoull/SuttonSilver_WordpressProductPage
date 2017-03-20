@@ -1,7 +1,8 @@
 define([
     "jquery",
-    'mage/template'
-], function($,template){
+    'mage/template',
+    'scrollnav'
+], function($,template,scrollnav){
     "use strict";
 
 
@@ -51,6 +52,7 @@ define([
                 var html = template(ajaxproduct.options.productModal, {content:data});
                 $(ajaxproduct.options.productModal).html(html);
                 $(ajaxproduct.options.productModal).modal('show');
+                scrollnav._init($('.modal .sidebar'), $('.modal .main'));
             });
         }
     };

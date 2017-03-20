@@ -1,0 +1,60 @@
+<?php $_product = $block->getProduct();
+$post = $block->getPost();
+?>
+
+<div class="siderbar-cart">
+    <div class="product-info-price">
+        <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $_product->getId(); ?>">
+
+<span class="price-container price-final_price tax weee">
+        <span id="product-price-<?php echo $_product->getId(); ?>" data-price-amount="<?php echo $_product->getFinalPrice(); ?>" data-price-type="" class="price-wrapper ">
+        <span class="price">£<?php echo $_product->getFinalPrice(); ?></span>    </span>
+
+        </span>
+        </div>
+    </div>
+    <?php if ($_product->isSaleable()): ?>
+        <div class="box-tocart">
+            <div class="inner">
+                <div class="fieldset">
+                    <?php if ($block->shouldRenderQuantity()): ?>
+                        <div class="field qty">
+                            <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
+                            <div class="control">
+                                <input type="number"
+                                       name="qty"
+                                       id="qty"
+                                       maxlength="12"
+                                       value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                                       title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
+                                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                                />
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="actions">
+                        <button type="submit"
+                                title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                                class="action primary tocart"
+                                id="product-addtocart-button">
+                            <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+                        </button>
+                        <?php echo $block->getChildHtml('', true) ?>
+                    </div>
+                </div>
+                <div class="application">
+                    <p><span class="underline-text">
+                <a href="<?php echo $post->getMetaValue('application_form'); ?>" download="<?php echo $post->getPostName();?>">
+                    Download Application Form
+                </a>
+            </span>
+                    </p>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <a class="single-units btn-blue-standard" href="#">Single Units From £120</a>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+

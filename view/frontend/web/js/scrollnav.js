@@ -6,10 +6,16 @@ define([
 
     var scrollNav = {
         options: {
-            parPosition: []
+            parPosition: [],
+            stickyStopper : null,
+            sticky : null
 
         },
-        _init: function () {
+        _init: function (sticky = $('#maincontent .sidebar'), stickyStopper = $('#maincontent .main') ) {
+
+            scrollNav.options.sticky = sticky;
+            scrollNav.options.stickyStopper = stickyStopper;
+
             $('.wrapper-block').each(function () {
                 scrollNav.options.parPosition.push($(this).offset().top);
             });
@@ -31,8 +37,8 @@ define([
             return this;
         },
         _stick: function() {
-            var $sticky = $('.sidebar');
-            var $stickyrStopper = $('.main');
+            var $sticky = scrollNav.options.sticky;
+            var $stickyrStopper =  scrollNav.options.stickyStopper;
             if (!!$sticky.offset()) { // make sure ".sticky" element exists
 
                 var generalSidebarHeight = $sticky.innerHeight();
@@ -44,9 +50,6 @@ define([
 
                 $(window).on('scroll', function () { // scroll event
                     var windowTop = $(window).scrollTop(); // returns number
-                    console.log(diff);
-                    console.log(stopPoint);
-                    console.log(windowTop);
 
                     if (windowTop <  diff - generalSidebarHeight && windowTop > stickyTop - generalSidebarHeight) {
 

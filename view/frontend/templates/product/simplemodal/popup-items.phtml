@@ -10,7 +10,7 @@ switch ($type = $block->getType()) {
             $title = __('Related Products');
             $items = $block->getAllItems();
             $limit = $block->getPositionLimit();
-            $shuffle = (int) $block->isShuffled();
+            $shuffle = (int)$block->isShuffled();
             $canItemsAddToCart = $block->canItemsAddToCart();
 
             $showAddTo = true;
@@ -18,7 +18,7 @@ switch ($type = $block->getType()) {
             $templateType = null;
             $description = false;
         }
-    break;
+        break;
 
     case 'related':
         /** @var \Magento\Catalog\Block\Product\ProductList\Related $block */
@@ -27,7 +27,7 @@ switch ($type = $block->getType()) {
             $class = $type;
 
             $image = 'related_products_list';
-            $title = __('Related Products');
+            $title = __('Available Packages');
             $items = $block->getItems();
             $limit = 0;
             $shuffle = 0;
@@ -38,7 +38,7 @@ switch ($type = $block->getType()) {
             $templateType = null;
             $description = false;
         }
-    break;
+        break;
 
     case 'upsell-rule':
         if ($exist = $block->hasItems()) {
@@ -49,7 +49,7 @@ switch ($type = $block->getType()) {
             $title = __('We found other products you might like!');
             $items = $block->getAllItems();
             $limit = $block->getPositionLimit();
-            $shuffle = (int) $block->isShuffled();
+            $shuffle = (int)$block->isShuffled();
 
             $showAddTo = false;
             $showCart = false;
@@ -57,7 +57,7 @@ switch ($type = $block->getType()) {
             $description = false;
             $canItemsAddToCart = false;
         }
-    break;
+        break;
 
     case 'upsell':
         /** @var \Magento\Catalog\Block\Product\ProductList\Upsell $block */
@@ -77,7 +77,7 @@ switch ($type = $block->getType()) {
             $description = false;
             $canItemsAddToCart = false;
         }
-    break;
+        break;
 
     case 'crosssell-rule':
         /** @var \Magento\Catalog\Block\Product\ProductList\Crosssell $block */
@@ -95,7 +95,7 @@ switch ($type = $block->getType()) {
             $description = false;
             $canItemsAddToCart = false;
         }
-    break;
+        break;
 
     case 'crosssell':
         /** @var \Magento\Catalog\Block\Product\ProductList\Crosssell $block */
@@ -113,7 +113,7 @@ switch ($type = $block->getType()) {
             $description = false;
             $canItemsAddToCart = false;
         }
-    break;
+        break;
 
     case 'new':
         if ($exist = $block->getProductCollection()) {
@@ -133,91 +133,93 @@ switch ($type = $block->getType()) {
             $description = ($mode == 'list') ? true : false;
             $canItemsAddToCart = false;
         }
-    break;
+        break;
 
     case 'other':
-    break;
+        break;
 }
 ?>
 
-<?php if ($exist):?>
-
-    <div class="block-title title">
-        <strong id="block-<?php /* @escapeNotVerified */ echo $class?>-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $title; ?></strong>
-    </div>
-    <div class="block-content content" aria-labelledby="block-<?php /* @escapeNotVerified */ echo $class?>-heading">
-        <div class="products wrapper grid products-grid products-<?php /* @escapeNotVerified */ echo $type; ?>">
+<?php if ($exist): ?>
+    <div class="related-container" id="related">
+        <div class="block-title title">
+            <strong id="block-<?php /* @escapeNotVerified */
+            echo $class ?>-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */
+                echo $title; ?></strong>
+        </div>
+        <div class="block-content content" aria-labelledby="block-<?php /* @escapeNotVerified */
+        echo $class ?>-heading">
+            <div class="products wrapper grid products-grid products-<?php /* @escapeNotVerified */
+            echo $type; ?>">
                 <?php $iterator = 0; ?>
                 <?php foreach ($items as $_item):
                     $iterator++;
-                    switch ($iterator)  {
-                        case 1:
-                            $class = 'green';
-                            break;
-                        case 2:
-                            $class = 'yellow';
-                            break;
-                        case 3:
-                            $class = 'orange';
-                            break;
-                    }
                     ?>
-                <div class="product product-<?php /* @escapeNotVerified */ echo $type; ?> <?php echo $class?>">
-                    <?php
-                    $specialprice = $_item->getSpecialPrice();
-                    $price = $_item->getPrice();
-                    ?>
-                    <div class="ribbon ribbon-top-right">
-                        <?php   if ($specialprice) :?>
-                           <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="col-xs-12 col-md-8">
-                        <div class="inner">
-                        <div class="product-title">
-                            <span><?php echo __($_item->getName()); ?></span>
-                            <div class="subtitle">
-                                <?php if($level = $_item->getLevel()) : ?>
-                                    <span class="level"><?php echo __('Level '.$level); ?></span>
-                                <?php endif; ?>
-                                <?php if($unitCount = $_item->getUnitCount()) : ?>
-                                    <span class="level"><?php echo __($unitCount.' Units'); ?></span>
-                                <?php endif; ?>
+                    <div class="product product-<?php /* @escapeNotVerified */
+                    echo $type; ?>">
+                        <?php
+                        $specialprice = $_item->getSpecialPrice();
+                        $price = $_item->getPrice();
+                        ?>
+                        <div class="ribbon ribbon-top-right">
+                            <?php   if ($specialprice) :?>
+                                <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                            <div class="inner">
+                                <div class="product-title">
+                                    <span><?php echo __($_item->getName()); ?></span>
+                                    <div class="subtitle">
+                                        <?php if ($level = $_item->getLevel()) : ?>
+                                            <span class="level"><?php echo __('Level ' . $level); ?></span>
+                                        <?php endif; ?>
+                                        <?php if ($unitCount = $_item->getUnitCount()) : ?>
+                                            <span class="level"><?php echo __($unitCount . ' Units'); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="content">
+
+                                    <?php $post = $this->getPostById($_item->load($_item->getId())->getData('associated_page'));
+                                    echo $post->getName();
+                                    ?>
+                                </div>
                             </div>
                         </div>
-                            <div class="content">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="inner">
 
-                                <?php $post = $this->getPostById($_item->load($_item->getId())->getData('associated_page'));
-                                   echo  $post->getName();
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="inner">
-                         <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-                            <div class="actions">
-                                <?php
 
-                                ?>
+                                <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $_item->getId(); ?>">
+
+                                    <span class="price-container price-final_price tax weee">
+                                        <span id="product-price-<?php echo $_item->getId(); ?>" data-price-amount="<?php echo $_item->getFinalPrice(true); ?>" data-price-type="finalPrice" class="price-wrapper ">
+                                            <span class="price">£<?php echo $_item->getFinalPrice(true); ?></span>
+                                        </span>
+
+                                    </span>
+
+                                    <span class="price-content text-center">
+                                    <span class="vat"><?php  echo __('Plus VAT'); ?></span>
+                                </span>
+
+
+                                </div>
+                                <div class="actions">
                                     <a class="action tocart primary btn-blue-standard"
                                        href="<?php echo $_item->getProductUrl(); ?>"
-                                       title="<?php /* @escapeNotVerified */ echo __('View') ?>">
-                                        <span><?php /* @escapeNotVerified */ echo __('View') ?></span>
+                                       title="<?php /* @escapeNotVerified */
+                                       echo __('View Packages') ?>">
+                                        <span><?php /* @escapeNotVerified */
+                                            echo __('View Packages') ?></span>
                                     </a>
-                                    <form data-role="tocart-form" action="<?php echo $this->getAddToCartUrl($_item); ?>" method="post" class="add-to-cart-related">
-                                    <?php echo $block->getBlockHtml('formkey')?>
-                                        <button class="action tocart primary btn-blue-standard"
-                                                data-post='<?php /* @escapeNotVerified */ echo $block->getPostData($_item); ?>'
-                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart1') ?>">
-                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
-                                        </button>
-                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 <?php endforeach ?>
+            </div>
         </div>
     </div>
-<?php endif;?>
+<?php endif; ?>
