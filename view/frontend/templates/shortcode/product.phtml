@@ -2,12 +2,12 @@
 $items = $this->getProducts();
 ?>
 <?php if ($items):?>
-
+<div id="related" class="product-shortcodes wrapper-block related-container">
     <div class="block-title title">
-        <strong id="block-<?php /* @escapeNotVerified */ echo $class?>-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $title; ?></strong>
+        <strong id="block-related-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $title; ?></strong>
     </div>
-    <div class="block-content content" aria-labelledby="block-<?php /* @escapeNotVerified */ echo $class?>-heading">
-        <div class="products wrapper grid products-grid products-<?php /* @escapeNotVerified */ echo $type; ?>">
+    <div class="block-content content" aria-labelledby="block-related-heading">
+        <div class="products wrapper grid products-grid products-related">
             <?php $iterator = 0; ?>
             <?php foreach ($items as $_item):
                 $iterator++;
@@ -23,7 +23,7 @@ $items = $this->getProducts();
                         break;
                 }
                 ?>
-                <div class="product product-<?php /* @escapeNotVerified */ echo $type; ?> <?php echo $class?>">
+                <div class="product product-related <?php echo $class; ?>">
                     <?php
                     $specialprice = $_item->getSpecialPrice();
                     $price = $_item->getPrice();
@@ -49,7 +49,7 @@ $items = $this->getProducts();
                             <div class="content">
                                 <?php
                                 $factory  = \Magento\Framework\App\ObjectManager::getInstance();
-                                $page = $factory->get('FishPig\WordPress\Model\Post')->load($_item->load($_item->getId())->getData('associated_page'));?>
+                                $post = $factory->get('FishPig\WordPress\Model\Post')->load($_item->load($_item->getId())->getData('associated_page'));?>
                                 <?php
                                 echo  $post->getExcerpt();
                                 ?>
@@ -58,7 +58,21 @@ $items = $this->getProducts();
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <div class="inner">
-                            <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
+                            <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $_item->getId(); ?>">
+
+                                    <span class="price-container price-final_price tax weee">
+                                        <span id="product-price-<?php echo $_item->getId(); ?>" data-price-amount="<?php echo $_item->getFinalPrice(true); ?>" data-price-type="finalPrice" class="price-wrapper ">
+                                            <span class="price">£<?php echo $_item->getFinalPrice(true); ?></span>
+                                        </span>
+
+                                    </span>
+
+                                <span class="price-content text-center">
+                                    <span class="vat"><?php  echo __('Plus VAT'); ?></span>
+                                </span>
+
+
+                            </div>
                             <div class="actions">
                                 <?php
 
@@ -83,4 +97,5 @@ $items = $this->getProducts();
             <?php endforeach ?>
         </div>
     </div>
+</div>
 <?php endif;?>

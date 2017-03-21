@@ -155,8 +155,7 @@ switch ($type = $block->getType()) {
                 <?php foreach ($items as $_item):
                     $iterator++;
                     ?>
-                    <div class="product product-<?php /* @escapeNotVerified */
-                    echo $type; ?>">
+                    <div class="product product-<?php /* @escapeNotVerified */echo $type; ?>">
                         <?php
                         $specialprice = $_item->getSpecialPrice();
                         $price = $_item->getPrice();

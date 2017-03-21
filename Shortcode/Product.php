@@ -19,7 +19,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
     public function __construct(
         \FishPig\WordPress\Model\App $app,
         \Magento\Framework\View\Element\Context $context,
-        \Magento\Catalog\Model\ProductRepository $productRepository
+        \Magento\Catalog\Api\ProductRepositoryInterfaceFactory $productRepositoryFactory
     )
     {
         $this->_app = $app;
@@ -27,7 +27,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
         $this->_layout = $context->getLayout();
         $this->_cache = $context->getCache();
         $this->_cacheState = $context->getCacheState();
-        $this->_productRepository = $productRepository;
+        $this->_productRepository = $productRepositoryFactory;
     }
 
 	/**
@@ -41,28 +41,24 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
 
 	protected function _process()
 	{
+        $value = $this->getValue();
 		if (($shortcodes = $this->_getShortcodesByTag($this->getTag())) !== false) {
 			foreach($shortcodes as $it => $shortcode) {
 				$params = $shortcode->getParams();
-
 
 				if (!$params->getSkus()) {
 					return $this;
 				}
 
-				$post = false;
-				
-				if ($params->getPostId() && (int)$params->getPostId() !== $this->getPostId()) {
-					$post = $this->_factory->getFactory('Post')->create()->load($params->getPostId());
-				}
-
 				if (($skus = trim($params->getSkus(), ',')) !== '') {
                   	$products = array();
                     $skus =   str_replace(array('&#8217;', '&#8242;'), '', utf8_encode($skus));
-					foreach(explode(',', $skus) as $skus) {
-                        $products[] = $this->_productRepository->get($skus);
+                    $repo = $this->_productRepository->create();
+					foreach(explode(',', $skus) as $sku) {
+                        $products[] = $repo->get($sku);
 					}
 				}
+
 
 
 				$html = $this->_layout->createBlock('\Magento\Framework\View\Element\Template')
@@ -72,7 +68,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
                     ->setProducts($products)
 					->toHtml();
 
-				$this->setValue(str_replace($shortcode['html'], $html, $this->getValue()));
+                $this->setValue(str_replace($shortcode['html'], $html, $value));
 			}
 		}
 		
