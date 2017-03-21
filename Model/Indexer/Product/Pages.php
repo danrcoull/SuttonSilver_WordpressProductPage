@@ -19,7 +19,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
 
     public function __construct
     (
-        \FishPig\WordPress\Model\Post $fishpigPost,
+        \SuttonSilver\WordpressProductPage\Model\PostFactory $fishpigPost,
         \Magento\Framework\Logger\Monolog $logger, //log injection
         \FishPig\WordPress\Model\ResourceModel\Post\CollectionFactory $fishpigPostCollection,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $catalogCollection,
@@ -57,23 +57,36 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     {
         $collectionProducts = $this->_catalogCollection->create();
         $collectionPages = $this->_fishpigPostCollection->create()->addPostTypeFilter('products');
+        $repo = $this->_productRepositoryFactory->create();
 
         $pageIds = [];
         $associatedIds = [];
 
-        $productRepo = $this->_productRepositoryFactory->create();
-
-        foreach($collectionProducts as $product)
+        //loop over product collection
+        foreach($collectionProducts as $cproduct)
         {
-            $id = $product->getId();
+            //get id from original loop
+            $id = $cproduct->getId();
 
-            $fullproduct = $productRepo->getById($id);
+            //create repo and get product
+            $product = $repo->getById($id,true);
 
-            $associatedIds[] = $pId = $this->createUpdateWpPage($fullproduct);
+            //create wp-page
+            $pId = $this->createUpdateWpPage($product);
 
+            //set associated
             $product->setData('associated_page', $pId);
-            $product->setData('url_key', $fullproduct->getUrlKey());
-            $product->save();
+
+            try {
+                //repo save product
+                $repo->save($product);
+            }catch(\Exception $e)
+            {
+                $this->_logger->addInfo($e->getMessage());
+            }
+
+            //get associated id
+            $associatedIds[] = $pId;
 
         }
 
@@ -85,6 +98,10 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $diff = array_diff($pageIds,$associatedIds );
         $this->deleteWpPages($diff);
 
+        $this->_logger->addDebug('Page Ids:'.print_r($pageIds,true));
+        $this->_logger->addDebug('Associated Ids:'.print_r($associatedIds,true));
+        $this->_logger->addDebug('Unassociated Ids:'.print_r($diff,true));
+
     }
 
     /**
@@ -95,14 +112,11 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
      */
     public function executeList(array $ids)
     {
-        $product = $this->_productRepositoryFactory->create();
-        foreach($ids as $id)
+        foreach($ids as $p)
         {
-            $fullproduct = $product->getById($id);
-            $id =  $this->createUpdateWpPage($fullproduct);
-            $product->setData('associated_page', $id);
-            $product->setData('url_key', $fullproduct->getUrlKey());
-            $product->save();
+            $product = $this->_productRepositoryFactory->create();
+            $product = $product->getById($p);
+            $associatedIds[] = $this->createUpdateWpPage($product);
         }
     }
 
@@ -115,17 +129,19 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     public function executeRow($id)
     {
         $product = $this->_productRepositoryFactory->create()->getById($id);
-        $id = $this->createUpdateWpPage($product);
-        $product->setData('associated_page', $id);
-        $product->setData('url_key', $product->getUrlKey());
-        $product->save();
+        $this->createUpdateWpPage($product);
     }
 
     public function createUpdateWpPage($product)
     {
         $url =$this->_storeManager->getStore()->getBaseUrl();
 
-        $newPost = $this->_fishpigPost->load($product->getData('associated_page'));
+        $newPost = null;
+        $newPost = $this->_fishpigPost->create();
+
+        if($product->getData('associated_page') == $this->getPostByKey($product)) {
+            $newPost->load($product->getData('associated_page'));
+        }
 
         $newPost->setPostTitle($product->getName());
 
@@ -133,19 +149,36 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost->setPostName('wordpress-'.$product->getUrlKey());
         $newPost->setGuid($url.'?p=' . $newPost->getId() . '&post_type=' . $newPost->getPostType());
         $newPost->setPostStatus('publish');
-        $newPost->save();
+        $newPost->setPostDate(date('Y/m/d'));
+
+        try {
+            $newPost->save();
+        }catch(\Exception $e)
+        {
+            $this->_logger->addInfo($e->getMessage());
+        }
+
 
         return $newPost->getId();
 
     }
 
+    public function getPostByKey($product){
+        $collectionPages = $this->_fishpigPostCollection->create()
+            ->addPostTypeFilter('products')
+            ->addFieldToFilter('post_name',$product->getUrlKey())
+            ->addFieldToFilter('post_title',$product->getName())
+            ->getFirstItem()
+            ->getId();
+        return $collectionPages;
+    }
+
     public function deleteWpPages($ids)
     {
-        $fpPost =$this->_fishpigPost;
-
         foreach($ids as $id) {
-
-            $newPost = $fpPost->load($id);
+            $newPost = null;
+            $newPost = $this->_fishpigPost->create();
+            $newPost->load($id);
             $newPost->setPostStatus('trash');
             $newPost->save();
         }

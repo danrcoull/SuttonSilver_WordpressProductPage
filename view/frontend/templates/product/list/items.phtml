@@ -188,7 +188,7 @@ switch ($type = $block->getType()) {
                             <div class="content">
 
                                 <?php $post = $this->getPostById($_item->load($_item->getId())->getData('associated_page'));
-                                   echo  $post->getName();
+                                   echo  $post->getExcerpt();
                                 ?>
                             </div>
                         </div>

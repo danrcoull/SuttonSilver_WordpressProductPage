@@ -46,7 +46,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
 				$params = $shortcode->getParams();
 
 
-				if (!$params->getIds()) {
+				if (!$params->getSkus()) {
 					return $this;
 				}
 
@@ -56,11 +56,11 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
 					$post = $this->_factory->getFactory('Post')->create()->load($params->getPostId());
 				}
 
-				if (($ids = trim($params->getIds(), ',')) !== '') {
+				if (($skus = trim($params->getSkus(), ',')) !== '') {
                   	$products = array();
-					$ids =   str_replace(array('&#8217;', '&#8242;'), '', utf8_encode($ids));
-					foreach(explode(',', $ids) as $id) {
-                        $products[] = $this->_productRepository->getById($id);
+                    $skus =   str_replace(array('&#8217;', '&#8242;'), '', utf8_encode($skus));
+					foreach(explode(',', $skus) as $skus) {
+                        $products[] = $this->_productRepository->get($skus);
 					}
 				}
 
