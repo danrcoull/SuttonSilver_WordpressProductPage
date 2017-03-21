@@ -61,16 +61,18 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $pageIds = [];
         $associatedIds = [];
 
+        $productRepo = $this->_productRepositoryFactory->create();
+
         foreach($collectionProducts as $product)
         {
             $id = $product->getId();
-            $product = clone $this->_productRepositoryFactory->create();
-            $product = $product->getById($id);
 
-            $associatedIds[] = $pId = $this->createUpdateWpPage($product);
+            $fullproduct = $productRepo->getById($id);
+
+            $associatedIds[] = $pId = $this->createUpdateWpPage($fullproduct);
 
             $product->setData('associated_page', $pId);
-            $product->setData('url_key', $product->getUrlKey());
+            $product->setData('url_key', $fullproduct->getUrlKey());
             $product->save();
 
         }
@@ -93,13 +95,13 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
      */
     public function executeList(array $ids)
     {
+        $product = $this->_productRepositoryFactory->create();
         foreach($ids as $id)
         {
-            $product = $this->_productRepositoryFactory->create();
-            $product = $product->getById($id);
-            $id =  $this->createUpdateWpPage($product);
+            $fullproduct = $product->getById($id);
+            $id =  $this->createUpdateWpPage($fullproduct);
             $product->setData('associated_page', $id);
-            $product->setData('url_key', $product->getUrlKey());
+            $product->setData('url_key', $fullproduct->getUrlKey());
             $product->save();
         }
     }
@@ -123,10 +125,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
     {
         $url =$this->_storeManager->getStore()->getBaseUrl();
 
-        $newPost = null;
-        $newPost = $this->_fishpigPost;
-
-        $newPost->load($product->getData('associated_page'));
+        $newPost = $this->_fishpigPost->load($product->getData('associated_page'));
 
         $newPost->setPostTitle($product->getName());
 
@@ -142,10 +141,11 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
 
     public function deleteWpPages($ids)
     {
+        $fpPost =$this->_fishpigPost;
+
         foreach($ids as $id) {
-            $newPost = null;
-            $newPost = $this->_fishpigPost;
-            $newPost->load($id);
+
+            $newPost = $fpPost->load($id);
             $newPost->setPostStatus('trash');
             $newPost->save();
         }
