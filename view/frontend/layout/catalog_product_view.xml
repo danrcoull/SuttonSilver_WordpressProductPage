@@ -12,6 +12,10 @@
     <update handle="catalog_product_opengraph" />
     <update handle="page_calendar"/>
     <body>
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="checkout_page_head_components" template="Magento_Catalog::js/components.phtml"/>
+        </referenceBlock>
+
         <attribute name="itemtype" value="http://schema.org/Product" />
         <attribute name="itemscope" value="itemscope"/>
 
@@ -21,13 +25,11 @@
         </referenceContainer>
 
         <referenceContainer name="sidebar.main">
-            <container name="addto.cart.sidebar" htmlTag="div" htmlClass="siderbar-cart" >
-                <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart" template="SuttonSilver_WordpressProductPage::product/view/addtocart.phtml" after="product.info.price"/>
-            </container>
-            <block class="Magento\Catalog\Block\Product\View" name="product.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart" template="SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
         </referenceContainer>
 
-        <move element="product.info.price" destination="addto.cart.sidebar" before="product.info.addtocart" />
+
 
 
 
@@ -53,9 +55,12 @@
         <referenceContainer name="product.info.media" remove="true" />
         <referenceContainer name="product.info.stock.sku" remove="true" />
         <referenceContainer name="content.aside" remove="true" />
+        <referenceContainer name="product.info.extrahint" remove="true" />
 
-        <referenceBlock name="product.info.details" remove="true" />
         <referenceBlock name="wishlist_sidebar" remove="true" />
         <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="product.info" remove="true" />
+        <referenceBlock name="product.info.overview" remove="true" />
+        <referenceBlock name="product.info.details" remove="true" />
     </body>
 </page>

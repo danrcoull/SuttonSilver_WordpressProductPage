@@ -139,7 +139,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost = null;
         $newPost = $this->_fishpigPost->create();
 
-        if($product->getData('associated_page') == $this->getPostByKey($product)) {
+        if($product->getData('associated_page')) {
             $newPost->load($product->getData('associated_page'));
         }
 

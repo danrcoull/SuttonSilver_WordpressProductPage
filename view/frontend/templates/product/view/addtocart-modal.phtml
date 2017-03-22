@@ -1,16 +1,4 @@
-<script>// <![CDATA[
-    require([
-        'jquery',
-        'ajaxproduct'
-    ], function ($,ajaxproduct) {
-        ajaxproduct._create();
-    });
-    // ]]>
-</script>
-
-
-
-<div class="modal fade" id="simple-product-modal" tabindex="-1" role="dialog" aria-labelledby="simpleProductModal">
+<div class="modal fade" id="addtocartmodal" tabindex="-1" role="dialog" aria-labelledby="addtocartmodal">
     <div class="modal-dialog modal-lg" role="document">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <div class="modal-content">
@@ -27,7 +15,7 @@
                         </div>
                     </div>
                     <div class="sidebar sidebar-main">
-                        <%= content.sidebar %>
+                        <?php echo $block->getChildHtml('product.info.modal',true); ?>
                     </div>
                 </div>
             </div>
