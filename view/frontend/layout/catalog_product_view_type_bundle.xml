@@ -24,6 +24,10 @@
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
+                    <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
+                </block>
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
                 <block class="Magento\Catalog\Block\Product\View" name="product.info.modal" template="Magento_Catalog::product/view/form.phtml">
                     <container name="product.info.form.content.modal" as="product_info_form_content">
                         <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.modal" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>

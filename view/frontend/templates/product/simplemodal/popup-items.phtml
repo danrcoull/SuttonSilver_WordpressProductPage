@@ -160,11 +160,7 @@ switch ($type = $block->getType()) {
                         $specialprice = $_item->getSpecialPrice();
                         $price = $_item->getPrice();
                         ?>
-                        <div class="ribbon ribbon-top-right">
-                            <?php   if ($specialprice) :?>
-                                <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
-                            <?php endif; ?>
-                        </div>
+
                         <div class="col-xs-12 col-md-8">
                             <div class="inner">
                                 <div class="product-title">
@@ -187,6 +183,11 @@ switch ($type = $block->getType()) {
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-4">
+                            <div class="ribbon ribbon-top-right">
+                                <?php   if ($specialprice && $price > $specialprice) :?>
+                                    <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
+                                <?php endif; ?>
+                            </div>
                             <div class="inner">
 
 

@@ -1,9 +1,11 @@
 <?php $_product = $block->getProduct();
 $post = $block->getPost();
-$buttonTitle = __("Add to Basket")
+$buttonTitle = __("Add to Basket");
 ?>
 
 <div class="siderbar-cart">
+    <div class="openText"><?php echo __('Ready To Buy?'); ?><span
+            class="glyphicon glyphicon-chevron-up pull-right"></span></div>
     <div class="product-info-price">
         <div class="price-box price-final_price" data-role="priceBox"
              data-product-id="<?php echo $_product->getId(); ?>">

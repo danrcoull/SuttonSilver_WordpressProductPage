@@ -1,4 +1,7 @@
 <div id="units" class="wrapper-block simple-products">
+
+    <?php echo $this->getChildHtml('product.info.simples.title',true); ?>
+
     <?php foreach ($this->getOptions() as $option):
         if ($option->getTitle() != 'Induction day') :
             ?>
@@ -10,7 +13,7 @@
                         <?php
                         foreach ($option->getSelections() as $data) :
                             $data->load($data->getId()); ?>
-                            <tr>
+                            <tr data-option-id="<?php echo $data->getId(); ?>">
                                 <td>
                                     <?php echo $data->getSku(); ?>
                                 </td>

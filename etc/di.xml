@@ -8,4 +8,5 @@
 	<preference for="FishPig\WordPress\Model\Post" type="SuttonSilver\WordpressProductPage\Model\Post" />
 	<preference for="Magento\Catalog\Block\Product\View" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" />
 	<preference for="Magento\Catalog\Block\Product\ProductList\Related" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ProductList\Related" />
+	<preference for="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View\Type\Bundle" />
 </config>
