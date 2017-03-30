@@ -65,11 +65,18 @@ $_post = $this->getPostById($_item->getData('associated_page'));
             <h3 class="title"><span>Do you Require an induction?</span>
                 <span class="subtitle">Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.</span>
                 <span class="subtitle error">
-                    <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These are not course specific soplease only selectone date if yoiu are enrolling on more than one course."); ?></span>
+                    <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("Thes are not course specific soplease only selectone date if yoiu are enrolling on more than one course."); ?></span>
                 </span>
             </h3>
+            <div class="content">
+                <div class="yes-no-wrapper">
+                    <a href="" data-induction="yes" class="active">Yes</a>
+                    <a href="" data-induction="no">No</a>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
 <div class="white">
@@ -78,12 +85,13 @@ $_post = $this->getPostById($_item->getData('associated_page'));
             4
         </div>
         <div class="text pull-left">
-            <h3 class="title"><span>I have read and understood the <span class="underline-text"><a href="">terms and conditions </a></span>
-                <span class="subtitle error">
+            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a href="">terms and conditions </a></span></h3>
+                <div class="subtitle error">
                     <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
-                </span>
-            </h3>
+                </div>
+
         </div>
     </div>
 </div>
-underline-text
+
+<div class="arrow"><span><?php echo __('Thank You, Please proceed to payment'); ?></span></div>

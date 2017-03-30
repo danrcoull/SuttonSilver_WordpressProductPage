@@ -24,10 +24,12 @@
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
+
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
                     <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
                 </block>
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
+
                 <block class="Magento\Catalog\Block\Product\View" name="product.info.modal" template="Magento_Catalog::product/view/form.phtml">
                     <container name="product.info.form.content.modal" as="product_info_form_content">
                         <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.modal" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
@@ -42,12 +44,28 @@
                                 <block class="Magento\Catalog\Block\Product\View\Options\Type\Date" as="date" template="Magento_Catalog::product/view/options/type/date.phtml"/>
                             </block>
                             <block class="Magento\Framework\View\Element\Html\Calendar" name="html_calendar" as="html_calendar" template="Magento_Theme::js/calendar.phtml"/>
+                            <block class="Magento\Catalog\Block\Product\View" name="bundle.product.view.options.notice.modal" template="Magento_Bundle::catalog/product/view/options/notice.phtml"/>
+                            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundle.options.modal" as="type_bundle_options" template="Magento_Bundle::catalog/product/view/type/bundle/options.phtml" before="-">
+                                <container name="product.info.bundle.options.top.modal" as="product_info_bundle_options_top">
+                                    <block class="Magento\Catalog\Block\Product\View" name="bundle.back.button.modal" as="backButton" before="-" template="Magento_Bundle::catalog/product/view/backbutton.phtml"/>
+                                </container>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Select" name="product.info.bundle.options.select.modal" as="select"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Multi" name="product.info.bundle.options.multi.modal" as="multi"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Radio" name="product.info.bundle.options.radio.modal" as="radio"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Checkbox" name="product.info.bundle.options.checkbox.modal" as="checkbox"/>
+                            </block>
                         </block>
                         <block class="Magento\Catalog\Block\Product\View" name="product.info.options.wrapper.bottom.modal" as="product_options_wrapper_bottom" template="Magento_Catalog::product/view/options/wrapper/bottom.phtml">
                             <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.additional.modal" as="product.info.addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
                         </block>
                     </block>
+                    <referenceBlock name="product.info.form.options.modal">
+                        <container name="bundle.product.options.wrapper.modal" htmlTag="div" htmlClass="bundle-options-wrapper" after="product.info.form.options.modal" />
+                    </referenceBlock>
+                    <move element="product.info.options.wrapper.modal" destination="bundle.product.options.wrapper.modal" before="-" />
+                    <move element="product.info.options.wrapper.bottom.modal" destination="bundle.product.options.wrapper.modal" after="product.info.options.wrapper.modal" />
                 </block>
+
             </block>
         </referenceContainer>
     </body>
