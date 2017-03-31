@@ -1,4 +1,4 @@
-<div class="modal fade" id="addtocartmodal" tabindex="-1" role="dialog" aria-labelledby="addtocartmodal">
+<div class="modal fade" id="addtocartmodal" tabindex="-1" role="dialog" aria-hidden="true"  aria-labelledby="addtocartmodal">
     <div class="modal-dialog modal-lg" role="document">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <div class="modal-content">
@@ -23,3 +23,60 @@
         </div>
     </div>
 </div>
+
+<div id="termsModal" class="modal fade modal-child" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="termsModal" aria-hidden="true" data-modal-parent="#addtocartmodal">
+    <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-inner-shadow">
+                    These are the Terms and conditions.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>// <![CDATA[
+    require([
+        'jquery',
+        'bootstrapjs-datepicker'
+    ], function ($) {
+        $('.modal-child').on('show.bs.modal', function () {
+            var modalParent = $(this).attr('data-modal-parent');
+            $(modalParent).css('opacity', 0);
+        });
+
+        $('.modal-child').on('hidden.bs.modal', function () {
+            var modalParent = $(this).attr('data-modal-parent');
+            $(modalParent).css('opacity', 1);
+            if ($('body').hasClass('modal-open') == false) {
+                $('body').addClass('modal-open');
+            };
+        });
+
+
+
+        $('.induction .yes-no-wrapper a').on('click',function(event){
+            if($(this).hasClass('active') == false)
+            {
+                $('.induction .yes-no-wrapper a').removeClass('active');
+                $(this).addClass('active');
+                if($(this).text() == 'Yes')
+                {
+                    $('#datetimepicker12').datetimepicker({
+                        inline: true,
+                        sideBySide: false,
+                        format: "dd MM yyyy"
+                });
+
+                }else{
+                    $('#datetimepicker12').data("DateTimePicker").destroy();
+                }
+            }
+            event.preventDefault();
+        });
+
+    });
+    // ]]>
+</script>

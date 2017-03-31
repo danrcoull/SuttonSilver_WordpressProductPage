@@ -56,7 +56,7 @@ $_post = $this->getPostById($_item->getData('associated_page'));
     </div>
 </div>
 
-<div class="white">
+<div class="white induction">
     <div class="add-to-cart-title">
         <div class="circle-with-text small pull-left">
             3
@@ -70,9 +70,10 @@ $_post = $this->getPostById($_item->getData('associated_page'));
             </h3>
             <div class="content">
                 <div class="yes-no-wrapper">
-                    <a href="" data-induction="yes" class="active">Yes</a>
-                    <a href="" data-induction="no">No</a>
+                    <a href="" data-induction="yes" >Yes</a>
+                    <a href="" data-induction="no" class="active">No</a>
                 </div>
+                <div id="datetimepicker12"></div>
             </div>
         </div>
     </div>
@@ -85,7 +86,7 @@ $_post = $this->getPostById($_item->getData('associated_page'));
             4
         </div>
         <div class="text pull-left">
-            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a href="">terms and conditions </a></span></h3>
+            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span></h3>
                 <div class="subtitle error">
                     <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
                 </div>

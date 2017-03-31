@@ -143,6 +143,8 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
             $newPost->load($product->getData('associated_page'));
         }
 
+        $this->_logger->addInfo("Loaded Product Id :".$product->getData('associated_page')." Loaded Post:".$newPost->getId());
+
         $newPost->setPostTitle($product->getName());
 
         $newPost->setPostType('products');
@@ -150,6 +152,8 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost->setGuid($url.'?p=' . $newPost->getId() . '&post_type=' . $newPost->getPostType());
         $newPost->setPostStatus('publish');
         $newPost->setPostDate(date('Y/m/d'));
+
+        $this->_logger->addInfo($newPost->setPostName());
 
         try {
             $newPost->save();
