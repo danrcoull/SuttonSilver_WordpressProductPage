@@ -1,0 +1,34 @@
+<?php
+$_item = $this->getProduct();
+$_post = $this->getPostById($_item->getData('associated_page'));
+
+$contentBefore =  $_post->getMetaValue('product_blocks_before_units');
+$contentAfter  =  $_post->getMetaValue('product_blocks_after_units');
+
+$terms = "";
+
+if($contentBefore != null) {
+    foreach ($contentBefore as $row) {
+        foreach ($row as $field) {
+            if ($field instanceof WP_Post) {
+                $newPost = $this->getPostById($field->ID);
+                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                    $terms .= $newPost->getMainContent();
+                }
+            }
+        }
+    }
+}
+
+if($contentAfter != null) {
+    foreach ($contentAfter as $row) {
+        foreach ($row as $field) {
+            $newPost = $this->getPostById($field->ID);
+            if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                $terms .= $newPost->getMainContent();
+            }
+        }
+    }
+}
+
+echo $_post->clean($terms);

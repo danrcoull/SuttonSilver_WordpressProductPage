@@ -46,7 +46,7 @@ define([
                 var stickOffset = 50;
                 var stickyStopperPosition = $stickyrStopper.offset().top + $stickyrStopper.height();
                 var stopPoint = stickyStopperPosition - generalSidebarHeight - stickOffset;
-                var diff = stopPoint + stickOffset;
+                var diff = stopPoint + stickOffset ;
 
                 $(window).on('scroll', function () { // scroll event
                     var windowTop = $(window).scrollTop(); // returns number
