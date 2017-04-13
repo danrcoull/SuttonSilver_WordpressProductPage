@@ -9,11 +9,11 @@
                 <div class="column">
                     <h3 class="title"><?php echo $option->getTitle(); ?><span
                             class="subtitle"><?php echo __('Units essential to this qualification'); ?></span></h3>
-                    <table class="table bundle-simples">
+                    <table class="table bundle-simples" data-options-id="<?php echo $option->getId(); ?>">
                         <?php
                         foreach ($option->getSelections() as $data) :
-                            $data->load($data->getId()); ?>
-                            <tr data-option-id="<?php echo $data->getId(); ?>">
+                            $data = $data->load($data->getId()); ?>
+                            <tr data-option-id="<?php echo $data->getSelectionId(); ?>">
                                 <td>
                                     <?php echo $data->getSku(); ?>
                                 </td>
@@ -24,7 +24,7 @@
 
                                 </td>
                                 <td>
-                                    <a class="btn-blue-standard open-simple" data-id="<?php echo $data->getId(); ?>">
+                                    <a class="btn-blue-standard open-simple" data-product="<?php echo $data->getId(); ?>">
                                         <?php echo __('View Unit'); ?>
                                     </a>
                                 </td>

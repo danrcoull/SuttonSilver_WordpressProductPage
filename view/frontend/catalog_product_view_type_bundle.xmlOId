@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="catalog_product_view_type_bundle"/>
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+    </head>
+    <update handle="catalog_product_opengraph" />
+    <update handle="page_calendar"/>
+    <body>
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="bundle_checkout_page_head_components" template="Magento_Bundle::js/components.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="product.info.content">
+            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundles"
+                   template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml"  />
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
+
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
+                    <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
+                </block>
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
+                <container name="product.info.sidebar" as="product_form_sidebar">
+                    <container name="product.info.price" label="Product info auxiliary container" htmlTag="div" htmlClass="product-info-price" before="-">
+                        <container name="product.info.stock.sku" label="Product auxiliary info" htmlTag="div" htmlClass="product-info-stock-sku">
+                            <container name="product.info.type" before="-"/>
+                            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.sku" template="product/view/attribute.phtml" after="product.info.type">
+                                <arguments>
+                                    <argument name="at_call" xsi:type="string">getSku</argument>
+                                    <argument name="at_code" xsi:type="string">sku</argument>
+                                    <argument name="css_class" xsi:type="string">sku</argument>
+                                    <argument name="at_label" xsi:type="string">default</argument>
+                                    <argument name="add_attribute" xsi:type="string">itemprop="sku"</argument>
+                                </arguments>
+                            </block>
+                        </container>
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.review" template="product/view/review.phtml" after="product.info.stock.sku" />
+                        <block class="Magento\Catalog\Pricing\Render" name="product.price.final" after="product.info.sku">
+                            <arguments>
+                                <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                                <argument name="price_type_code" xsi:type="string">final_price</argument>
+                                <argument name="zone" xsi:type="string">item_view</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <block class="Magento\Catalog\Pricing\Render" name="product.price.tier" after="product.info.price">
+                        <arguments>
+                            <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                            <argument name="price_type_code" xsi:type="string">tier_price</argument>
+                            <argument name="zone" xsi:type="string">item_view</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Magento\Catalog\Block\Product\View" name="product.info.modal" template="Magento_Catalog::product/view/form.phtml">
+                    <container name="product.info.form.content.modal" as="product_info_form_content">
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.modal" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
+                    </container>
+                    <block class="Magento\Framework\View\Element\Template" name="product.info.form.options.modal" as="options_container">
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.options.wrapper.modal" as="product_options_wrapper" template="Magento_Catalog::product/view/options/wrapper.phtml">
+                            <block class="Magento\Catalog\Block\Product\View\Options" name="product.info.options.modal" as="product_options" template="Magento_Catalog::product/view/options.phtml">
+                                <block class="Magento\Catalog\Block\Product\View\Options\Type\DefaultType" as="default" template="Magento_Catalog::product/view/options/type/default.phtml"/>
+                                <block class="Magento\Catalog\Block\Product\View\Options\Type\Text" as="text" template="Magento_Catalog::product/view/options/type/text.phtml"/>
+                                <block class="Magento\Catalog\Block\Product\View\Options\Type\File" as="file" template="Magento_Catalog::product/view/options/type/file.phtml"/>
+                                <block class="Magento\Catalog\Block\Product\View\Options\Type\Select" as="select" template="Magento_Catalog::product/view/options/type/select.phtml"/>
+                                <block class="Magento\Catalog\Block\Product\View\Options\Type\Date" as="date" template="Magento_Catalog::product/view/options/type/date.phtml"/>
+                            </block>
+                            <block class="Magento\Framework\View\Element\Html\Calendar" name="html_calendar" as="html_calendar" template="Magento_Theme::js/calendar.phtml"/>
+                            <block class="Magento\Catalog\Block\Product\View" name="bundle.product.view.options.notice.modal" template="Magento_Bundle::catalog/product/view/options/notice.phtml"/>
+                            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundle.options.modal" as="type_bundle_options" template="Magento_Bundle::catalog/product/view/type/bundle/options.phtml" before="-">
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Select" name="product.info.bundle.options.select.modal" as="select"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Multi" name="product.info.bundle.options.multi.modal" as="multi"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Radio" name="product.info.bundle.options.radio.modal" as="radio"/>
+                                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Checkbox" name="product.info.bundle.options.checkbox.modal" as="checkbox"/>
+                            </block>
+                        </block>
+                        <block class="Magento\Catalog\Block\Product\View" name="product.info.options.wrapper.bottom.modal" as="product_options_wrapper_bottom" template="Magento_Catalog::product/view/options/wrapper/bottom.phtml">
+                            <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.additional.modal" as="product.info.addtocart" template="Magento_Catalog::product/view/addtocart.phtml"/>
+                        </block>
+                    </block>
+                    <referenceBlock name="product.info.form.options.modal">
+                        <container name="bundle.product.options.wrapper.modal" htmlTag="div" htmlClass="bundle-options-wrapper" after="product.info.form.options.modal" />
+                    </referenceBlock>
+                    <move element="product.info.options.wrapper.modal" destination="bundle.product.options.wrapper.modal" before="-" />
+                    <move element="product.info.options.wrapper.bottom.modal" destination="bundle.product.options.wrapper.modal" after="product.info.options.wrapper.modal" />
+                </block>
+
+                </container>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

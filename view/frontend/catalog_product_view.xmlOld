@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+    </head>
+    <update handle="catalog_product_opengraph" />
+    <update handle="page_calendar"/>
+    <body>
+        <referenceBlock name="head.components">
+            <block class="Magento\Framework\View\Element\Js\Components" name="checkout_page_head_components" template="Magento_Catalog::js/components.phtml"/>
+        </referenceBlock>
+
+        <attribute name="itemtype" value="http://schema.org/Product" />
+        <attribute name="itemscope" value="itemscope"/>
+
+        <referenceContainer name="content">
+            <container name="alert.urls" as="alert_urls" label="Alert Urls"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content" template="SuttonSilver_WordpressProductPage::product/view/content.phtml" />
+            <container name="product.info.related" htmlTag="div" htmlId="related" htmlClass="wrapper-block related-container" />
+        </referenceContainer>
+
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart" template="SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
+        </referenceContainer>
+
+
+        <referenceBlock name="catalog.product.related">
+            <action method='setTemplate'>
+                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/list/items.phtml</argument>
+            </action>
+
+        </referenceBlock>
+
+        <referenceBlock name="catalog.product.upsell">
+            <action method='setTemplate'>
+                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/list/items.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <move element="catalog.product.related" destination="product.info.related" />
+        <move element="catalog.product.upsell" destination="product.info.related" />
+        <move element="page.main.title" destination="content" before="product.info.content" />
+
+
+        <referenceContainer name="content.aside" remove="true" />
+
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+
+    </body>
+</page>

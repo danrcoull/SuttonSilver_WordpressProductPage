@@ -38,8 +38,8 @@ define([
         },
         _runAjax: function (event) {
             event.preventDefault();
-            var catalogAjax = 'https://local.cilex.co.uk/catalogajax/product/view';
-            var id =  $(this).data('id');
+            var catalogAjax = 'http://local.cilex.co.uk/catalogajax/product/view';
+            var id =  $(this).data('product');
 
 
             $.ajax({
