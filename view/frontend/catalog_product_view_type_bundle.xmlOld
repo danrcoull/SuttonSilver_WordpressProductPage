@@ -64,7 +64,7 @@
         <referenceContainer name="product.info.main">
             <block class="Magento\Catalog\Block\Product\View" name="customize.button" as="customize_button" template="Magento_Bundle::catalog/product/view/customize.phtml" after="product.info.price" />
         </referenceContainer>
-
+        <move element="product.info" destination="bundle.options.container" before="-"/>
 
         <referenceContainer name="product.info.content">
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundles"
@@ -81,22 +81,15 @@
                  </block>
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
-                <container name="product.info.sidebar.popup" as="product_form_sidebar" />
+                <container name="product.info.sidebar" as="product_form_sidebar" />
             </block>
 
         </referenceContainer>
 
-        <referenceBlock name="product.info.content.addtocart">
-            <action method='setTemplate'>
-                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml</argument>
-            </action>
-        </referenceBlock>
-
-        <move element="product.info" destination="bundle.options.container" before="-"/>
-
         <referenceBlock name="customize.button" remove="true" />
         <referenceBlock name="bundle.back.button" remove="true" />
-        <move element="bundle.options.container" destination="product.info.sidebar.popup" before="-"/>
+        <referenceBlock name="product.info.price" remove="true" />
+        <move element="bundle.options.container" destination="product.info.sidebar" before="-"/>
 
 
     </body>

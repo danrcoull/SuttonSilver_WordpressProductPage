@@ -1,6 +1,5 @@
 define([
-    "jquery",
-    'bootstrapjs'
+    "jquery"
 ], function($) {
     "use strict";
 

@@ -6,21 +6,9 @@ $buttonTitle = __("Add to Basket");
 <div class="siderbar-cart">
     <div class="openText"><?php echo __('Ready To Buy?'); ?><span
             class="glyphicon glyphicon-chevron-up pull-right"></span></div>
-    <div class="product-info-price">
-        <div class="price-box price-final_price" data-role="priceBox"
-             data-product-id="<?php echo $_product->getId(); ?>">
 
-<span class="price-container price-final_price tax weee">
-        <span id="product-price-<?php echo $_product->getId(); ?>"
-              data-price-amount="<?php echo $_product->getFinalPrice(); ?>" data-price-type="" class="price-wrapper ">
-        <span class="price">£<?php echo $_product->getFinalPrice(); ?></span>    </span>
+    <?php echo $block->getChildHtml('product.info.sidebar'); ?>
 
-        </span>
-        <span class="price-content text-center">
-            <span class="vat">Plus VAT</span>
-        </span>
-        </div>
-    </div>
     <?php
     if ($_product->isSaleable()): ?>
         <div class="box-tocart">
@@ -54,18 +42,20 @@ $buttonTitle = __("Add to Basket");
                             <span><?php /* @escapeNotVerified */
                                 echo $buttonTitle ?></span>
                         </a>
-                        <?php echo $block->getChildHtml('', true) ?>
                     </div>
                 </div>
-                <div class="application">
-                    <p><span class="underline-text">
-                <a href="<?php echo $post->getMetaValue('application_form'); ?>"
-                   download="<?php echo $post->getPostName(); ?>">
-                    Download Application Form
-                </a>
-            </span>
-                    </p>
-                </div>
+                <?php if($post->getMetaValue('application_form')) : ?>
+                    <div class="application">
+                        <p><span class="underline-text">
+
+                        <a href="<?php echo $post->getMetaValue('application_form'); ?>"
+                           download="<?php echo $post->getPostName(); ?>">
+                            Download Application Form
+                        </a>
+                    </span>
+                        </p>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="cart-footer">
                 <a class="single-units btn-blue-standard" href="#">Single Units From £120</a>
@@ -73,5 +63,3 @@ $buttonTitle = __("Add to Basket");
         </div>
     <?php endif; ?>
 </div>
-
-<?php echo $block->getChildHtml('product.info'); ?>
