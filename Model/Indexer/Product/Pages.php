@@ -153,7 +153,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $newPost->setPostStatus('publish');
         $newPost->setPostDate(date('Y/m/d'));
 
-        $this->_logger->addInfo($newPost->setPostName());
+        $this->_logger->addInfo($newPost->getPostName());
 
         try {
             $newPost->save();
