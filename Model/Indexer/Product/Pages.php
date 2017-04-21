@@ -19,7 +19,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
 
     public function __construct
     (
-        \SuttonSilver\WordpressProductPage\Model\PostFactory $fishpigPost,
+        \FishPig\WordPress\Model\PostFactory  $fishpigPost,
         \Magento\Framework\Logger\Monolog $logger, //log injection
         \FishPig\WordPress\Model\ResourceModel\Post\CollectionFactory $fishpigPostCollection,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $catalogCollection,
