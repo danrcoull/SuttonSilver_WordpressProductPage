@@ -82,7 +82,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
                 $repo->save($product);
             }catch(\Exception $e)
             {
-                $this->_logger->addInfo($e->getMessage());
+               // $this->_logger->addInfo($e->getMessage());
             }
 
             //get associated id
@@ -159,7 +159,7 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
             $newPost->save();
         }catch(\Exception $e)
         {
-            $this->_logger->addInfo($e->getMessage());
+            //$this->_logger->addInfo($e->getMessage());
         }
 
 
