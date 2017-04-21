@@ -56,4 +56,9 @@ class View extends \Magento\Catalog\Block\Product\View {
         $this->productId = $id;
         return $this;
     }
+
+    public function getProductById($id)
+    {
+        return $this->productRepository->getById($id);
+    }
 }

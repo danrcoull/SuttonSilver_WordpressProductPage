@@ -98,9 +98,9 @@ class Pages implements \Magento\Framework\Indexer\ActionInterface, \Magento\Fram
         $diff = array_diff($pageIds,$associatedIds );
         $this->deleteWpPages($diff);
 
-        $this->_logger->addDebug('Page Ids:'.print_r($pageIds,true));
-        $this->_logger->addDebug('Associated Ids:'.print_r($associatedIds,true));
-        $this->_logger->addDebug('Unassociated Ids:'.print_r($diff,true));
+        //$this->_logger->addDebug('Page Ids:'.print_r($pageIds,true));
+        //$this->_logger->addDebug('Associated Ids:'.print_r($associatedIds,true));
+        //c$this->_logger->addDebug('Unassociated Ids:'.print_r($diff,true));
 
     }
 
