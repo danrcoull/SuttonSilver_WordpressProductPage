@@ -61,8 +61,7 @@
 </div>
 <script>// <![CDATA[
     require([
-        'jquery',
-        'bootstrap/datepicker'
+        'jquery'
     ], function ($) {
 
 
@@ -99,11 +98,14 @@
                 $(this).addClass('active');
                 if($(this).text() == 'Yes')
                 {
-                    $('#datetimepicker12').data("DateTimePicker").destroy();
-                    $('#datetimepicker12').datetimepicker2({
+                    $('#datetimepicker12').datepicker('destroy');
+                    $('#datetimepicker12').datepicker({
                         inline: true,
-                        sideBySide: true,
-                        format: "dd MM yyyy"
+                        format: "dd MM yyyy",
+                        beforeShowDay: $.datepicker.noWeekends,
+                        onSelect: function(date) {
+                            alert(date)
+                        },
                     });
 
                     $("#datetimepicker12").on("dp.change", function(e) {
@@ -113,7 +115,7 @@
                     });
 
                 }else{
-                    $('#datetimepicker12').data("DateTimePicker").destroy();
+                    $('#datetimepicker12').datepicker('destroy');
                 }
             }
 
