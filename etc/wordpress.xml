@@ -3,6 +3,6 @@
     <shortcodes>
         <shortcode id="product" class="SuttonSilver\WordpressProductPage\Shortcode\Product" sortOrder="40" />
         <shortcode id="caldera_form" class="SuttonSilver\WordpressProductPage\Shortcode\Caldera" sortOrder="40" />
-        <<shortcode id="tribe_events" class="SuttonSilver\WordpressProductPage\Shortcode\TribeEvents" sortOrder="40" />-->
+        <!--<shortcode id="tribe_events" class="SuttonSilver\WordpressProductPage\Shortcode\TribeEvents" sortOrder="40" />-->
     </shortcodes>
 </wordpress>
