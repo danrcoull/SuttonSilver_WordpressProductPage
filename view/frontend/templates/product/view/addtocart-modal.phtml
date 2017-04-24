@@ -100,9 +100,6 @@
 
                 if($(this).text() == 'Yes')
                 {
-                    $('.bundle-option-'+$parent)
-                        .val($('.bundle-option-'+$parent+" option:first").val())
-                        .trigger('change');
 
                     $('.bundle-option-'+$parent).prop('checked',false).click();
 
