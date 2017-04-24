@@ -81,16 +81,16 @@
                  </block>
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
-                <container name="product.info.sidebar.popup" as="product_form_sidebar" />
+                <container name="product.info.sidebar.popup" as="product_form_sidebar" htmlTag="div" />
             </block>
 
         </referenceContainer>
 
-        <referenceBlock name="product.info.content.addtocart">
+       <!-- <referenceBlock name="product.info.content.addtocart">
             <action method='setTemplate'>
                 <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml</argument>
             </action>
-        </referenceBlock>
+        </referenceBlock> -->
 
         <move element="product.info" destination="bundle.options.container" before="-"/>
 
