@@ -28,7 +28,7 @@ class Frontpage extends \Magento\Framework\View\Element\Template
 
     public function getFrontPage()
     {
-        $id = $this->_app->getConfig()->getOption('page_on_front');
+        $id = $this->_app->getConfig()->getHomepagePageId();
         $post = $this->_fishpig->getFactory('Post')->create()->load($id);
         return $post;
     }
