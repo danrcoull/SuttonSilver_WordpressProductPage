@@ -52,10 +52,14 @@ class View extends \Magento\Framework\App\Action\Action
                 ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-items.phtml')
                 ->toHtml();
 
+
+
+
             $sidebar = $layout
                 ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
                 ->setProductId($productId)
-                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml')
+                ->setName('product.info.content.addtocart')
+                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart-simple.phtml')
                 ->toHtml();
 
 

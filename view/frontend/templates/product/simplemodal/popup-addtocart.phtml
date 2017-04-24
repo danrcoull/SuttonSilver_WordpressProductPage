@@ -33,11 +33,9 @@ $buttonTitle = __("Add to Basket");
                         </div>
                     <?php endif; ?>
                     <div class="actions">
-                        <a href="#addtocartmodal"
-                                data-toggle="modal" data-target="#addtocartmodal"
-                                title="<?php /* @escapeNotVerified */
+                        <a      title="<?php /* @escapeNotVerified */
                                 echo $buttonTitle ?>"
-                                class="action primary tocart"
+                                class="action primary tocart bundle-addtocart"
                                 id="product-addtocart-button">
                             <span><?php /* @escapeNotVerified */
                                 echo $buttonTitle ?></span>
@@ -63,3 +61,17 @@ $buttonTitle = __("Add to Basket");
         </div>
     <?php endif; ?>
 </div>
+
+<script>// <![CDATA[
+    require([
+        'jquery',
+        'bootstrap/modal'
+    ], function ($,ajaxproduct) {
+        $('.bundle-addtocart').on('click', function(e) {
+            $('#addtocartmodal').bsmodal('show');
+            e.preventDefault();
+        });
+
+    });
+    // ]]>
+</script>
