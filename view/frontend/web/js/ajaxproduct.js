@@ -41,8 +41,6 @@ define([
             $('#simple-product-modal .modal-body .sidebar').empty().text('<%= content.sidebar %>');
         },
         _runAjax: function (event) {
-            //$('.modal-backdrop').hide();
-            //$(ajaxproduct.options.productModal).hide();
             var catalogAjax = location.protocol + '//' + location.host + '/catalogajax/product/view';
             var id = $(this).data('simpleproduct');
 
