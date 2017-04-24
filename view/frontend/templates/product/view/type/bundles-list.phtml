@@ -3,7 +3,7 @@
     <?php echo $this->getChildHtml('product.info.simples.title',true); ?>
 
     <?php foreach ($this->getOptions() as $option):
-        if ($option->getTitle() != 'Induction day') :
+        if (strtolower($option->getTitle()) != strtolower('Induction Day')):
             ?>
             <div class="one-column">
                 <div class="column">

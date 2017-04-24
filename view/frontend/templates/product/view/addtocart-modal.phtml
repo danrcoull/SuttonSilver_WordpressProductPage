@@ -96,8 +96,12 @@
             {
                 $('.induction .yes-no-wrapper a').removeClass('active');
                 $(this).addClass('active');
+                $parent = $(this).parent().attr('data-options-id');
+
                 if($(this).text() == 'Yes')
                 {
+                    $('.bundle-option-'+$parent).prop('checked',false).click();
+
                     $('#datetimepicker12').datepicker('destroy');
                     $('#datetimepicker12').datepicker({
                         inline: true,
@@ -115,6 +119,7 @@
                     });
 
                 }else{
+                    $('.bundle-option-'+$parent).prop('checked',true).click();
                     $('#datetimepicker12').datepicker('destroy');
                 }
             }

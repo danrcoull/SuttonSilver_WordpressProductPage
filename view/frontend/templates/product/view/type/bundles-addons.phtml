@@ -57,40 +57,49 @@ $_post = $this->getPostById($_item->getData('associated_page'));
     </div>
 </div>
 -->
-<div class="white induction">
-    <div class="add-to-cart-title">
-        <div class="circle-with-text small pull-left">
-            2
-        </div>
-        <div class="text pull-left">
-            <h3 class="title"><span>Do you Require an induction?</span>
-                <span class="subtitle">Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.</span>
-                <span class="subtitle error">
-                    <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
-                </span>
-            </h3>
-            <div class="content">
-                <div class="yes-no-wrapper">
-                    <a href="" data-induction="yes" >Yes</a>
-                    <a href="" data-induction="no" class="active">No</a>
+<?php foreach ($this->getOptions() as $option):
+    if (strtolower($option->getTitle()) === strtolower('Induction Day')):
+        ?>
+        <div class="white induction">
+            <div class="add-to-cart-title">
+                <div class="circle-with-text small pull-left">
+                    2
                 </div>
-                <div id="datetimepicker12"></div>
+                <div class="text pull-left">
+                    <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
+                        <span class="subtitle"><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?></span>
+                        <span class="subtitle error">
+                    <span><i class="fa fa-exclamation-triangle"
+                             aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
+                </span>
+                    </h3>
+                    <div class="content">
+                        <div class="yes-no-wrapper" data-options-id="<?php echo $option->getId(); ?>">
+                            <a href="" data-induction="yes">Yes</a>
+                            <a href="" data-induction="no" class="active">No</a>
+                        </div>
+                        <div id="datetimepicker12"></div>
+                    </div>
+                </div>
             </div>
+
         </div>
-    </div>
-
-</div>
-
+        <?php
+    endif;
+endforeach; ?>
 <div class="white">
     <div class="add-to-cart-title">
         <div class="circle-with-text small pull-left">
             3
         </div>
         <div class="text pull-left">
-            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span></h3>
-                <div class="subtitle error">
-                    <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
-                </div>
+            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a
+                        href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
+            </h3>
+            <div class="subtitle error">
+                <span><i class="fa fa-exclamation-triangle"
+                         aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+            </div>
 
         </div>
     </div>
