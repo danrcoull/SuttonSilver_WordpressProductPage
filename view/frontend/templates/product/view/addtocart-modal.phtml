@@ -91,13 +91,16 @@
 
 
         $('.induction .yes-no-wrapper a').on('click',function(event){
+            event.preventDefault();
+
             if($(this).hasClass('active') == false)
             {
                 $('.induction .yes-no-wrapper a').removeClass('active');
                 $(this).addClass('active');
                 if($(this).text() == 'Yes')
                 {
-                    $('#datetimepicker12').datetimepicker({
+                    $('#datetimepicker12').data("DateTimePicker").destroy();
+                    $('#datetimepicker12').datetimepicker2({
                         inline: true,
                         sideBySide: true,
                         format: "dd MM yyyy"
@@ -113,7 +116,7 @@
                     $('#datetimepicker12').data("DateTimePicker").destroy();
                 }
             }
-            event.preventDefault();
+
         });
 
         var agreed = false;
