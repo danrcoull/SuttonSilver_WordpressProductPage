@@ -25,7 +25,10 @@
                                 </td>
                                 <td>
                                     <a
-                                       class="btn-blue-standard open-simple-product" data-simpleproduct="<?php echo $data->getId(); ?>" >
+                                       class="btn-blue-standard open-simple-product <?php echo ($block->getData('data_modal_child')) ? "modal-child" : ""; ?>"
+                                       <?php echo ($block->getData('data_modal_parent')) ? "data-modal-parent='".$block->getData('data_modal_parent')."'" : ""; ?>
+                                       <?php echo ($block->getData('data_modal_child')) ? "data-modal-child='".$block->getData('data_modal_child')."'" : ""; ?>
+                                       data-simpleproduct="<?php echo $data->getId(); ?>" >
                                         <?php echo __('View Unit'); ?>
                                     </a>
                                 </td>

@@ -3,7 +3,9 @@
         'jquery',
         'ajaxproduct'
     ], function ($,ajaxproduct) {
-        ajaxproduct._create();
+        $(document).ready(function() {
+            ajaxproduct._create();
+        });
     });
     // ]]>
 </script>

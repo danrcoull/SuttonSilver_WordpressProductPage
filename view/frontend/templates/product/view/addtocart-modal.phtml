@@ -68,12 +68,12 @@
 
         $('.modal-child').on('show.bs.modal', function () {
             var modalParent = $(this).attr('data-modal-parent');
-            $(modalParent).css('opacity', 0);
+            $(modalParent).css('opacity', 0).hide();
         });
 
         $('.modal-child').on('hidden.bs.modal', function () {
             var modalParent = $(this).attr('data-modal-parent');
-            $(modalParent).css('opacity', 1);
+            $(modalParent).css('opacity', 1).show();
             if ($('body').hasClass('modal-open') == false) {
                 $('body').addClass('modal-open');
             };

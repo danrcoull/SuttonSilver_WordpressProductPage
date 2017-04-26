@@ -44,13 +44,13 @@ define([
                 var stickyTop = $sticky.offset().top;
                 var stickOffset = 50;
                 var stickyStopperPosition = $stickyrStopper.offset().top + $stickyrStopper.height();
-                var stopPoint = stickyStopperPosition - generalSidebarHeight - stickOffset;
+                var stopPoint = stickyStopperPosition - generalSidebarHeight;
                 var diff = stopPoint + stickOffset ;
 
-                $(window).on('scroll', function () { // scroll event
-                    var windowTop = $(window).scrollTop(); // returns number
-
-                    if (windowTop <  diff - generalSidebarHeight && windowTop > stickyTop - generalSidebarHeight) {
+                $(document).on('scroll', function () { // scroll event
+                    var windowTop = $(document).scrollTop(); // returns number
+                    console.log(windowTop);
+                    if (windowTop <=  diff  && windowTop >= stickyTop ) {
 
                         $sticky.css({"margin-top": (windowTop +stickOffset)});
                     } else if(windowTop == stickyTop){
@@ -60,8 +60,8 @@ define([
             }
         },
         _onScroll: function (event) {
-            $(window).on('scroll', function () {
-                var position = $(document).scrollTop() + 100,
+            $(document).on('scroll', function () {
+                var position = $(document).scrollTop(),
                     index = -1;
                 for (var i = 0; i < scrollNav.options.parPosition.length; i++) {
                     if (position <= scrollNav.options.parPosition[i]) {

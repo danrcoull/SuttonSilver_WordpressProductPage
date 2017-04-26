@@ -61,7 +61,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
 
 
 
-				$html = $this->_layout->createBlock('\Magento\Framework\View\Element\Template')
+				$html = $this->_layout->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
 					->setTemplate('SuttonSilver_WordpressProductPage::shortcode/product.phtml')
 					->addData($params->getData())
 					->setObject($this->getObject())

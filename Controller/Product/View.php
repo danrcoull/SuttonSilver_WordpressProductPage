@@ -45,13 +45,26 @@ class View extends \Magento\Framework\App\Action\Action
                 ->setTemplate('SuttonSilver_WordpressProductPage::product/view/content.phtml')
                 ->toHtml();
 
+
+
+
+            $priceDefault = $layout->createBlock('\Magento\Framework\Pricing\Render',
+                "product.price.render.default",
+                ["data" => ['price_render_handle' => 'catalog_product_prices', 'use_link_for_as_low_as'=>true]]
+            );
+
+            $price = $layout->createBlock('\Magento\Catalog\Pricing\Render',
+                "product.price.tier",
+                ["data" => ['price_render' => 'product.price.render.default', 'price_type_code'=>'final_price','zone'=>'item_view']]
+            )->setChild('child',$priceDefault);
+
             $main2 = $layout
                 ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ProductList\Related')
                 ->setProductId($productId)
                 ->setType('related')
-                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-items.phtml')
+                ->setTemplate('SuttonSilver_WordpressProductPage::product/list/items.phtml')
+                ->setChild('child',$price)
                 ->toHtml();
-
 
 
 

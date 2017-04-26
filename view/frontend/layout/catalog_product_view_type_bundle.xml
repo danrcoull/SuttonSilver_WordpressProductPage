@@ -68,7 +68,8 @@
 
         <referenceContainer name="product.info.content">
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundles"
-                   template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml"  />
+                   template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml"  >
+            </block>
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
@@ -77,6 +78,10 @@
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
 
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
+                <arguments>
+                    <argument name="data_modal_parent" xsi:type="string">#addtocartmodal</argument>
+                    <argument name="data_modal_child"  xsi:type="string">#simple-product-modal</argument>
+                </arguments>
                 <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
                  </block>
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />

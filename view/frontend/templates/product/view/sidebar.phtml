@@ -50,10 +50,12 @@ $contentAfter = $post->getMetaValue('product_blocks_after_units');z
         'jquery',
         'scrollnav'
     ], function ($,scrollNav) {
-        var win = $(window); //this = window
-        if (win.width() >= 720) {
-            scrollNav._init();
-        }
+        $(document).ready(function(){
+            var win = $(window); //this = window
+            if (win.width() >= 720) {
+                scrollNav._init();
+            }
+        })
     });
     // ]]>
 </script>

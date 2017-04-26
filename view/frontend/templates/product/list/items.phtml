@@ -33,8 +33,8 @@ switch ($type = $block->getType()) {
             $shuffle = 0;
             $canItemsAddToCart = $block->canItemsAddToCart();
 
-            $showAddTo = true;
-            $showCart = false;
+            $showAddTo = false;
+            $showCart = true;
             $templateType = null;
             $description = false;
         }
@@ -197,23 +197,40 @@ switch ($type = $block->getType()) {
                         </div>
                         <div class="inner">
                          <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-                            <div class="actions">
-                                <?php
-
-                                ?>
-                                    <a class="action tocart primary btn-blue-standard"
+                            <div class="actions actions-primary">
+                                   <a class="action tocart primary btn-blue-standard"
                                        href="<?php echo $_item->getProductUrl(); ?>"
                                        title="<?php /* @escapeNotVerified */ echo __('View') ?>">
                                         <span><?php /* @escapeNotVerified */ echo __('View') ?></span>
                                     </a>
-                                    <form data-role="tocart-form" action="<?php echo $this->getAddToCartUrl($_item); ?>" method="post" class="add-to-cart-related">
-                                    <?php echo $block->getBlockHtml('formkey')?>
-                                        <button class="action tocart primary btn-blue-standard"
-                                                data-post='<?php /* @escapeNotVerified */ echo $block->getPostData($_item); ?>'
-                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart1') ?>">
-                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
-                                        </button>
-                                    </form>
+                                    <?php if ($showAddTo || $showCart): ?>
+                                        <?php if ($showCart): ?>
+                                            <div class="add-to-cart-related">
+                                                <?php if ($_item->isSaleable()): ?>
+                                                    <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
+                                                        <button class="action tocart primary btn-blue-standard" data-mage-init='{"redirectUrl": {"url": "<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_item) ?>"}}' type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <?php $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                        $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
+                                                        ?>
+                                                        <button class="action tocart primary btn-blue-standard"
+                                                                data-post='<?php /* @escapeNotVerified */ echo $postData; ?>'
+                                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
+                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                        </button>
+                                                    <?php endif; ?>
+                                                <?php else: ?>
+                                                    <?php if ($_item->getIsSalable()): ?>
+                                                        <div class="stock available btn-blue-standard"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+                                                    <?php else: ?>
+                                                        <div class="stock unavailable btn-blue-standard"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                             </div>
                         </div>
                     </div>
