@@ -49,7 +49,6 @@ define([
 
                 $(document).on('scroll', function () { // scroll event
                     var windowTop = $(document).scrollTop(); // returns number
-                    console.log(windowTop);
                     if (windowTop <=  diff  && windowTop >= stickyTop ) {
 
                         $sticky.css({"margin-top": (windowTop +stickOffset)});

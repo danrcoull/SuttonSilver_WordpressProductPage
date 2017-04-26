@@ -1,6 +1,5 @@
 <?php
 $items = $this->getProducts();
-echo 'here';
 ?>
 <?php if ($items):?>
 <div id="related" class="product-shortcodes wrapper-block related-container">
@@ -21,6 +20,7 @@ echo 'here';
                         break;
                     case 3:
                         $class = 'orange';
+                        $iterator = 0;
                         break;
                 }
                 ?>
@@ -59,21 +59,7 @@ echo 'here';
                     </div>
                     <div class="col-xs-12 col-md-4">
                         <div class="inner">
-                            <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?php echo $_item->getId(); ?>">
-
-                                    <span class="price-container price-final_price tax weee">
-                                        <span id="product-price-<?php echo $_item->getId(); ?>" data-price-amount="<?php echo $_item->getFinalPrice(true); ?>" data-price-type="finalPrice" class="price-wrapper ">
-                                            <span class="price">£<?php echo $_item->getFinalPrice(true); ?></span>
-                                        </span>
-
-                                    </span>
-
-                                <span class="price-content text-center">
-                                    <span class="vat"><?php  echo __('Plus VAT'); ?></span>
-                                </span>
-
-
-                            </div>
+                            <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
                             <div class="actions">
                                 <?php
 

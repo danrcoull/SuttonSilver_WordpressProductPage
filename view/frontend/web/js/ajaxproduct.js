@@ -53,7 +53,6 @@ define([
 
             var catalogAjax = location.protocol + '//' + location.host + '/catalogajax/product/view';
             var id = $(this).data('simpleproduct');
-            alert(id);
             $.ajax({
                 url: catalogAjax,
                 data: {ajax: '1', productId: id},

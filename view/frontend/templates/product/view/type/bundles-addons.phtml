@@ -1,6 +1,7 @@
 <?php
 $_item = $this->getProduct();
 $_post = $this->getPostById($_item->getData('associated_page'));
+$count =1;
 ?>
 <!--
 <div class="grey">
@@ -63,7 +64,7 @@ $_post = $this->getPostById($_item->getData('associated_page'));
         <div class="white induction">
             <div class="add-to-cart-title">
                 <div class="circle-with-text small pull-left">
-                    2
+                    <?php echo $count++;?>
                 </div>
                 <div class="text pull-left">
                     <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
@@ -90,13 +91,13 @@ endforeach; ?>
 <div class="white">
     <div class="add-to-cart-title">
         <div class="circle-with-text small pull-left">
-            3
+            <?php echo $count++;?>
         </div>
         <div class="text pull-left">
             <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a
                         href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
             </h3>
-            <div class="subtitle error">
+            <div class="subtitle error terms-agreed">
                 <span><i class="fa fa-exclamation-triangle"
                          aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
             </div>
@@ -105,4 +106,4 @@ endforeach; ?>
     </div>
 </div>
 
-<div class="arrow"><span><?php echo __('Thank You, Please proceed to payment'); ?></span></div>
+<div class="add-to-cart arrow" style="opacity:0;"><span><?php echo __('Thank You, Please proceed to payment'); ?></span></div>

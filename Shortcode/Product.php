@@ -30,48 +30,57 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
         $this->_productRepository = $productRepositoryFactory;
     }
 
-	/**
-	 * @return string
-	**/
-	public function getTag()
-	{
-		return 'product';
-	}
-	
+    /**
+     * @return string
+     **/
+    public function getTag()
+    {
+        return 'product';
+    }
 
-	protected function _process()
-	{
+
+    protected function _process()
+    {
         $value = $this->getValue();
-		if (($shortcodes = $this->_getShortcodesByTag($this->getTag())) !== false) {
-			foreach($shortcodes as $it => $shortcode) {
-				$params = $shortcode->getParams();
+        if (($shortcodes = $this->_getShortcodesByTag($this->getTag())) !== false) {
+            foreach ($shortcodes as $it => $shortcode) {
+                $params = $shortcode->getParams();
 
-				if (!$params->getSkus()) {
-					return $this;
-				}
+                if (!$params->getSkus()) {
+                    return $this;
+                }
 
-				if (($skus = trim($params->getSkus(), ',')) !== '') {
-                  	$products = array();
-                    $skus =   str_replace(array('&#8217;', '&#8242;'), '', utf8_encode($skus));
+                if (($skus = trim($params->getSkus(), ',')) !== '') {
+                    $products = array();
+                    $skus = str_replace(array('&#8217;', '&#8242;'), '', utf8_encode($skus));
                     $repo = $this->_productRepository->create();
-					foreach(explode(',', $skus) as $sku) {
+                    foreach (explode(',', $skus) as $sku) {
                         $products[] = $repo->get($sku);
-					}
-				}
+                    }
+                }
 
+                $priceDefault = $this->_layout->createBlock('\Magento\Framework\Pricing\Render',
+                    "product.price.render.default.related",
+                    ["data" => ['price_render_handle' => 'catalog_product_prices', 'use_link_for_as_low_as'=>true]]
+                );
 
+                $price = $this->_layout->createBlock('\Magento\Catalog\Pricing\Render',
+                    "product.price.tier",
+                    ["data" => ['price_render' => 'product.price.render.default.related', 'price_type_code'=>'final_price','zone'=>'item_view']]
+                )->setChild('child',$priceDefault);
 
-				$html = $this->_layout->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
-					->setTemplate('SuttonSilver_WordpressProductPage::shortcode/product.phtml')
-					->addData($params->getData())
-					->setObject($this->getObject())
+                $html = $this->_layout->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
+                    ->setTemplate('SuttonSilver_WordpressProductPage::shortcode/product.phtml')
+                    ->addData($params->getData())
+                    ->setObject($this->getObject())
                     ->setProducts($products)
-					->toHtml();
+
+                    ->toHtml();
 
                 $this->setValue(str_replace($shortcode['html'], $html, $value));
-			}
-		}
-		
-		return $this;
-	}
+            }
+        }
+
+        return $this;
+    }
 }

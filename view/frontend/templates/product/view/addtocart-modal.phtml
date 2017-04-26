@@ -33,6 +33,12 @@
                     <h3><?php echo __('Terms &amp; Conditions'); ?></h3>
                     <div class="content">
                         <?php echo $block->getChildHtml('product.info.terms',true); ?>
+                        <div class="text text-center">
+                            <div class="subtitle error terms-agreed">
+                                <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+                            </div>
+                            <a href="" class="btn-green-solid agree"><span>Agree and Add to Basket</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +55,7 @@
                 <div class="modal-inner-shadow">
                     <div class="text text-center">
                         <h3 class="title"><span class="inline">Before you add this to your basket, you must agree to our</span> <span class="underline-text"><a href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span></h3>
-                        <div class="subtitle error">
+                        <div class="subtitle error terms-agreed">
                             <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
                         </div>
                         <a href="" class="btn-green-solid agree"><span>Agree and Add to Basket</span></a>
@@ -123,6 +129,31 @@
         });
 
         var agreed = false;
+        var acceptTerms = function(agreed){
+            if(agreed)
+            {
+                $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',0);
+                $('.add-to-cart.arrow').css('opacity',1);
+            }else{
+                $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',1);
+                $('.add-to-cart.arrow').css('opacity',0);
+            }
+        }
+
+        acceptTerms(agreed);
+        $(document).on('click','#termsModal .agree',function(event){
+            event.preventDefault();
+            agreed = true;
+            acceptTerms(agreed);
+            $('#termsModal').bsmodal('hide');
+        });
+
+        $(document).on('click','#addtocartmodal .add-to-cart.arrow', function(event){
+             event.preventDefault();
+             $('#addtocartmodal .box-tocart .tocart').trigger('click');
+        });
+
+
         $('#product_addtocart_form').on('submit', function(event)
         {
             if(agreed == false) {
