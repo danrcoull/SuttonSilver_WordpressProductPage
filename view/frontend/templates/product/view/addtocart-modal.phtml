@@ -30,10 +30,10 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-inner-shadow">
-                    <h3><?php echo __('Terms &amp; Conditions'); ?></h3>
+                    <h3 class="text text-center"><?php echo __('Terms &amp; Conditions'); ?></h3>
                     <div class="content">
-                        <?php echo $block->getChildHtml('product.info.terms',true); ?>
                         <div class="text text-center">
+                            <?php echo $block->getChildHtml('product.info.terms',true); ?>
                             <div class="subtitle error terms-agreed">
                                 <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
                             </div>

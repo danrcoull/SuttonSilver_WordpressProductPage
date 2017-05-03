@@ -1,99 +1,122 @@
 <?php
 $items = $this->getProducts();
 ?>
-<?php if ($items):?>
-<div id="related" class="product-shortcodes wrapper-block related-container">
-    <div class="block-title title">
-        <strong id="block-related-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $title; ?></strong>
-    </div>
-    <div class="block-content content" aria-labelledby="block-related-heading">
-        <div class="products wrapper grid products-grid products-related">
-            <?php $iterator = 0; ?>
-            <?php foreach ($items as $_item):
-                $iterator++;
-                switch ($iterator)  {
-                    case 1:
-                        $class = 'green';
-                        break;
-                    case 2:
-                        $class = 'yellow';
-                        break;
-                    case 3:
-                        $class = 'orange';
-                        $iterator = 0;
-                        break;
-                }
-                ?>
-                <div class="product product-related <?php echo $class; ?>">
-                    <?php
-                    $specialprice = $_item->getSpecialPrice();
-                    $price = $_item->getPrice();
+<?php if ($items): ?>
+    <div id="related" class="product-shortcodes wrapper-block related-container">
+        <div class="block-title title">
+            <strong id="block-related-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */
+                echo $title; ?></strong>
+        </div>
+        <div class="block-content content" aria-labelledby="block-related-heading">
+            <div class="products wrapper grid products-grid products-related">
+                <?php $iterator = 0; ?>
+                <?php foreach ($items as $_item):
+                    $iterator++;
+
+                    switch ($iterator) {
+                        case 1:
+                            $class = 'green';
+                            break;
+                        case 2:
+                            $class = 'yellow';
+                            break;
+                        case 3:
+                            $class = 'orange';
+                            $iterator = 0;
+                            break;
+                    }
                     ?>
-                    <div class="ribbon ribbon-top-right">
-                        <?php   if ($specialprice) :?>
-                            <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="col-xs-12 col-md-8">
-                        <div class="inner">
-                            <div class="product-title">
-                                <span><?php echo __($_item->getName()); ?></span>
-                                <div class="subtitle">
-                                    <?php if($level = $_item->getLevel()) : ?>
-                                        <span class="level"><?php echo __('Level '.$level); ?></span>
-                                    <?php endif; ?>
-                                    <?php if($unitCount = $_item->getUnitCount()) : ?>
-                                        <span class="level"><?php echo __($unitCount.' Units'); ?></span>
-                                    <?php endif; ?>
+                    <div class="product product-related <?php echo $class; ?>">
+                        <div class="col-xs-12 col-md-8">
+                            <div class="inner">
+                                <div class="product-title">
+                                    <span><?php echo __($_item->getName()); ?></span>
+                                    <div class="subtitle">
+                                        <?php if ($level = $_item->getLevel()) : ?>
+                                            <span class="level"><?php echo __('Level ' . $level); ?></span>
+                                        <?php endif; ?>
+                                        <?php if ($unitCount = $_item->getUnitCount()) : ?>
+                                            <span class="level"><?php echo __($unitCount . ' Units'); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <?php
+                                    $factory = \Magento\Framework\App\ObjectManager::getInstance();
+                                    $post = $factory->get('FishPig\WordPress\Model\Post')->load($_item->load($_item->getId())->getData('associated_page')); ?>
+                                    <?php
+                                    echo $post->getExcerpt();
+                                    ?>
                                 </div>
                             </div>
-                            <div class="content">
-                                <?php
-                                $factory  = \Magento\Framework\App\ObjectManager::getInstance();
-                                $post = $factory->get('FishPig\WordPress\Model\Post')->load($_item->load($_item->getId())->getData('associated_page'));?>
-                                <?php
-                                echo  $post->getExcerpt();
-                                ?>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-md-4">
-                        <div class="inner">
-                            <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-                            <div class="actions">
-                                <?php
-
-                                ?>
-                                <a class="action tocart primary btn-blue-standard"
-                                   href="<?php echo $_item->getProductUrl(); ?>"
-                                   title="<?php /* @escapeNotVerified */ echo __('View') ?>">
-                                    <span><?php /* @escapeNotVerified */ echo __('View') ?></span>
-                                </a>
-                                <?php if ($_item->isSaleable()): ?>
-                                    <?php $postParams = $block->getAddToCartPostParams($_item); ?>
-                                    <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post"  class="add-to-cart-related">
-                                        <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
-                                        <input type="hidden" name="<?php /* @escapeNotVerified */ echo 'unec'; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data']['unec']; ?>">
-                                        <?php echo $block->getBlockHtml('formkey')?>
-                                        <button type="submit"
-                                                title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
-                                                class="action tocart primary  primary btn-blue-standard">
-                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
-                                        </button>
-                                    </form>
-                                <?php else: ?>
-                                    <?php if ($_item->getIsSalable()): ?>
-                                        <div class="stock available add-to-cart-related"><span class="primary btn-blue-standard"><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
-                                    <?php else: ?>
-                                        <div class="stock unavailable add-to-cart-related"><span class="primary btn-blue-standard"><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
-                                    <?php endif; ?>
+                        <div class="col-xs-12 col-md-4">
+                            <?php
+                            $specialprice = $_item->getSpecialPrice();
+                            $price = $_item->getPrice();
+                            ?>
+                            <div class="ribbon ribbon-top-right">
+                                <?php if ($specialprice && $price > $specialprice) : ?>
+                                    <span>£<?php echo round($price - $specialprice); ?><?php echo __(' Discount'); ?></span>
                                 <?php endif; ?>
                             </div>
+                            <div class="inner">
+                                <?php /* @escapeNotVerified */
+                                echo $block->getProductPrice($_item); ?>
+                                <div class="actions actions-primary">
+                                    <a class="action tocart primary btn-blue-standard"
+                                       href="<?php echo $_item->getProductUrl(); ?>"
+                                       title="<?php /* @escapeNotVerified */
+                                       echo __('View') ?>">
+                                        <span><?php /* @escapeNotVerified */
+                                            echo __('View') ?></span>
+                                    </a>
+
+
+                                    <div class="add-to-cart-related">
+                                        <?php if ($_item->isSaleable()): ?>
+                                            <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
+                                                <button class="action tocart primary btn-blue-standard"
+                                                        data-mage-init='{"redirectUrl": {"url": "<?php /* @escapeNotVerified */
+                                                        echo $block->getAddToCartUrl($_item) ?>"}}' type="button"
+                                                        title="<?php /* @escapeNotVerified */
+                                                        echo __('Add to Cart') ?>">
+                                                    <span><?php /* @escapeNotVerified */
+                                                        echo __('Add to Cart') ?></span>
+                                                </button>
+                                            <?php else: ?>
+                                                <?php $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()]);
+                                                ?>
+                                                <button class="action tocart primary btn-blue-standard"
+                                                        data-post='<?php /* @escapeNotVerified */
+                                                        echo $postData; ?>'
+                                                        type="button" title="<?php /* @escapeNotVerified */
+                                                echo __('Add to Cart') ?>">
+                                                    <span><?php /* @escapeNotVerified */
+                                                        echo __('Add to Cart') ?></span>
+                                                </button>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <?php if ($_item->getIsSalable()): ?>
+                                                <div class="stock available btn-blue-standard">
+                                                    <span><?php /* @escapeNotVerified */
+                                                        echo __('In stock') ?></span></div>
+                                            <?php else: ?>
+                                                <div class="stock unavailable btn-blue-standard">
+                                                    <span><?php /* @escapeNotVerified */
+                                                        echo __('Out of stock') ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach ?>
+                <?php endforeach ?>
+            </div>
         </div>
     </div>
-</div>
-<?php endif;?>
+<?php endif; ?>

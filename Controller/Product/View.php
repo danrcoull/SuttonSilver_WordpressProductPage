@@ -67,12 +67,15 @@ class View extends \Magento\Framework\App\Action\Action
                 ->toHtml();
 
 
+            $layout->addContainer('product.info.sidebar','sidebar');
+            $layout->setChild('product.info.sidebar','product.price.tier','price.sidebar');
 
             $sidebar = $layout
                 ->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
                 ->setProductId($productId)
                 ->setName('product.info.content.addtocart')
-                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart-simple.phtml')
+                ->setTemplate('SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml')
+                ->setChild('child','product.info.sidebar')
                 ->toHtml();
 
 

@@ -1,13 +1,43 @@
 <?php
 namespace SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product;
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Boolean;
-use Magento\Catalog\Model\Category;
-use Magento\Catalog\Model\Product;
+
 class View extends \Magento\Catalog\Block\Product\View {
+    /**
+     * @var \FishPig\WordPress\Model\App\Factory
+     */
     protected $_fishpig;
+    /**
+     * @var \SuttonSilver\WordpressProductPage\Helper\Filter
+     */
     protected $_filter;
+    /**
+     * @var
+     */
     private $productId;
+
+    /**
+     * @var \Magento\Framework\Url\Helper\Data
+     */
+    protected $urlHelper;
+
+    /***
+     * View constructor.
+     * @param \Magento\Catalog\Block\Product\Context $context
+     * @param \Magento\Framework\Url\EncoderInterface $urlEncoder
+     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     * @param \Magento\Framework\Stdlib\StringUtils $string
+     * @param \Magento\Catalog\Helper\Product $productHelper
+     * @param \Magento\Catalog\Model\ProductTypes\ConfigInterface $productTypeConfig
+     * @param \Magento\Framework\Locale\FormatInterface $localeFormat
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param ProductRepositoryInterface $productRepository
+     * @param \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency
+     * @param \FishPig\WordPress\Model\App\Factory $factory
+     * @param \SuttonSilver\WordpressProductPage\Helper\Filter $filter
+     * @param \Magento\Framework\Url\Helper\Data $urlHelper
+     * @param array $data
+     */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
         \Magento\Framework\Url\EncoderInterface $urlEncoder,
@@ -21,12 +51,16 @@ class View extends \Magento\Catalog\Block\Product\View {
         \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency,
         \FishPig\WordPress\Model\App\Factory $factory,
         \SuttonSilver\WordpressProductPage\Helper\Filter $filter,
+        \Magento\Framework\Url\Helper\Data $urlHelper,
         array $data = []
     )
     {
+        parent::__construct($context, $urlEncoder, $jsonEncoder, $string, $productHelper, $productTypeConfig, $localeFormat, $customerSession, $productRepository, $priceCurrency, $data);
+
         $this->_fishpig = $factory;
         $this->_filter = $filter;
-        parent::__construct($context, $urlEncoder, $jsonEncoder, $string, $productHelper, $productTypeConfig, $localeFormat, $customerSession, $productRepository, $priceCurrency, $data);
+        $this->urlHelper = $urlHelper;
+
     }
     public function getPost() {
         if($this->getProductId()) {
@@ -60,5 +94,18 @@ class View extends \Magento\Catalog\Block\Product\View {
     public function getProductById($id)
     {
         return $this->productRepository->getById($id);
+    }
+
+    public function getAddToCartPostParams(\Magento\Catalog\Model\Product $product)
+    {
+        $url = $this->getAddToCartUrl($product);
+        return [
+            'action' => $url,
+            'data' => [
+                'product' => $product->getEntityId(),
+                \Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED =>
+                    $this->urlHelper->getEncodedUrl($url),
+            ]
+        ];
     }
 }
