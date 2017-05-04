@@ -13,12 +13,10 @@ class Frontpage extends \Magento\Framework\View\Element\Template
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \FishPig\WordPress\Block\Context $wpContext,
-        \FishPig\WordPress\Model\App\Factory $factory,
         \SuttonSilver\WordpressProductPage\Helper\Filter $filter,
         array $data = []
     )
     {
-        $this->_fishpig = $factory;
         $this->_filter = $filter;
         $this->_config = $wpContext->getConfig();
         $this->_app = $wpContext->getApp();
