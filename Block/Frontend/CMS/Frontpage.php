@@ -17,6 +17,7 @@ class Frontpage extends \Magento\Framework\View\Element\Template
         array $data = []
     )
     {
+        $this->_fishpig = $wpContext->getFactory();
         $this->_filter = $filter;
         $this->_config = $wpContext->getConfig();
         $this->_app = $wpContext->getApp();
