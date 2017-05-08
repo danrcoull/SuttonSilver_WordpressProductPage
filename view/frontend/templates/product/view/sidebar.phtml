@@ -48,14 +48,13 @@ $contentAfter = $post->getMetaValue('product_blocks_after_units');z
 <script>// <![CDATA[
     require([
         'jquery',
-        'scrollnav'
+        'scrollnav',
+        'domReady!'
     ], function ($,scrollNav) {
-        $(document).ready(function(){
             var win = $(window); //this = window
             if (win.width() >= 720) {
                 scrollNav._init();
             }
-        })
     });
     // ]]>
 </script>
