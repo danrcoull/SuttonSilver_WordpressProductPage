@@ -1,0 +1,21 @@
+<div id="termsModal" class="modal fade" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="termsModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-inner-shadow">
+                    <h3 class="text text-center"><?php echo __('Terms &amp; Conditions'); ?></h3>
+                    <div class="content">
+                        <div class="text text-center">
+                            <?php echo $block->getChildHtml('product.info.terms',true); ?>
+                            <div class="subtitle error terms-agreed">
+                                <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+                            </div>
+                            <a href="" class="btn-green-solid agree"><span>Agree and Add to Basket</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

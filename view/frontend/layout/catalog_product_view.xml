@@ -200,6 +200,11 @@
         <referenceBlock name="product.info.stock.sku" remove="true" />
 
 
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.simple" after="-" template="SuttonSilver_WordpressProductPage::product/view/simple-conditions.phtml">
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml"/>
+             </block>
+        </referenceContainer>
 
     </body>
 </page>
