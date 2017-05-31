@@ -12,7 +12,7 @@
 $post = $block->getPost();
 $buttonTitle = __("Add to Basket");
 ?>
-<?php if ($_product->isSaleable()): ?>
+<?php if ($_product->isSaleable() && $_product->getFinalPrice() > 0): ?>
     <div class="box-tocart">
         <div class="inner">
             <div class="fieldset">

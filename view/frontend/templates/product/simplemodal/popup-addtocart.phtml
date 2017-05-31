@@ -3,7 +3,7 @@ $post = $block->getPost();
 $buttonTitle = __("Add to Basket");
 $type = $_product->getData('type_id');
 ?>
-
+<?php if($_product->getFinalPrice() > 0) : ?>
 <div class="siderbar-cart">
     <div class="openText"><?php echo __('Ready To Buy?'); ?><span
             class="glyphicon glyphicon-chevron-up pull-right"></span></div>
@@ -135,3 +135,4 @@ $type = $_product->getData('type_id');
     // ]]>
 </script>
 <?php endif ?>
+<?php endif; ?>
