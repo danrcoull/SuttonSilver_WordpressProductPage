@@ -191,11 +191,7 @@ switch ($type = $block->getType()) {
                         $specialprice = $_item->getSpecialPrice();
                         $price = $_item->getPrice();
                         ?>
-                        <div class="ribbon ribbon-top-right">
-                            <?php   if ($specialprice && $price > $specialprice) :?>
-                                <span>£<?php echo round($price-$specialprice); ?><?php echo __(' Discount'); ?></span>
-                            <?php endif; ?>
-                        </div>
+
                         <div class="inner">
                          <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
                             <div class="actions actions-primary">
@@ -224,9 +220,13 @@ switch ($type = $block->getType()) {
                                                     <?php endif; ?>
                                                 <?php else: ?>
                                                     <?php if ($_item->getIsSalable()): ?>
+
                                                         <div class="stock available btn-blue-standard"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
                                                     <?php else: ?>
-                                                        <div class="stock unavailable btn-blue-standard"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+                                                        <div class="ribbon ribbon-top-right unavailable">
+                                                            <span class="">Unavailable</span>
+                                                        </div>
+                                                        <div class="stock unavailable btn-blue-standard" data-product-id="<?php echo $_item->getEntityId();?>"><span><?php /* @escapeNotVerified */ echo __('Notify') ?></span></div>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
                                             </div>
@@ -239,4 +239,68 @@ switch ($type = $block->getType()) {
                 <?php endforeach ?>
         </div>
     </div>
+    <?php $buttonTitle = __('Notify'); ?>
+    <div class="" id="outofstock-modal-related">
+        <div class="modal-body">
+            <div class="modal-inner-shadow">
+                <h3 class="text text-center"><?php echo __('Notify Your Interest'); ?></h3>
+                <div class="content">
+                    <form action="<?php /* @escapeNotVerified */ echo $block->getUrl('outofstock/index/notify') ?>"
+                          method="post"
+                          class="form notify"
+                          id="form-validate"
+                          data-mage-init='{"validation":{}}'
+                          enctype="multipart/form-data">
+
+                        <fieldset class="fieldset" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+                            <input type="hidden" name="product" id="product-id" value="" />
+                            <?php echo $block->getBlockHtml('formkey')?>
+                            <div class="field note"><p>Please enter your email address below, you will recieve an email when this <?php echo __('course'); ?> become available.</p></div>
+                            <div class="form-group email required">
+                                <label for="email" class="label"><span><?php echo __('email'); ?></span></label>
+                                <div class="control">
+                                    <input type="email" name="email" alt="email" id="email_address" class="form-control input-text" data-validate="{required:true, 'validate-email':true}" />
+                                </div>
+                            </div>
+
+                            <div class="actions-toolbar">
+                                <div class="primary">
+                                    <button type="submit"
+                                            title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+                                            class="action submit primary">
+                                        <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function ($, modal) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    modalClass: 'modal-dialog',
+                    title: '',
+                    buttons: []
+                };
+
+                var popup = modal(options, $('#outofstock-modal-related'));
+                $('.products-grid .stock.unavailable').on('click', function(e)
+                {
+                    $('#product-id').attr('value', $(this).attr('data-product-id'));
+                    $('#outofstock-modal-related').modal('openModal');
+                    e.preventDefault();
+                });
+            }
+        );
+    </script>
 <?php endif;?>
