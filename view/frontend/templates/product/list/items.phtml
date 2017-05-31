@@ -193,13 +193,16 @@ switch ($type = $block->getType()) {
                         ?>
 
                         <div class="inner">
-                         <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
+                            <?php if($_item->getFinalPrice() > 0) : ?>
+                                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
+                            <?php endif; ?>
                             <div class="actions actions-primary">
                                    <a class="action tocart primary btn-blue-standard"
                                        href="<?php echo $_item->getProductUrl(); ?>"
                                        title="<?php /* @escapeNotVerified */ echo __('View') ?>">
                                         <span><?php /* @escapeNotVerified */ echo __('View') ?></span>
                                     </a>
+                                <?php if($_item->getFinalPrice() > 0) : ?>
                                     <?php if ($showAddTo || $showCart): ?>
                                         <?php if ($showCart): ?>
                                             <div class="add-to-cart-related">
@@ -232,6 +235,7 @@ switch ($type = $block->getType()) {
                                             </div>
                                         <?php endif; ?>
                                     <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
