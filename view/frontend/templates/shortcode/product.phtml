@@ -61,8 +61,9 @@ $items = $this->getProducts();
                                 <?php endif; ?>
                             </div>
                             <div class="inner">
-                                <?php /* @escapeNotVerified */
-                                echo $block->getProductPrice($_item); ?>
+                                <?php if($_item->getFinalPrice() > 0) : ?>
+                                    <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
+                                <?php endif; ?>
                                 <div class="actions actions-primary">
                                     <a class="action tocart primary btn-blue-standard"
                                        href="<?php echo $_item->getProductUrl(); ?>"
@@ -72,7 +73,7 @@ $items = $this->getProducts();
                                             echo __('View') ?></span>
                                     </a>
 
-
+                                    <?php if($_item->getFinalPrice() > 0) : ?>
                                     <div class="add-to-cart-related">
                                         <?php if ($_item->isSaleable()): ?>
                                             <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
@@ -111,7 +112,7 @@ $items = $this->getProducts();
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
-
+                                    <?php endif; ?>
 
                                 </div>
                             </div>
