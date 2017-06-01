@@ -63,7 +63,7 @@ $items = $this->getProducts();
                             <?php if($_item->getTypeId() == 'bundle') : ?>
                                 <div class="ribbon ribbon-top-right">
                                     <?php   if ($simlePrice > $price) :?>
-                                        <span><?php echo __('Save'); ?> £<?php echo round($simlePrice-$price); ?></span>
+                                        <span>£<?php echo round($simlePrice-$price); ?></span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
