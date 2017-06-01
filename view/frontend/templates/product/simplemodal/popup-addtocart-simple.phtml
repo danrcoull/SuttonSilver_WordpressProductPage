@@ -8,5 +8,20 @@ $buttonTitle = __("Add to Basket");
             class="glyphicon glyphicon-chevron-up pull-right"></span></div>
 
     <?php echo $block->getChildHtml('product.info.sidebar'); ?>
+    <?php if($_product->getTypeId() == 'bundle') :
+        $price = $_product->getFinalPrice();
+        $simlePrice = 0;
+        $simples = $_product->getTypeInstance(true)->getSelectionsCollection($_product->getTypeInstance(true)->getOptionsIds($_product), $_product);
+        foreach($simples as $simple)
+        {
+            $simlePrice += $simple->getFinalPrice();
+        }
+        ?>
+        <div class="ribbon ribbon-top-right">
+            <?php   if ($simlePrice > $price) :?>
+                <span>£<?php echo round($simlePrice-$price); ?></span>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
 </div>
 <?php endif; ?>
