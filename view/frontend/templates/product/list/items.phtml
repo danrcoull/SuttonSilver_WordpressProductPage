@@ -190,7 +190,7 @@ switch ($type = $block->getType()) {
                         <?php
                         $price = $_item->getFinalPrice();
                         $simlePrice = 0;
-                        $simples = $_product->getTypeInstance(true)->getSelectionsCollection($_item->getTypeInstance(true)->getOptionsIds($_item), $_item);
+                        $simples = $_item->getTypeInstance(true)->getSelectionsCollection($_item->getTypeInstance(true)->getOptionsIds($_item), $_item);
                         foreach($simples as $simple)
                         {
                             $simlePrice += $simple->getFinalPrice();
