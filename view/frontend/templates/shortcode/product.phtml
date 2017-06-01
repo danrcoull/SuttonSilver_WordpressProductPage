@@ -52,14 +52,21 @@ $items = $this->getProducts();
                         </div>
                         <div class="col-xs-12 col-md-4">
                             <?php
-                            $specialprice = $_item->getSpecialPrice();
-                            $price = $_item->getPrice();
+                            $price = $_item->getFinalPrice();
+                            $simlePrice = 0;
+                            $simples = $_product->getTypeInstance(true)->getSelectionsCollection($_item->getTypeInstance(true)->getOptionsIds($_item), $_item);
+                            foreach($simples as $simple)
+                            {
+                                $simlePrice += $simple->getFinalPrice();
+                            }
                             ?>
-                            <div class="ribbon ribbon-top-right">
-                                <?php if ($specialprice && $price > $specialprice) : ?>
-                                    <span>£<?php echo round($price - $specialprice); ?><?php echo __(' Discount'); ?></span>
-                                <?php endif; ?>
-                            </div>
+                            <?php if($_item->getTypeId() == 'bundle') : ?>
+                                <div class="ribbon ribbon-top-right">
+                                    <?php   if ($simlePrice > $price) :?>
+                                        <span><?php echo __('Save'); ?> £<?php echo round($simlePrice-$price); ?></span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
                             <div class="inner">
                                 <?php if($_item->getFinalPrice() > 0) : ?>
                                     <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
@@ -107,7 +114,7 @@ $items = $this->getProducts();
                                                 <div class="ribbon ribbon-top-right unavailable">
                                                     <span class="">Unavailable</span>
                                                 </div>
-                                                <div class="stock unavailable btn-blue-standard">
+                                                <div class="stock unavailable btn-blue-standard"  data-product-id="<?php echo $_item->getEntityId();?>">
                                                     <span><?php /* @escapeNotVerified */  echo __('Notify') ?></span></div>
                                             <?php endif; ?>
                                         <?php endif; ?>
