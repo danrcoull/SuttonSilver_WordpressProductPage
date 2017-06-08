@@ -220,8 +220,8 @@ switch ($type = $block->getType()) {
                                             <div class="add-to-cart-related">
                                                 <?php if ($_item->isSaleable()): ?>
                                                     <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
-                                                        <button class="action tocart primary btn-blue-standard" data-mage-init='{"redirectUrl": {"url": "<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_item) ?>"}}' type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
-                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                        <button class="action tocart primary btn-blue-standard" data-mage-init='{"redirectUrl": {"url": "<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_item) ?>"}}' type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>">
+                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     <?php else: ?>
                                                         <?php $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
@@ -229,8 +229,8 @@ switch ($type = $block->getType()) {
                                                         ?>
                                                         <button class="action tocart primary btn-blue-standard"
                                                                 data-post='<?php /* @escapeNotVerified */ echo $postData; ?>'
-                                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Cart') ?>">
-                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>">
+                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     <?php endif; ?>
                                                 <?php else: ?>
