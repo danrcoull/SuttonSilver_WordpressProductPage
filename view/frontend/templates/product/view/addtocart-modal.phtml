@@ -95,8 +95,8 @@
 
         });
 
-
-        $('.induction .yes-no-wrapper a').on('click',function(event){
+        $('#addtocartmodal .induction .yes-no-wrapper a').last().click();
+        $('#addtocartmodal .induction .yes-no-wrapper a').on('click',function(event){
             event.preventDefault();
 
             if($(this).hasClass('active') == false)
@@ -108,7 +108,8 @@
                 if($(this).text() == 'Yes')
                 {
 
-                    $('.bundle-option-'+$parent).prop('checked',false).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',false).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',true).click();
 
                     $('#datetimepicker12').datepicker('destroy');
                     $('#datetimepicker12').datepicker({
@@ -116,13 +117,20 @@
                         format: "dd MM yyyy",
                         beforeShowDay: $.datepicker.noWeekends,
                         onSelect: function(date) {
-                            alert(date)
+                            $dateId = $('#datetimepicker12').attr('data-options-id');
+                            $('#options_'+$dateId+'_text').attr('value',date);
                         },
                     });
 
 
                 }else{
-                    $('.bundle-option-'+$parent).prop('checked',true).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',true).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',false).click();
+
+
+                    $dateId = $('#datetimepicker12').attr('data-options-id');
+                    $('#options_'+$dateId+'_text').attr('value','');
+
                     $('#datetimepicker12').datepicker('destroy');
                 }
             }

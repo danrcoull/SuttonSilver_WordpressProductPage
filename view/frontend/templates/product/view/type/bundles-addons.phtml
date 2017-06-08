@@ -1,7 +1,7 @@
 <?php
 $_item = $this->getProduct();
 $_post = $this->getPostById($_item->getData('associated_page'));
-$count =1;
+$count = 1;
 ?>
 <!--
 <div class="grey">
@@ -58,36 +58,57 @@ $count =1;
     </div>
 </div>
 -->
-<?php foreach ($this->getOptions() as $option):
+<?php
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customOptions = $_objectManager->get('Magento\Catalog\Model\Product\Option')->getProductOptionCollection($_item);
+$induction = false;
+$inductionId = false;
+
+$inductionDate = false;
+$inductionDateId = false;
+foreach ($customOptions as $option):
+
     if (strtolower($option->getTitle()) === strtolower('Induction Day')):
-        ?>
-        <div class="white induction">
-            <div class="add-to-cart-title">
-                <div class="circle-with-text small pull-left">
-                   <span></span>
-                </div>
-                <div class="text pull-left">
-                    <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
-                        <span class="subtitle"><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?></span>
-                        <span class="subtitle error">
+        $induction = true;
+        $inductionId =  $option->getId();
+    endif;
+
+    if (strtolower($option->getTitle()) === strtolower('Induction Date')):
+        $inductionDate = true;
+        $inductionDateId =  $option->getId();
+    endif;
+endforeach;
+?>
+<?php if ($induction) : ?>
+    <div class="white induction">
+        <div class="add-to-cart-title">
+            <div class="circle-with-text small pull-left">
+                <span></span>
+            </div>
+            <div class="text pull-left">
+                <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
+                    <span class="subtitle"><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?></span>
+                    <span class="subtitle error">
                     <span><i class="fa fa-exclamation-triangle"
                              aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
                 </span>
-                    </h3>
-                    <div class="content">
-                        <div class="yes-no-wrapper" data-options-id="<?php echo $option->getId(); ?>">
-                            <a href="" data-induction="yes">Yes</a>
-                            <a href="" data-induction="no" class="active">No</a>
-                        </div>
-                        <div id="datetimepicker12"></div>
+                </h3>
+                <div class="content">
+                    <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
+                        <a href="" data-induction="yes">Yes</a>
+                        <a href="" data-induction="no" class="active">No</a>
                     </div>
+                    <?php if ($inductionDate): ?>
+                        <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
+                    <?php endif; ?>
                 </div>
             </div>
-
         </div>
-        <?php
-    endif;
-endforeach; ?>
+
+    </div>
+    <?php
+endif;
+?>
 <div class="white">
     <div class="add-to-cart-title">
         <div class="circle-with-text small pull-left">
@@ -95,7 +116,7 @@ endforeach; ?>
         </div>
         <div class="text pull-left">
             <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a
-                        href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
+                            href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
             </h3>
             <div class="subtitle error terms-agreed">
                 <span><i class="fa fa-exclamation-triangle"
@@ -106,4 +127,5 @@ endforeach; ?>
     </div>
 </div>
 
-<div class="add-to-cart arrow" style="opacity:0;"><span><?php echo __('Thank you, please proceed to payment.'); ?></span></div>
+<div class="add-to-cart arrow" style="opacity:0;">
+    <span><?php echo __('Thank you, please proceed to payment.'); ?></span></div>
