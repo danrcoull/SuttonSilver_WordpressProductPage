@@ -1,5 +1,6 @@
 define([
-    "jquery"
+    "jquery",
+    "bootstrap/affix"
 ], function($) {
     "use strict";
 
@@ -21,7 +22,9 @@ define([
 
             scrollNav._onClick();
             scrollNav._onScroll();
-            scrollNav._stick();
+            //scrollNav._stick();
+            scrollNav.options.sticky.affix({offset: {top: scrollNav.options.sticky.offset().top} });
+
         },
         _onClick: function (event) {
             $('#productScroll a').on('click', function (event) {

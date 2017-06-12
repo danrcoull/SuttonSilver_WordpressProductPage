@@ -7,5 +7,6 @@ var config = {
     paths: {
         'ajaxproduct': 'SuttonSilver_WordpressProductPage/js/ajaxproduct',
         'scrollnav': 'SuttonSilver_WordpressProductPage/js/scrollnav',
+        'bootstrap/affix': 'SuttonSilver_WordpressProductPage/js/bootstrap/affix',
     }
 };

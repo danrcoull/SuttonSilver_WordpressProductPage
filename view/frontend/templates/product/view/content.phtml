@@ -1,5 +1,6 @@
 <?php
     $post = $this->getPost();
+    $product = $this->getProduct();
     $contentBefore =  $post->getMetaValue('product_blocks_before_units');
     $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
 
@@ -17,8 +18,9 @@
             }
         }
     }
-
-    echo $block->getChildHtml('product.info.bundles');
+    if($product->getTypeId() == 'bundle') {
+        echo $block->getChildHtml('product.info.bundles');
+    }
 
     if($contentAfter != null) {
         foreach ($contentAfter as $row) {
