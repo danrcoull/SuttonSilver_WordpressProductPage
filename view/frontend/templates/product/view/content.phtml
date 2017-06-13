@@ -4,10 +4,13 @@
     $contentBefore =  $post->getMetaValue('product_blocks_before_units');
     $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
 
-
+    ?>
+    <div id="introduction">
+    <?php
     echo $post->clean($post->getMainContent());
-
-
+    ?>
+    </div>
+    <?php
     if($contentBefore != null) {
         foreach ($contentBefore as $row) {
             foreach ($row as $field) {

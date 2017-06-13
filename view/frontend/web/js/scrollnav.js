@@ -1,6 +1,7 @@
 define([
     "jquery",
-    "bootstrap/affix"
+    "bootstrap/affix",
+    "bootstrap/scrollspy"
 ], function($) {
     "use strict";
 
@@ -21,21 +22,78 @@ define([
             });
 
             scrollNav._onClick();
-            scrollNav._onScroll();
+            //scrollNav._onScroll();
             //scrollNav._stick();
-            scrollNav.options.sticky.affix({offset: {top: scrollNav.options.sticky.offset().top} });
+            var footerHeight = ($('footer').outerHeight(true) + $('.footer.awards').outerHeight(true)) + 125;
+
+            $('#maincontent .siderbar-cart').affix( {
+                offset: {
+                    top: 100,
+                    bottom: (footerHeight + $('#maincontent #productScroll').outerHeight(true))
+                }
+            })
+                .on('affix.bs.affix', function() {
+                    $(this).css('width',$(this).parent().width());
+                    $(this).css('top',  120);
+                })
+                .on('affix-top.bs.affix',function(){
+                    $(this).css('width','auto');
+                    $(this).css('top',  'auto');
+                });
+
+            $('#maincontent #productScroll').affix({
+                offset: {
+                    top:  100,
+                    bottom: footerHeight + 50
+                }
+            })
+                .on('affix.bs.affix', function() {
+                    $(this).css('width',$(this).parent().width());
+                    $(this).css('position','fixed');
+                    $(this).css('top',  ($('#maincontent .siderbar-cart').outerHeight(true) + 125));
+                })
+                .on('affix-top.bs.affix',function(){
+                    $(this).css('width','auto');
+                    $(this).css('top',  'auto');
+                    $(this).css('position','relative');
+                });
+
+            $('body').scrollspy({target: "#productScroll", offset: scrollNav.options.sticky.offset().top});
 
         },
         _onClick: function (event) {
             $('#productScroll a').on('click', function (event) {
-                $('html, body').animate({
+                /** $('html, body').animate({
                     scrollTop: $($.attr(this, 'href')).offset().top
                 }, 500);
-                $('#productScroll a').removeClass('active');
-                $(this).addClass('active');
+                 $('#productScroll a').removeClass('active');
+                 $(this).addClass('active');
 
-                event.preventDefault();
+                 event.preventDefault();**/
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+
+                } // End if
             });
+
+
             return this;
         },
         _stick: function() {
