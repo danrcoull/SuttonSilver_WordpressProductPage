@@ -237,7 +237,8 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                         </button>
                                                     <?php endif; ?>
                                                 <?php else: ?>
-                                                    <?php if ($_item->isSaleable() && $stockItem->getData('is_in_stock')): ?>
+                                                    <?php
+                                                    if ($stockItem->getData('is_in_stock')): ?>
 
                                                         <div class="stock available btn-blue-standard"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
                                                     <?php else: ?>
