@@ -136,7 +136,8 @@ $type = $_product->getData('type_id');
         };
 
 
-        if ( document.location.href.indexOf('?startcustomization=1') > -1 ) {
+        if ( document.location.href.indexOf('?startcustomization=1') > -1 ||
+        document.location.href.indexOf('?options=cart') > -1  {
             $('#addtocartmodal').bsmodal('show');
         }
 
