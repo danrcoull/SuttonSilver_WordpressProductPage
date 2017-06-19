@@ -143,9 +143,12 @@
             {
                 $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',0);
                 $('.add-to-cart.arrow').css('opacity',1);
+                $('.confirm-terms #confirm-terms').prop('checked',true);
             }else{
                 $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',1);
                 $('.add-to-cart.arrow').css('opacity',0);
+                $('.confirm-terms #confirm-terms').prop('checked',false);
+
             }
         };
 
@@ -155,6 +158,11 @@
             agreed = true;
             acceptTerms(agreed);
             $('#termsModal').bsmodal('hide');
+        });
+
+        $('.confirm-terms #confirm-terms').change(function(){
+            var c = this.checked ?  agreed = true :  agreed = false;
+            acceptTerms(agreed);
         });
 
         $(document).on('click','#addtocartmodal .add-to-cart.arrow', function(event){

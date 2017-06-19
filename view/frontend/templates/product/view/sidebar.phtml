@@ -3,6 +3,7 @@ $post = $this->getPost();
 $contentBefore = $post->getMetaValue('product_blocks_before_units');
 $contentAfter = $post->getMetaValue('product_blocks_after_units');
 $product = $this->getProduct();
+
 ?>
 <a data-toggle="collapse" href="#productScroll" class=" visible-xs jumpto">Jump To<i class="fa fa-chevron-down"></i></a>
 <nav id="productScroll" class="panel-collapse collapse in">
@@ -44,7 +45,18 @@ $product = $this->getProduct();
             }
         }
         ?>
-        <?php if(count($product->getRelatedProductIds()) >0) : ?>
+        <?php
+        $collectoon = $this->getProduct()->getRelatedProductCollection()->addAttributeToSelect(
+            'required_options'
+        )->setPositionOrder()->addStoreFilter()->setVisibility([2,4]);
+        $collectoon->addMinimalPrice()
+           ->addFinalPrice()
+           ->addTaxPercents()
+           ->addUrlRewrite();
+        foreach ($collectoon as $product) {
+            $product->setDoNotUseCategoryId(true);
+        }
+        if($collectoon->count() >0) : ?>
             <li><a href="#related" class="circle"><span>Related</a></span></li>
         <?php endif; ?>
     </ul>
@@ -56,10 +68,12 @@ $product = $this->getProduct();
         'scrollnav',
         'domReady!'
     ], function ($,scrollNav) {
-            var win = $(window); //this = window
-            if (win.width() >= 720) {
-                scrollNav._init();
-            }
+            $(document).ready(function(){
+                var win = $(window); //this = window
+                if (win.width() >= 720) {
+                    scrollNav._init();
+                }
+            })
     });
     // ]]>
 </script>

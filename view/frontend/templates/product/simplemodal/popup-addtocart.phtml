@@ -78,7 +78,7 @@ $type = $_product->getData('type_id');
 
                         <a href="<?php echo $post->getMetaValue('product_application_upload'); ?>"
                            download="<?php echo $post->getPostName(); ?>">
-                            Download Application Form
+                            <?php /* @escapeNotVerified */ echo __('Download Application Form'); ?>
                         </a>
                     </span>
                         </p>
@@ -86,7 +86,7 @@ $type = $_product->getData('type_id');
                 <?php endif; ?>
             </div>
             <div class="cart-footer">
-                <a class="single-units btn-blue-standard" href="#">Single Units From £120</a>
+                <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
             </div>
         </div>
     <?php endif; ?>
@@ -118,7 +118,7 @@ $type = $_product->getData('type_id');
         'jquery',
         'bootstrap/modal',
         'domReady!'
-    ], function ($,ajaxproduct) {
+    ], function ($) {
 
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -135,9 +135,9 @@ $type = $_product->getData('type_id');
             }
         };
 
-        if( getUrlParameter('options') == 'cart')
-        {
-            $('.bundle-addtocart').trigger('click');
+
+        if ( document.location.href.indexOf('?startcustomization=1') > -1 ) {
+            $('#addtocartmodal').bsmodal('show');
         }
 
         $('.bundle-addtocart').on('click', function(e) {

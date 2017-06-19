@@ -52,7 +52,7 @@ $buttonTitle = __("Add to Basket");
 
                         <a href="<?php echo $post->getMetaValue('product_application_upload'); ?>"
                            download="<?php echo $post->getPostName(); ?>">
-                            Download Application Form
+                          <?php /* @escapeNotVerified */ echo __('Download Application Form'); ?>
                         </a>
                     </span>
                     </p>

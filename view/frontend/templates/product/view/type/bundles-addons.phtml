@@ -87,11 +87,12 @@ endforeach;
             </div>
             <div class="text pull-left">
                 <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
-                    <span class="subtitle"><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?></span>
-                    <span class="subtitle error">
-                    <span><i class="fa fa-exclamation-triangle"
-                             aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
-                </span>
+                    <span class="subtitle "><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?>
+                        <span class="error inline"><i class="fa fa-exclamation-triangle"
+                                 aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
+
+                    </span>
+
                 </h3>
                 <div class="content">
                     <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
@@ -115,12 +116,17 @@ endif;
             <span></span>
         </div>
         <div class="text pull-left">
-            <h3 class="title"><span class="inline">I have read and understood the</span> <span class="underline-text"><a
+            <h3 class="title no-padding-bottom "><span class="inline">I have read and understood the</span> <span class="underline-text"><a
                             href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
-            </h3>
-            <div class="subtitle error terms-agreed">
-                <span><i class="fa fa-exclamation-triangle"
+                <span class="subtitle block terms-agreed">
+                <span class="error "><i class="fa fa-exclamation-triangle"
                          aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+                </span>
+            </h3>
+            <div class="checkbox confirm-terms margin">
+                <label>
+                    <input type="checkbox" name="confirm-terms" id="confirm-terms" /> Confirm
+                </label>
             </div>
 
         </div>
