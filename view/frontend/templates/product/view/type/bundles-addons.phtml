@@ -136,8 +136,8 @@ endforeach;
                         }
 
                         $collection = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
-                        $collection = $collection->getPostCollection()->addFieldToFilter('name', array('like' => '%induction%'));
-
+                        $collection = $collection->getPostCollection()->addFieldToFilter('name', array('regexp' => 'induction'));
+                        var_dump($collection);
                         foreach($collection as $event) :
                             var_dump($event->getMetaValue('_EventVenueID'))
                             ?>
