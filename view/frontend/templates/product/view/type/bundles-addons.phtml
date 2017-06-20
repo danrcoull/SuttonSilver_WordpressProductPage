@@ -75,17 +75,17 @@ foreach ($customOptions as $option):
 
     if (strtolower($option->getTitle()) === strtolower('Induction Day')):
         $induction = true;
-        $inductionId =  $option->getId();
+        $inductionId = $option->getId();
     endif;
 
     if (strtolower($option->getTitle()) === strtolower('Induction Date')):
         $inductionDate = true;
-        $inductionDateId =  $option->getId();
+        $inductionDateId = $option->getId();
     endif;
 
     if (strtolower($option->getTitle()) === strtolower('Induction Location')):
         $inductionLocation = true;
-        $inductionLocationId =  $option->getId();
+        $inductionLocationId = $option->getId();
     endif;
 endforeach;
 ?>
@@ -99,7 +99,7 @@ endforeach;
                 <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
                     <span class="subtitle "><?php echo __('Inductions are optional and are an introduction to the CILEx Law School, rather than being course specific.'); ?>
                         <span class="error inline"><i class="fa fa-exclamation-triangle"
-                                 aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
+                                                      aria-hidden="true"></i><?php echo __("Thes are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
 
                     </span>
 
@@ -111,50 +111,54 @@ endforeach;
                     </div>
                     <?php if ($inductionDate): ?>
                         <div class="col-xs-12 col-md-6">
-                           <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
+                            <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
                         </div>
-                        <?php if($inductionLocation): ?>
+                        <?php if ($inductionLocation): ?>
                             <div class="col-xs-12 col-md-6">
-                        <?php
-                        $id = 0;
-                        $level3Id = 84;
-                        $level6Id = 93;
-                        $gtfdId = 96;
+                                <?php
+                                $id = 0;
+                                $level3Id = 84;
+                                $level6Id = 93;
+                                $gtfdId = 96;
 
+                                $type = $_item->getAttributeText('induction_type');
 
-                        switch($_item->getAttributeText('induction_type'))
-                        {
-                            case __('Level 3 induction'):
-                                $id = $level3Id;
-                                break;
-                            case __('Level 6 induction'):
-                                $id = $level6Id;
-                                break;
-                            case __('GTFD induction'):
-                                $id = $gtfdId;
-                                break;
-                        }
+                                switch (trim($type)) {
+                                    case 'Level 3 induction':
+                                        $id = $level3Id;
+                                        break;
+                                    case 'Level 6 induction':
+                                        $id = $level6Id;
+                                        break;
+                                    case 'GTFD induction':
+                                        $id = $gtfdId;
+                                        break;
+                                }
 
-                        $collection = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
-                        $collection = $collection->getPostCollection()
-                            ->addExpressionAttributeToSelect('name','LOWER({{name}})', array('name'))
-                            ->addFieldToFilter('name', array('like' => '%induction%'));
-                        var_dump($collection);
-                        die;
-                        foreach($collection as $event) :
-                            var_dump($event->getMetaValue('_EventVenueID'))
-                            ?>
-                            <div class="radio confirm-terms margin">
-                                <label>
-                                    <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID'));?>
-                                    <input type="radio" class='induction-date' data-date-options-id="<?php echo $inductionDateId; ?>"
-                                           data-location-options-id="<?php echo $inductionLocationId; ?>"
-                                           data-location="<?php echo $location->getName(); ?>"
-                                           data-date="<?php echo $event->getMetaValue('_EventStartDate');?>" /> <?php echo $event->getName(); ?>
-                                </label>
+                                if ($id != 0) {
+                                    $levelTerm = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
+                                    var_dump($levelTerm->getName());
+                                    die;
+                                    $levelTerm = $levelTerm->getPostCollection()
+                                        ->addFieldToFilter('name', array('like' => '%induction%'));
+                                    var_dump($levelTerm);
+                                    die;
+                                    foreach ($levelTerm as $event) :
+                                        var_dump($event->getMetaValue('_EventVenueID'))
+                                        ?>
+                                        <div class="radio confirm-terms margin">
+                                            <label>
+                                                <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID')); ?>
+                                                <input type="radio" class='induction-date'
+                                                       data-date-options-id="<?php echo $inductionDateId; ?>"
+                                                       data-location-options-id="<?php echo $inductionLocationId; ?>"
+                                                       data-location="<?php echo $location->getName(); ?>"
+                                                       data-date="<?php echo $event->getMetaValue('_EventStartDate'); ?>"/> <?php echo $event->getName(); ?>
+                                            </label>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php } ?>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
@@ -171,16 +175,17 @@ endif;
             <span></span>
         </div>
         <div class="text pull-left">
-            <h3 class="title no-padding-bottom "><span class="inline">I have read and understood the</span> <span class="underline-text"><a
+            <h3 class="title no-padding-bottom "><span class="inline">I have read and understood the</span> <span
+                        class="underline-text"><a
                             href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
                 <span class="subtitle block terms-agreed">
                 <span class="error "><i class="fa fa-exclamation-triangle"
-                         aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+                                        aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
                 </span>
             </h3>
             <div class="checkbox confirm-terms margin">
                 <label>
-                    <input type="checkbox" name="confirm-terms" id="confirm-terms" /> Confirm
+                    <input type="checkbox" name="confirm-terms" id="confirm-terms"/> Confirm
                 </label>
             </div>
 
