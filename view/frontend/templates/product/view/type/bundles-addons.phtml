@@ -2,63 +2,7 @@
 $_item = $this->getProduct();
 $_post = $this->getPostById($_item->getData('associated_page'));
 $count = 1;
-?>
-<!--
-<div class="grey">
-    <div class="add-to-cart-title">
-        <div class="circle-with-text small pull-left">
-            2
-        </div>
-        <div class="text pull-left">
-            <h3 class="title"><span>Add-ons</span><span
-                    class="subtitle">Please Select any optional add-ons you require</span></h3>
-        </div>
-    </div>
-    <div class="products wrapper grid products-related">
-        <div class="product product-related green">
-            <div class="col-xs-12 col-md-8">
-                <div class="inner">
-                    <div class="product-title">
-                        <span><?php echo __($_item->getName()); ?></span>
-                        <span class="subtitle error">
-                            <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("If you have already had an induction you don't need to book another one."); ?></span>
-                        </span>
-                    </div>
-                    <div class="content">
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <div class="inner">
-                    <div class="product-info-price">
-                        <div class="price-box price-final_price" data-role="priceBox">
-
-<span class="price-container price-final_price tax weee">
-        <span id="product-price-<?php echo $_item->getId(); ?>"
-              data-price-amount="12.50" data-price-type="" class="price-wrapper ">
-        <span class="price">£12.50</span>    </span>
-
-        </span>
-                            <span class="price-content text-center">
-            <span class="vat">Plus VAT</span>
-        </span>
-                        </div>
-                    </div>
-
-                    <div class="inner">
-
-                        <div class="actions">
-                            <span class="check on"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-<?php
 $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $customOptions = $_objectManager->get('Magento\Catalog\Model\Product\Option')->getProductOptionCollection($_item);
 $induction = false;
@@ -136,13 +80,9 @@ endforeach;
                                 }
 
                                 if ($id != 0) {
-                                    $levelTerm = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
+                                    $levelTerm = $_objectManager->get('FishPig\WordPress\Model\Post')->getCollection()
+                                        ->addTermIdFilter($id);
 
-
-                                    $levelTerm = $levelTerm->getPostCollection();
-                                    var_dump($levelTerm);
-                                    die;
-                                    $levelTerm->addFieldToFilter('name', array('regex' => 'induction'));
                                     var_dump($levelTerm);
                                     die;
                                     foreach ($levelTerm as $event) :
