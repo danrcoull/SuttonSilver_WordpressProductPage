@@ -137,10 +137,12 @@ endforeach;
                         $collection = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
                         $collection->getPostCollection()->addFieldToFilter('name', array('regexp' => 'induction'));
 
-                        foreach($collection as $event) : ?>
+                        foreach($collection as $event) :
+                            var_dump($event->getMetaValue('_EventVenueID'))
+                            ?>
                             <div class="radio confirm-terms margin">
                                 <label>
-                                    <?php $location = $_objectManager->get('FishPig\WordPress\Model\Term')->load($event->getMetaValue('_EventVenueID'));?>
+                                    <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID'));?>
                                     <input type="radio" class='induction-date' data-date-options-id="<?php echo $inductionDateId; ?>"
                                            data-location-options-id="<?php echo $inductionLocationId; ?>"
                                            data-location="<?php echo $location->getName(); ?>"
