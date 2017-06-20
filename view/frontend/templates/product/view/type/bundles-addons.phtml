@@ -137,10 +137,12 @@ endforeach;
 
                                 if ($id != 0) {
                                     $levelTerm = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
-                                    var_dump($levelTerm->getName());
+
+
+                                    $levelTerm = $levelTerm->getPostCollection();
+                                    var_dump($levelTerm);
                                     die;
-                                    $levelTerm = $levelTerm->getPostCollection()
-                                        ->addFieldToFilter('name', array('like' => '%induction%'));
+                                    $levelTerm->addFieldToFilter('name', array('regex' => 'induction'));
                                     var_dump($levelTerm);
                                     die;
                                     foreach ($levelTerm as $event) :
