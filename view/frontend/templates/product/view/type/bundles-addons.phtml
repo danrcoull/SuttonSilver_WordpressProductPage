@@ -66,6 +66,11 @@ $inductionId = false;
 
 $inductionDate = false;
 $inductionDateId = false;
+
+$inductionLocationId = false;
+$inductionLocation = false;
+
+
 foreach ($customOptions as $option):
 
     if (strtolower($option->getTitle()) === strtolower('Induction Day')):
@@ -76,6 +81,11 @@ foreach ($customOptions as $option):
     if (strtolower($option->getTitle()) === strtolower('Induction Date')):
         $inductionDate = true;
         $inductionDateId =  $option->getId();
+    endif;
+
+    if (strtolower($option->getTitle()) === strtolower('Induction Location')):
+        $inductionLocation = true;
+        $inductionLocationId =  $option->getId();
     endif;
 endforeach;
 ?>
@@ -100,7 +110,46 @@ endforeach;
                         <a href="" data-induction="no" class="active">No</a>
                     </div>
                     <?php if ($inductionDate): ?>
-                        <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
+                        <div class="col-xs-12 col-md-6">
+                           <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
+                        </div>
+                        <?php if($inductionLocation): ?>
+                            <div class="col-xs-12 col-md-6">
+                        <?php
+                        $id = 0;
+                        $level3Id = 84;
+                        $level6Id = 93;
+                        $gtfdId = 96;
+
+                        switch($_item->getAttributeText('induction_type'))
+                        {
+                            case __('Level 3 induction'):
+                                $id = $level3Id;
+                                break;
+                            case __('Level 6 induction'):
+                                $id = $level6Id;
+                                break;
+                            case __('Level 6 induction'):
+                                $id = $gtfdId;
+                                break;
+                        }
+
+                        $collection = $_objectManager->get('FishPig\WordPress\Model\Term')->load($id);
+                        $collection->getPostCollection()->addFieldToFilter('name', array('regexp' => 'induction'));
+
+                        foreach($collection as $event) : ?>
+                            <div class="radio confirm-terms margin">
+                                <label>
+                                    <?php $location = $_objectManager->get('FishPig\WordPress\Model\Term')->load($event->getMetaValue('_EventVenueID'));?>
+                                    <input type="radio" class='induction-date' data-date-options-id="<?php echo $inductionDateId; ?>"
+                                           data-location-options-id="<?php echo $inductionLocationId; ?>"
+                                           data-location="<?php echo $location->getName(); ?>"
+                                           data-date="<?php echo $event->getMetaValue('_EventStartDate');?>" /> <?php echo $event->getName(); ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

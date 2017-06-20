@@ -117,8 +117,8 @@
                         format: "dd MM yyyy",
                         beforeShowDay: $.datepicker.noWeekends,
                         onSelect: function(date) {
-                            $dateId = $('#datetimepicker12').attr('data-options-id');
-                            $('#options_'+$dateId+'_text').attr('value',date);
+                            //$dateId = $('#datetimepicker12').attr('data-options-id');
+                            //$('#options_'+$dateId+'_text').attr('value',date);
                         },
                     });
 
@@ -127,14 +127,23 @@
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',true).click();
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',false).click();
 
-
-                    $dateId = $('#datetimepicker12').attr('data-options-id');
-                    $('#options_'+$dateId+'_text').attr('value','');
-
                     $('#datetimepicker12').datepicker('destroy');
+
+                    $dateId = $('.induction-date').first().attr('data-date-options-id');
+                    $locationId = $('.induction-date').first().attr('data-location-options-id');
+                    $('#options_'+$dateId+'_text').attr('value', '');
+                    $('#options_'+$locationId+'_text').attr('value','');
                 }
             }
 
+        });
+
+        $('.induction-date').on('click', function(){
+            $dateId = $(this).attr('data-date-options-id');
+            $('#options_'+$dateId+'_text').attr('value', $(this).attr('data-date'));
+
+            $locationId = $(this).attr('data-location-options-id');
+            $('#options_'+$locationId+'_text').attr('value', $(this).attr('data-location'));
         });
 
         var agreed = false;
