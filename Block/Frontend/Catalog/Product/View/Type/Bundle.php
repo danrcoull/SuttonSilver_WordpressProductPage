@@ -67,4 +67,10 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
         $post = $this->_fishpig->getFactory('Post')->create()->load($id);
         return $post;
     }
+
+    public function getInductionCollection($id)
+    {
+        return $this->_fishpig->getFactory('Post')->create()->getPostCollection()
+            ->addTermIdFilter($id);
+    }
 }

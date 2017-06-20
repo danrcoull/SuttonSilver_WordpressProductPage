@@ -80,11 +80,9 @@ endforeach;
                                 }
 
                                 if ($id != 0) {
-                                    $levelTerm = $_objectManager->get('FishPig\WordPress\Model\Post')->getCollection()
-                                        ->addTermIdFilter($id);
+                                    $levelTerm = $this->getInductionCollection($id);
+                                    die(var_dump($levelTerm));
 
-                                    var_dump($levelTerm);
-                                    die;
                                     foreach ($levelTerm as $event) :
                                         var_dump($event->getMetaValue('_EventVenueID'))
                                         ?>
