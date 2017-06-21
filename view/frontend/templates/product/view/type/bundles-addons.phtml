@@ -86,10 +86,11 @@ if ($id != 0) {
                             </div>
                             <?php if ($inductionLocation): ?>
                                 <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide">
+                                    <ul>
                                     <?php foreach ($levelTerm as $event) :
 
                                         ?>
-                                        <div class="radio confirm-terms margin">
+                                        <li class="radio confirm-terms margin">
                                             <label>
                                                 <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID')); ?>
                                                 <input type="radio" class='induction-date'
@@ -98,9 +99,9 @@ if ($id != 0) {
                                                        data-location="<?php echo $location->getName(); ?>"
                                                        data-date="<?php echo $event->getMetaValue('_EventStartDate'); ?>"/> <?php echo $event->getName(); ?>
                                             </label>
-                                        </div>
+                                        </li>
                                     <?php endforeach; ?>
-
+                                    </ul>
                                 </div>
                         <?php endif; ?>
                         </div>
