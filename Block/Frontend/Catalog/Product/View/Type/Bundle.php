@@ -71,7 +71,6 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
     public function getInductionCollection($id)
     {
         return $this->_fishpig->getFactory('Post')->create()->getCollection()
-            ->addTermIdFilter($id,'tribe_events_cat')
-            ->addFieldToFilter('name',array('like','%Induction%'));
+            ->addTermIdFilter($id,'tribe_events_cat');
     }
 }
