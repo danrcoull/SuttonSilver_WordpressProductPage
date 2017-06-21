@@ -73,9 +73,11 @@ if ($id != 0) {
 
                 </h3>
                 <div class="content">
-                    <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
-                        <a href="" data-induction="yes">Yes</a>
-                        <a href="" data-induction="no" class="active">No</a>
+                    <div class="row">
+                        <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
+                            <a href="" data-induction="yes">Yes</a>
+                            <a href="" data-induction="no" class="active">No</a>
+                        </div>
                     </div>
                     <?php if ($inductionDate && count($levelTerm) > 0): ?>
                         <div class="row">
