@@ -81,7 +81,7 @@ endforeach;
 
                                 if ($id != 0) {
                                     $levelTerm = $this->getInductionCollection($id);
-                                    //die(var_dump($levelTerm));
+                                   die(var_dump(count($levelTerm)));
 
                                     foreach ($levelTerm as $event) :
                                         var_dump($event->getMetaValue('_EventVenueID'))
