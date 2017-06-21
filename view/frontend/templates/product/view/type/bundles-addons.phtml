@@ -93,7 +93,7 @@ if ($id != 0) {
                                         <li class="radio confirm-terms margin">
                                             <label>
                                                 <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID')); ?>
-                                                <input type="radio" class='induction-date'
+                                                <input type="radio" name="date-location" class='induction-date'
                                                        data-date-options-id="<?php echo $inductionDateId; ?>"
                                                        data-location-options-id="<?php echo $inductionLocationId; ?>"
                                                        data-location="<?php echo $location->getName(); ?>"
