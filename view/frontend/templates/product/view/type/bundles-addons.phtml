@@ -61,9 +61,9 @@ endforeach;
                             <div class="col-xs-12 col-md-6">
                                 <?php
                                 $id = 0;
-                                $level3Id = 84;
-                                $level6Id = 93;
-                                $gtfdId = 96;
+                                $level3Id = 99;
+                                $level6Id = 95;
+                                $gtfdId = 100;
 
                                 $type = $_item->getAttributeText('induction_type');
 
@@ -81,7 +81,7 @@ endforeach;
 
                                 if ($id != 0) {
                                     $levelTerm = $this->getInductionCollection($id);
-                                   die(var_dump(count($levelTerm)));
+
 
                                     foreach ($levelTerm as $event) :
                                         var_dump($event->getMetaValue('_EventVenueID'))
