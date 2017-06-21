@@ -95,8 +95,7 @@
 
         });
 
-        $('.yes-no-wrapper-show-hide').hide();
-        $('#addtocartmodal .induction .yes-no-wrapper a').last().click();
+
         $('#addtocartmodal .induction .yes-no-wrapper a').on('click',function(event){
             event.preventDefault();
 
@@ -140,6 +139,9 @@
             }
 
         });
+
+        $('.yes-no-wrapper-show-hide').hide();
+        $('#addtocartmodal .induction .yes-no-wrapper a').trigger( "click" );
 
         $('.induction-date').on('click', function(){
             $dateId = $(this).attr('data-date-options-id');
