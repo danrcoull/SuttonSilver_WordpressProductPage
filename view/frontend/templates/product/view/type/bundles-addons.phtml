@@ -81,11 +81,11 @@ if ($id != 0) {
                     </div>
                     <?php if ($inductionDate && count($levelTerm) > 0): ?>
                         <div class="row">
-                            <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide ">
+                            <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-left ">
                                 <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
                             </div>
                             <?php if ($inductionLocation): ?>
-                                <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide">
+                                <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
                                     <ul>
                                     <?php foreach ($levelTerm as $event) :
 
