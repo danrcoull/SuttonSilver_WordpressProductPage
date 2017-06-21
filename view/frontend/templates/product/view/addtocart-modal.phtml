@@ -108,6 +108,7 @@
                 if($(this).text() == 'Yes')
                 {
 
+                    $('.yes-no-wrapper-show-hide').show();
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',false).click();
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',true).click();
 
@@ -124,6 +125,7 @@
 
 
                 }else{
+                    $('.yes-no-wrapper-show-hide').hide();
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',true).click();
                     $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',false).click();
 
