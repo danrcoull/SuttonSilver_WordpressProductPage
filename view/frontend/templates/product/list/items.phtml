@@ -171,11 +171,8 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                         <div class="product-title">
                             <span><?php echo __($_item->getName()); ?></span>
                             <div class="subtitle">
-                                <?php if($level = $_item->getLevel()) : ?>
+                                <?php if($level = $_item->getAttributeText('level')) : ?>
                                     <span class="level"><?php echo __('Level '.$level); ?></span>
-                                <?php endif; ?>
-                                <?php if($unitCount = $_item->getUnitCount()) : ?>
-                                    <span class="level"><?php echo __($unitCount.' Units'); ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>

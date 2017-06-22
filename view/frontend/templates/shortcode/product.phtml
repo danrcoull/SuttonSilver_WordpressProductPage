@@ -36,9 +36,6 @@ $items = $this->getProducts();
                                         <?php if ($level = $_item->getAttributeText('level')) : ?>
                                             <span class="level"><?php echo __('Level ' . $level); ?></span>
                                         <?php endif; ?>
-                                        <?php if ($unitCount = $_item->getAttributeText('unit_count')) : ?>
-                                            <span class="level"><?php echo __($unitCount . ' Units'); ?></span>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="content">
