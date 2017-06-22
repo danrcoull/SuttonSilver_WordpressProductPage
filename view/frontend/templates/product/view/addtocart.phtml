@@ -59,9 +59,11 @@ $buttonTitle = __("Add to Basket");
                 </div>
             <?php endif; ?>
         </div>
+        <?php if($_product->getTypeId() === 'bundle'): ?>
         <div class="cart-footer">
-            <a class="single-units btn-blue-standard" href="#">Single Units From £120</a>
+            <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
         </div>
+        <?php endif; ?>
     </div>
 <?php endif; ?>
 <script type="text/x-magento-init">

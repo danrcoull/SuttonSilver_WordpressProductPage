@@ -85,9 +85,11 @@ $type = $_product->getData('type_id');
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="cart-footer">
-                <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
-            </div>
+            <?php if($_product->getTypeId() === 'bundle'): ?>
+                <div class="cart-footer">
+                    <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
+                </div>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
