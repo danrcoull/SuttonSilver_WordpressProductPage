@@ -10,12 +10,23 @@ $type = $_product->getData('type_id');
 
     <?php echo $block->getChildHtml('product.info.sidebar'); ?>
     <?php if($_product->getTypeId() == 'bundle') :
+        $lowest = 0;
+        $lowestUrl = "";
         $price = $_product->getFinalPrice();
         $simlePrice = 0;
         $simples = $_product->getTypeInstance(true)->getSelectionsCollection($_product->getTypeInstance(true)->getOptionsIds($_product), $_product);
         foreach($simples as $simple)
         {
             $simlePrice += $simple->getFinalPrice();
+            if($lowest == 0)
+            {
+                $lowest =  $simple->getFinalPrice();
+                $lowestUrl = $simple->getUrl();
+            }else {
+                $lowest = ($simple->getFinalPrice() < $lowest) ?  $simple->getFinalPrice(): $lowest;
+                $lowestUrl = ($simple->getFinalPrice() < $lowest) ?  $simple->getUrl(): $lowestUrl;
+            }
+
         }
         ?>
         <div class="ribbon ribbon-top-right">
@@ -87,7 +98,7 @@ $type = $_product->getData('type_id');
             </div>
             <?php if($_product->getTypeId() === 'bundle'): ?>
                 <div class="cart-footer">
-                    <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
+                    <a class="single-units btn-blue-standard" href="<?php echo $lowestUrl; ?>"><?php /* @escapeNotVerified */ echo __('Single Units From £'.$lowest); ?></a>
                 </div>
             <?php endif; ?>
         </div>
