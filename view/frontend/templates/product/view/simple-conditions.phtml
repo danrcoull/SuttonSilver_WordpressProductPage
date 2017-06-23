@@ -30,7 +30,7 @@
         $('#product-addtocart-button').on('click', function(event)
         {
             if(agreed === false) {
-                $('#termsModalSimple').modal('show');
+                $('#termsModalSimple').bsmodal('show');
                 event.preventDefault();
             }
 
@@ -38,6 +38,7 @@
 
         $('#termsModalSimple .agree').on('click',function(event){
             agreed = true;
+            $('#termsModalSimple').bsmodal('hide');
             event.preventDefault();
             $('#product_addtocart_form').submit();
             event.preventDefault();
