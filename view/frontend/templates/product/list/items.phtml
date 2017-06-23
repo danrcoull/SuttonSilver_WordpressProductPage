@@ -219,20 +219,20 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                 <?php
                                                 $stockItem = $objectManager->get('\Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($_item->getEntityId());
                                                 if ($_item->isSaleable() && $stockItem->getData('is_in_stock')): ?>
-                                                    <?php if ($_item->getTypeInstance()->hasRequiredOptions($_item)): ?>
-                                                        <button class="action tocart primary btn-blue-standard" data-mage-init='{"redirectUrl": {"url": "<?php /* @escapeNotVerified */ echo $block->getAddToCartUrl($_item) ?>"}}' type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>">
+                                                    <?php
+
+                                                    $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+
+                                                    $addToCartUrl =  $listBlock->getAddToCartUrl($_item);
+                                                    ?>
+                                                    <form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post">
+                                                        <?php echo $block->getBlockHtml('formkey')?>
+                                                        <button type="submit"
+                                                                title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
+                                                                class="action tocart primary btn-blue-standard">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
-                                                    <?php else: ?>
-                                                        <?php $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
-                                                        $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_item), ['product' => $_item->getEntityId()])
-                                                        ?>
-                                                        <button class="action tocart primary btn-blue-standard"
-                                                                data-post='<?php /* @escapeNotVerified */ echo $postData; ?>'
-                                                                type="button" title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>">
-                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
-                                                        </button>
-                                                    <?php endif; ?>
+                                                    </form>
                                                 <?php else: ?>
                                                     <?php
                                                     if ($stockItem->getData('is_in_stock')): ?>
