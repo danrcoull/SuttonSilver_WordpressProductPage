@@ -73,7 +73,6 @@
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
-            <referenceBlock name="product.info.content.addtocart.simple" remove="true" />
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >

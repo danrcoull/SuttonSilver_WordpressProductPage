@@ -34,11 +34,11 @@ $buttonTitle = __("Add to Basket");
                         </div>
                     </div>
                 <?php endif; ?>
-                <div class="actions">
+                <div class="actions" data-product-id="<?php echo $_product->getId();?>" >
                     <button type="submit"
                             title="<?php /* @escapeNotVerified */
                             echo $buttonTitle ?>"
-                            class="action primary tocart"
+                            class="action primary tocart simple-addtocart"
                             id="product-addtocart-button">
                         <span><?php /* @escapeNotVerified */
                             echo $buttonTitle ?></span>

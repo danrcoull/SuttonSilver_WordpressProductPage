@@ -223,11 +223,11 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                     $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
                                                     $addToCartUrl =  $listBlock->getAddToCartUrl($_item);
                                                     ?>
-                                                    <form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post">
+                                                    <form data-role="tocart-form" data-product-id="<?php echo $_item->getId();?>" action="<?php echo $addToCartUrl; ?>" method="post">
                                                         <?php echo $block->getBlockHtml('formkey')?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard">
+                                                                class="action tocart primary btn-blue-standard simple-addtocart">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>
@@ -243,10 +243,46 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                         <div class="stock unavailable btn-blue-standard" data-product-id="<?php echo $_item->getEntityId();?>"><span><?php /* @escapeNotVerified */ echo __('Notify') ?></span></div>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
+
+
                                             </div>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endif; ?>
+                            </div>
+                            <div class="hidden-terms hidden">
+                                <?php
+                                $contentBefore =  $post->getMetaValue('product_blocks_before_units');
+                                $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
+
+                                $terms = "";
+
+                                if($contentBefore != null) {
+                                    foreach ($contentBefore as $row) {
+                                        foreach ($row as $field) {
+                                            if ($field instanceof WP_Post) {
+                                                $newPost = $this->getPostById($field->ID);
+                                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                                                    $terms .= $newPost->getMainContent();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if($contentAfter != null) {
+                                    foreach ($contentAfter as $row) {
+                                        foreach ($row as $field) {
+                                            $newPost = $this->getPostById($field->ID);
+                                            if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                                                $terms .= $newPost->getMainContent();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                echo $post->clean($terms);
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -254,6 +290,8 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                 <?php endforeach ?>
         </div>
     </div>
+
+
     <?php $buttonTitle = __('Notify'); ?>
     <div class="" id="outofstock-modal-related">
         <div class="modal-body">
