@@ -19,3 +19,30 @@
         </div>
     </div>
 </div>
+
+<script>// <![CDATA[
+    require([
+        'jquery',
+        'domReady!'
+    ], function ($) {
+
+        agreed = false;
+        $('#product-addtocart-button').on('click', function(event)
+        {
+            if(agreed === false) {
+                $('#termsModalSimple').modal('show');
+                event.preventDefault();
+            }
+
+        });
+
+        $('#termsModalSimple .agree').on('click',function(event){
+            agreed = true;
+            event.preventDefault();
+            $('#product_addtocart_form').submit();
+            event.preventDefault();
+        });
+
+    });
+    // ]]>
+</script>
