@@ -70,7 +70,13 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
 
     public function getInductionCollection($id)
     {
-        return $this->_fishpig->getFactory('Post')->create()->getCollection()
-            ->addTermIdFilter($id,'tribe_events_cat');
+         $collection = $this->_fishpig->getFactory('Post')->create()->getCollection()
+            ->addTermIdFilter($id,'tribe_events_cat')
+            ->addMetaFieldToSelect('_EventStartDate')
+            ->addMetaFieldToFilter('_EventStartDate', array('gteq' => date("Y-m-d H:i:s", strtotime('now'))))
+            ->addMetaFieldToSort('_EventStartDate','asc')
+            ->setCurPage(1)->setPageSize(4);
+
+        return $collection;
     }
 }

@@ -116,7 +116,6 @@
                     $('#datetimepicker12').datepicker({
                         inline: true,
                         format: "dd MM yyyy",
-                        beforeShowDay: $.datepicker.noWeekends,
                         onSelect: function(date) {
                             //$dateId = $('#datetimepicker12').attr('data-options-id');
                             //$('#options_'+$dateId+'_text').attr('value',date);
@@ -145,7 +144,9 @@
 
         $('.induction-date').on('click', function(){
             $dateId = $(this).attr('data-date-options-id');
-            $('#options_'+$dateId+'_text').attr('value', $(this).attr('data-date'));
+            $date = $(this).attr('data-date');
+            $('#options_'+$dateId+'_text').attr('value',$date);
+            $('#datetimepicker12').datepicker('setDate', $date);
 
             $locationId = $(this).attr('data-location-options-id');
             $('#options_'+$locationId+'_text').attr('value', $(this).attr('data-location'));

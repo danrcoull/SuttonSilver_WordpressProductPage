@@ -92,12 +92,15 @@ if ($id != 0) {
                                         ?>
                                         <li class="radio confirm-terms margin">
                                             <label>
-                                                <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID')); ?>
+                                                <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID'));
+                                                $date = date("d/m/Y",strtotime($event->getMetaValue('_EventStartDate')));
+                                                $date2 = date("Y-m-d",strtotime($event->getMetaValue('_EventStartDate')));
+                                                ?>
                                                 <input type="radio" name="date-location" class='induction-date'
                                                        data-date-options-id="<?php echo $inductionDateId; ?>"
                                                        data-location-options-id="<?php echo $inductionLocationId; ?>"
                                                        data-location="<?php echo $location->getName(); ?>"
-                                                       data-date="<?php echo $event->getMetaValue('_EventStartDate'); ?>"/> <?php echo $event->getName(); ?>
+                                                       data-date="<?php echo $date2; ?>"/> <?php echo $event->getName() .' - ('.$date.')'; ?>
                                             </label>
                                         </li>
                                     <?php endforeach; ?>
