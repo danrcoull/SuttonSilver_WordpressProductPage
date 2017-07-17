@@ -4,6 +4,10 @@
 		<plugin disabled="false" name="SuttonSilver_WordpressProductPage_Plugin_Magento_Framework_App_FrontControllerInterface" sortOrder="10" type="SuttonSilver\WordpressProductPage\Plugin\Magento\Framework\App\FrontControllerInterface"/>
 	</type>
 
+	<type name="Magento\Checkout\Model\Cart">
+		<plugin name="add_extra_product" type="SuttonSilver\WordpressProductPage\Plugin\Magento\Checkout\Model\Cart\Add" sortOrder="1"/>
+	</type>
+
 	<preference for="FishPig\WordPress\Helper\Filter" type="SuttonSilver\WordpressProductPage\Helper\Filter" />
 	<preference for="FishPig\WordPress\Model\Post" type="SuttonSilver\WordpressProductPage\Model\Post" />
 	<preference for="Magento\Catalog\Block\Product\ProductList\Related" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ProductList\Related" />
