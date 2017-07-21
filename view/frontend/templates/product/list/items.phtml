@@ -221,13 +221,18 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                 if ($_item->isSaleable() && $stockItem->getData('is_in_stock')): ?>
                                                     <?php
                                                     $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
-                                                    $addToCartUrl =  $listBlock->getAddToCartUrl($_item);
+                                                    if(filter_var($_item->getData('has_options'))){
+                                                        $query = ['startcustomization' => '1'];
+                                                        $addToCartUrl = $_item->getUrlModel()->getUrl($_item).'?startcustomization=1';
+                                                    }else{
+                                                        $addToCartUrl = $listBlock->getAddToCartUrl($_item);
+                                                    }
                                                     ?>
                                                     <form data-role="tocart-form" data-product-id="<?php echo $_item->getId();?>" action="<?php echo $addToCartUrl; ?>" method="post">
                                                         <?php echo $block->getBlockHtml('formkey')?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard <?php echo ($_item->getTypeId() == 'simple') ? 'simple-addtocart' : ''; ?>">
+                                                                class="action tocart primary btn-blue-standard <?php echo ($_item->getTypeId() == 'simple' && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>

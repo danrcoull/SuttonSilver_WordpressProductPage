@@ -55,26 +55,26 @@ class Add
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
-
+        //die(var_dump($requestInfo['options']));
         if(isset($requestInfo['options']) && !in_array($productInfo->getSku(),$this->skus))
         {
             foreach($requestInfo['options'] as $key => $val) {
                 $title = $productInfo->getOptionById($key)->getTitle();
-                if (stripos($title, 'induction') !== false) {
-                    if (stripos($title, 'date') !== false) {
+                if (stripos(strtolower($title), 'induction') !== false) {
+                    if (stripos(strtolower($title), 'date') !== false) {
                         $induction['date'] = $val;
                         unset($requestInfo['options'][$key]);
-                    } elseif (stripos($title, 'location') !== false) {
+                    } elseif (stripos(strtolower($title), 'location') !== false) {
                         $induction['location'] = $val;
                         unset($requestInfo['options'][$key]);
                     }
                 }
 
-                if (stripos($title, 'revision') !== false) {
-                    if (stripos($title, 'date') !== false) {
+                if (stripos(strtolower($title), 'revision') !== false) {
+                    if (stripos(strtolower($title), 'date') !== false) {
                         $revision['date'] = $val;
                         unset($requestInfo['options'][$key]);
-                    } elseif (stripos($title, 'location') !== false) {
+                    } elseif (stripos(strtolower($title), 'location') !== false) {
                         $revision['location'] = $val;
                         unset($requestInfo['options'][$key]);
                     }
@@ -126,22 +126,23 @@ class Add
             $options = [];
             foreach($poptions as $key => $val) {
                 $title=  $val->getTitle();
-                if (stripos($title, 'induction') !== false) {
-                    if (stripos($title, 'date') !== false) {
-                        $options['options'][$val->getId()] = $induction['date'];
-                    } elseif (stripos($title, 'location') !== false) {
-                        $options['options'][$val->getId()] = $induction['location'];
+                if (stripos(strtolower($title), 'induction') !== false) {
+                    if (stripos(strtolower($title), 'date') !== false) {
+                        $options[$val->getId()] = $induction['date'];
+                    } elseif (stripos(strtolower($title), 'location') !== false) {
+                        $options[$val->getId()] = $induction['location'];
                     }
                 }
             }
 
+
             if(!in_array($p->getId(),$this->ids)) {
-                    $subject->addProduct($p, ['form_key' => $this->formKey->getFormKey(), 'qty' => 1, $options]);
+                    $subject->addProduct($p, ['form_key' => $this->formKey->getFormKey(), 'qty' => 1, 'options' => $options]);
             }else{
                 $item = $subject->getItems()->addFieldToFilter('product_id', $p->getId())->getFirstItem();
                 $data = [$item->getId()];
 
-                array_push($data[$item->getId()],$options);
+                array_push($data[$item->getId()]['options'],$options);
                 $subject->updateItems($data);
             }
         } catch (\Exception $e) {

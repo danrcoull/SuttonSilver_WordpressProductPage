@@ -95,7 +95,7 @@
 
         });
 
-
+        $('.yes-no-wrapper-show-hide').hide();
         $('#addtocartmodal .induction .yes-no-wrapper a').on('click',function(event){
             event.preventDefault();
 
@@ -109,8 +109,8 @@
                 {
 
                     $('.yes-no-wrapper-show-hide').show();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',false).click();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',true).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':first').prop('checked',false).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':last').prop('checked',true).click();
 
                     $('#datetimepicker12').datepicker('destroy');
                     $('#datetimepicker12').datepicker({
@@ -125,8 +125,8 @@
 
                 }else{
                     $('.yes-no-wrapper-show-hide').hide();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:first').prop('checked',true).click();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':visible:last').prop('checked',false).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':first').prop('checked',true).click();
+                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':last').prop('checked',false).click();
 
                     $('#datetimepicker12').datepicker('destroy');
 
@@ -138,9 +138,7 @@
             }
 
         });
-
-        $('.yes-no-wrapper-show-hide').hide();
-        $('#addtocartmodal .induction .yes-no-wrapper a').last().trigger( "click" );
+        $('#addtocartmodal .induction .yes-no-wrapper a').last()[0].click();
 
         $('.induction-date').on('click', function(){
             $dateId = $(this).attr('data-date-options-id');
@@ -182,7 +180,7 @@
 
         $(document).on('click','#addtocartmodal .add-to-cart.arrow', function(event){
              event.preventDefault();
-             $('#addtocartmodal .box-tocart .tocart').trigger('click');
+             $('#addtocartmodal .box-tocart .tocart').click();
         });
 
 

@@ -188,17 +188,17 @@
             </block>
         </referenceContainer>
 
-        <container name="product.info.sidebar" htmlTag="div" htmlId="sidebar-info" htmlClass="sidebar-info" />
-
 
         <move element="catalog.product.related" destination="product.info.related" />
         <move element="catalog.product.upsell" destination="product.info.related" />
 
+        <!--Main Page Sidebar -->
+        <container name="product.info.sidebar" htmlTag="div" htmlId="sidebar-info" htmlClass="sidebar-info" />
         <move element="product.info.price" destination="product.info.sidebar" />
         <move element="product.price.tier" after="product.info.price" destination="product.info.sidebar" />
         <move element="product.info" after="product.info.tier" destination="product.info.sidebar" />
-
         <move element="product.info.sidebar" destination="product.info.content.addtocart" />
+        <!--END Main Page Sidebar -->
 
         <move element="page.main.title" destination="content" before="product.info.content" />
 
@@ -207,6 +207,10 @@
         <referenceBlock name="product.info.media" remove="true" />
         <referenceBlock name="product.info.description" remove="true" />
         <referenceBlock name="product.info.stock.sku" remove="true" />
+
+        <move element="product.info" destination="product.info.sidebar.popup" />
+
+
 
     </body>
 </page>

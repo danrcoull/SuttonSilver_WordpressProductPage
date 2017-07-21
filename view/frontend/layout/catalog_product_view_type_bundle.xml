@@ -9,21 +9,7 @@
     <update handle="catalog_product_view_type_bundle"/>
     <body>
         <attribute name="class" value="page-product-bundle"/>
-        <referenceBlock name="product.info">
-            <block class="Magento\Catalog\Block\Product\View" name="bundle.summary" as="form_bottom" template="Magento_Bundle::catalog/product/view/summary.phtml">
-                <block class="Magento\Catalog\Pricing\Render" name="product.price.render.bundle.customization">
-                    <arguments>
-                        <argument name="price_render" xsi:type="string">product.price.render.default</argument>
-                        <argument name="price_type_code" xsi:type="string">configured_price</argument>
-                        <argument name="zone" xsi:type="string">item_view</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart.bundle" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml">
-                    <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog" name="addtocart.shortcut.buttons"/>
-                </block>
-                <block class="Magento\Catalog\Block\Product\View" name="product.info.addto.bundle" as="addto" template="Magento_Bundle::product/view/addto.phtml"/>
-            </block>
-        </referenceBlock>
+
         <referenceBlock name="product.info.options.wrapper">
             <block class="Magento\Catalog\Block\Product\View" name="bundle.product.view.options.notice" template="Magento_Bundle::catalog/product/view/options/notice.phtml"/>
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundle.options" as="type_bundle_options" template="Magento_Bundle::catalog/product/view/type/bundle/options.phtml" before="-">
@@ -76,7 +62,6 @@
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
-
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
                     <arguments>
                         <argument name="data_modal_parent" xsi:type="string">#addtocartmodal</argument>
@@ -88,9 +73,6 @@
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
                 <container name="product.info.sidebar.popup" as="product_form_sidebar" htmlTag="div" />
             </block>
-
-
-
         </referenceContainer>
 
         <referenceBlock name="customize.button" remove="true" />
