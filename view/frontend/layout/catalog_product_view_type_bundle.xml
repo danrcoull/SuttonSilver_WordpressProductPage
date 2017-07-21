@@ -77,25 +77,21 @@
             <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/type/simple-modal.phtml" />
             <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml" >
 
-            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
-                <arguments>
-                    <argument name="data_modal_parent" xsi:type="string">#addtocartmodal</argument>
-                    <argument name="data_modal_child"  xsi:type="string">#simple-product-modal</argument>
-                </arguments>
-                <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
-                 </block>
+                <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.simples" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list.phtml">
+                    <arguments>
+                        <argument name="data_modal_parent" xsi:type="string">#addtocartmodal</argument>
+                        <argument name="data_modal_child"  xsi:type="string">#simple-product-modal</argument>
+                    </arguments>
+                    <block class="Magento\Framework\View\Element\Template" name="product.info.simples.title" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-list-title.phtml" />
+                </block>
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
                 <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
                 <container name="product.info.sidebar.popup" as="product_form_sidebar" htmlTag="div" />
             </block>
 
-        </referenceContainer>
 
-        <referenceBlock name="product.info.content.addtocart">
-            <action method='setTemplate'>
-                <argument name="template" xsi:type="string">SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml</argument>
-            </action>
-        </referenceBlock>
+
+        </referenceContainer>
 
         <referenceBlock name="customize.button" remove="true" />
 

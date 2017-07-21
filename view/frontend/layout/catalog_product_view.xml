@@ -163,7 +163,7 @@
         </referenceContainer>
 
         <referenceContainer name="sidebar.main">
-            <block class="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" name="product.info.content.addtocart" template="SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart-simple.phtml"/>
+            <block class="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" name="product.info.content.addtocart" template="SuttonSilver_WordpressProductPage::product/simplemodal/popup-addtocart.phtml"/>
             <block class="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" name="product.info.content.sidebar.nav" template="SuttonSilver_WordpressProductPage::product/view/sidebar.phtml" />
         </referenceContainer>
 
@@ -179,6 +179,15 @@
             </action>
         </referenceBlock>
 
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="product.info.content.simple.loading" after="-" template="SuttonSilver_WordpressProductPage::product/simplemodal/loading.phtml" />
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.content.addtocart.modal" after="-" template="SuttonSilver_WordpressProductPage::product/view/addtocart-modal.phtml">
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.addons" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-addons.phtml" />
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.terms" template="SuttonSilver_WordpressProductPage::product/view/type/bundles-terms.phtml" />
+                <container name="product.info.sidebar.popup" as="product_form_sidebar" htmlTag="div" />
+            </block>
+        </referenceContainer>
+
         <container name="product.info.sidebar" htmlTag="div" htmlId="sidebar-info" htmlClass="sidebar-info" />
 
 
@@ -188,10 +197,10 @@
         <move element="product.info.price" destination="product.info.sidebar" />
         <move element="product.price.tier" after="product.info.price" destination="product.info.sidebar" />
         <move element="product.info" after="product.info.tier" destination="product.info.sidebar" />
+
         <move element="product.info.sidebar" destination="product.info.content.addtocart" />
 
         <move element="page.main.title" destination="content" before="product.info.content" />
-
 
         <referenceBlock name="product.info.review" remove="true" />
         <referenceBlock name="product.info.extrahint" remove="true" />

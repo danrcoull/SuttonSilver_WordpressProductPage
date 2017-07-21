@@ -1,7 +1,9 @@
 <?php $_product = $block->getProduct();
+
 $post = $block->getPost();
 $buttonTitle = __("Add to Basket");
 $type = $_product->getData('type_id');
+$hasOptions =  filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOOLEAN);
 ?>
 <?php if($_product->getFinalPrice() > 0) : ?>
 <div class="siderbar-cart">
@@ -70,7 +72,7 @@ $type = $_product->getData('type_id');
                             <div class="actions">
                                 <button type="submit"
                                         title="<?php echo $block->escapeHtml(__('Add to Basket')); ?>"
-                                        class="action primary tocart <?php echo ($type == 'bundle') ?'bundle-addtocart' : 'simple-addtocart'; ?>">
+                                        class="action primary tocart <?php echo ($type == 'bundle' || $hasOptions) ? 'bundle-addtocart' : 'simple-addtocart'; ?>">
                                     <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                 </button>
                             </div>
@@ -125,7 +127,7 @@ $type = $_product->getData('type_id');
 </script>
 <?php endif; ?>
 
-<?php if($type == 'bundle'): ?>
+<?php if($type == 'bundle' || $hasOptions): ?>
 <script>// <![CDATA[
     require([
         'jquery',
