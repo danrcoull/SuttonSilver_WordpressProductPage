@@ -1,120 +1,235 @@
 <?php
 $_item = $this->getProduct();
-$_post = $this->getPostById($_item->getData('associated_page'));
+$_post = $this->getPostById( $_item->getData( 'associated_page' ) );
 $count = 1;
 
 $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$customOptions = $_objectManager->get('Magento\Catalog\Model\Product\Option')->getProductOptionCollection($_item);
-$induction = false;
-$inductionId = false;
+$customOptions  = $_objectManager->get( 'Magento\Catalog\Model\Product\Option' )->getProductOptionCollection( $_item );
+$induction      = false;
+$inductionId    = false;
 
-$inductionDate = false;
+$inductionDate   = false;
 $inductionDateId = false;
 
 $inductionLocationId = false;
-$inductionLocation = false;
+$inductionLocation   = false;
 
 
-foreach ($customOptions as $option):
+foreach ( $customOptions as $option ):
 
-    if (strtolower($option->getTitle()) === strtolower('Induction Day')):
-        $induction = true;
-        $inductionId = $option->getId();
-    endif;
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Day' ) ):
+		$induction   = true;
+		$inductionId = $option->getId();
+	endif;
 
-    if (strtolower($option->getTitle()) === strtolower('Induction Date')):
-        $inductionDate = true;
-        $inductionDateId = $option->getId();
-    endif;
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Date' ) ):
+		$inductionDate   = true;
+		$inductionDateId = $option->getId();
+	endif;
 
-    if (strtolower($option->getTitle()) === strtolower('Induction Location')):
-        $inductionLocation = true;
-        $inductionLocationId = $option->getId();
-    endif;
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Location' ) ):
+		$inductionLocation   = true;
+		$inductionLocationId = $option->getId();
+	endif;
 endforeach;
 
-$id = 0;
+$id       = 0;
 $level3Id = 99;
 $level6Id = 95;
-$gtfdId = 100;
+$gtfdId   = 100;
 
-$type = $_item->getAttributeText('induction_type');
+$type = $_item->getAttributeText( 'induction_type' );
 
-switch (trim($type)) {
-    case 'Level 3 induction':
-        $id = $level3Id;
-        break;
-    case 'Level 6 induction':
-        $id = $level6Id;
-        break;
-    case 'GTFD induction':
-        $id = $gtfdId;
-        break;
+switch ( trim( $type ) ) {
+	case 'Level 3 induction':
+		$id = $level3Id;
+		break;
+	case 'Level 6 induction':
+		$id = $level6Id;
+		break;
+	case 'GTFD induction':
+		$id = $gtfdId;
+		break;
 }
-
-if ($id != 0) {
-    $levelTerm = $this->getInductionCollection($id);
+$levelTerm = [];
+if ( $id != 0 ) {
+	$levelTerm = $this->getInductionCollection( $id );
 }
 ?>
 
-<?php if ($induction) : ?>
+<?php if ( $induction ) : ?>
     <div class="white induction">
         <div class="add-to-cart-title">
             <div class="circle-with-text small pull-left">
                 <span></span>
             </div>
             <div class="text pull-left">
-                <h3 class="title"><span><?php echo __('Do you Require an induction?'); ?></span>
-                    <span class="subtitle "><?php echo __('Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.'); ?>
+                <h3 class="title"><span><?php echo __( 'Do you Require an induction?' ); ?></span>
+                    <span class="subtitle "><?php echo __( 'Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.' ); ?>
                         <span class="error inline"><i class="fa fa-exclamation-triangle"
-                                                      aria-hidden="true"></i><?php echo __("These are not course specific so please only select one date if you're enrolling on more than one course."); ?></span>
+                                                      aria-hidden="true"></i><?php echo __( "These are not course specific so please only select one date if you're enrolling on more than one course." ); ?></span>
 
                     </span>
 
                 </h3>
                 <div class="content">
-                    <div class="row">
-                        <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
-                            <a href="" data-induction="yes" class="active">Yes</a>
-                            <a href="" data-induction="no">No</a>
+					<?php if ( $inductionDate && count( $levelTerm ) > 0 ): ?>
+                        <div class="row">
+                            <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
+                                <a href="" data-induction="yes" class="active">Yes</a>
+                                <a href="" data-induction="no">No</a>
+                            </div>
                         </div>
-                    </div>
-                    <?php if ($inductionDate && count($levelTerm) > 0): ?>
+
                         <div class="row">
                             <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-left ">
                                 <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
                             </div>
-                            <?php if ($inductionLocation): ?>
+							<?php if ( $inductionLocation ): ?>
                                 <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
                                     <ul>
-                                    <?php foreach ($levelTerm as $event) :
+										<?php foreach ( $levelTerm as $event ) :
 
-                                        ?>
-                                        <li class="radio confirm-terms margin">
-                                            <label>
-                                                <?php $location = $_objectManager->get('FishPig\WordPress\Model\Post')->load($event->getMetaValue('_EventVenueID'));
-                                                $date = date("d/m/Y",strtotime($event->getMetaValue('_EventStartDate')));
-                                                $date2 = date("Y-m-d",strtotime($event->getMetaValue('_EventStartDate')));
-                                                ?>
-                                                <input type="radio" name="date-location" class='induction-date'
-                                                       data-date-options-id="<?php echo $inductionDateId; ?>"
-                                                       data-location-options-id="<?php echo $inductionLocationId; ?>"
-                                                       data-location="<?php echo $location->getName(); ?>"
-                                                       data-date="<?php echo $date2; ?>"/> <?php echo $event->getName() .' - ('.$date.')'; ?>
-                                            </label>
-                                        </li>
-                                    <?php endforeach; ?>
+											?>
+                                            <li class="radio confirm-terms margin">
+                                                <label>
+													<?php $location = $_objectManager->get( 'FishPig\WordPress\Model\Post' )->load( $event->getMetaValue( '_EventVenueID' ) );
+													$date           = date( "d/m/Y", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
+													$date2          = date( "Y-m-d", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
+													?>
+                                                    <input type="radio" name="date-location" class='induction-date'
+                                                           data-date-options-id="<?php echo $inductionDateId; ?>"
+                                                           data-location-options-id="<?php echo $inductionLocationId; ?>"
+                                                           data-location="<?php echo $location->getName(); ?>"
+                                                           data-date="<?php echo $date2; ?>"/> <?php echo $event->getName() . ' - (' . $date . ')'; ?>
+                                                </label>
+                                            </li>
+										<?php endforeach; ?>
                                     </ul>
                                 </div>
-                        <?php endif; ?>
+							<?php endif; ?>
                         </div>
-                    <?php endif; ?>
+					<?php endif; ?>
                 </div>
             </div>
         </div>
 
     </div>
-    <?php
+	<?php
+endif;
+?>
+
+<?php
+$revision   = false;
+$revisionId = false;
+
+$revisionData   = false;
+$revisionDateId = false;
+
+$revisionLocationId = false;
+$revisionLocation   = false;
+
+
+foreach ( $customOptions as $option ):
+
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Day' ) ):
+		$induction   = true;
+		$inductionId = $option->getId();
+	endif;
+
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Date' ) ):
+		$inductionDate   = true;
+		$inductionDateId = $option->getId();
+	endif;
+
+	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Location' ) ):
+		$inductionLocation   = true;
+		$inductionLocationId = $option->getId();
+	endif;
+endforeach;
+
+$id       = 0;
+$level3Id = 105;
+$level6Id = 104;
+$gtfdId   = 0;
+
+switch ( trim( $type ) ) {
+	case 'Level 3 induction':
+		$id = $level3Id;
+		break;
+	case 'Level 6 induction':
+		$id = $level6Id;
+		break;
+	case 'GTFD induction':
+		$id = $gtfdId;
+		break;
+}
+
+$levelTerm = [];
+if ( $id != 0 ) {
+	$levelTerm = $this->getInductionCollection( $id );
+}
+?>
+
+<?php if ( $revision ) : ?>
+    <div class="grey revision">
+        <div class="add-to-cart-title">
+            <div class="circle-with-text small pull-left">
+                <span></span>
+            </div>
+            <div class="text pull-left">
+                <h3 class="title"><span><?php echo __( 'Do you Require an induction?' ); ?></span>
+                    <span class="subtitle "><?php echo __( 'Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.' ); ?>
+                        <span class="error inline"><i class="fa fa-exclamation-triangle"
+                                                      aria-hidden="true"></i><?php echo __( "These are not course specific so please only select one date if you're enrolling on more than one course." ); ?></span>
+
+                    </span>
+
+                </h3>
+                <div class="content">
+					<?php if ( $revisionData && count( $levelTerm ) > 0 ): ?>
+                        <div class="row">
+                            <div class="yes-no-wrapper" data-options-id="<?php echo $revisionId; ?>">
+                                <a href="" data-induction="yes" class="active">Yes</a>
+                                <a href="" data-induction="no">No</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-left ">
+                                <div id="datetimepicker12" data-options-id="<?php echo $revisionDateId; ?>"></div>
+                            </div>
+							<?php if ( $revisionLocation ): ?>
+                                <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
+                                    <ul>
+										<?php foreach ( $levelTerm as $event ) :
+
+											?>
+                                            <li class="radio confirm-terms margin">
+                                                <label>
+													<?php $location = $_objectManager->get( 'FishPig\WordPress\Model\Post' )->load( $event->getMetaValue( '_EventVenueID' ) );
+													$date           = date( "d/m/Y", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
+													$date2          = date( "Y-m-d", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
+													?>
+                                                    <input type="radio" name="date-location" class='induction-date'
+                                                           data-date-options-id="<?php echo $revisionDateId; ?>"
+                                                           data-location-options-id="<?php echo $revisionLocationId; ?>"
+                                                           data-location="<?php echo $location->getName(); ?>"
+                                                           data-date="<?php echo $date2; ?>"/> <?php echo $event->getName() . ' - (' . $date . ')'; ?>
+                                                </label>
+                                            </li>
+										<?php endforeach; ?>
+                                    </ul>
+                                </div>
+							<?php endif; ?>
+                        </div>
+					<?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+	<?php
 endif;
 ?>
 <div class="white">
@@ -128,7 +243,7 @@ endif;
                             href="#termsModal" role="button" data-target="#termsModal" data-toggle="modal">terms and conditions </a></span>
                 <span class="subtitle block terms-agreed">
                 <span class="error "><i class="fa fa-exclamation-triangle"
-                                        aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>
+                                        aria-hidden="true"></i><?php echo __( "These must be accepted by the user." ); ?></span>
                 </span>
             </h3>
             <div class="checkbox confirm-terms margin">
@@ -142,4 +257,4 @@ endif;
 </div>
 
 <div class="add-to-cart arrow" style="opacity:0;">
-    <span><?php echo __('Thank you. Please proceed to payment.'); ?></span></div>
+    <span><?php echo __( 'Thank you. Please proceed to payment.' ); ?></span></div>

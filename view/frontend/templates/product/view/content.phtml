@@ -16,7 +16,10 @@
             foreach ($row as $field) {
                 if ($field instanceof WP_Post) {
                     $newPost = $this->getPostById($field->ID);
+	                $id = preg_replace("/[^-[:^punct:]]/", "",strtolower(str_replace(" ","-",$field->post_title)));
+	                echo "<div id='$id' class='cms-content-block'>";
                     echo $post->clean($newPost->getMainContent());
+                    echo "</div>";
                 }
             }
         }
@@ -30,7 +33,10 @@
             foreach ($row as $field) {
                 if ($field instanceof WP_Post) {
                     $newPost = $this->getPostById($field->ID);
-                    echo $post->clean($newPost->getMainContent());
+	                $id = preg_replace("/[^-[:^punct:]]/", "",strtolower(str_replace(" ","-",$field->post_title)));
+	                echo "<div id='$id' class='cms-content-block'>";
+	                echo $post->clean($newPost->getMainContent());
+	                echo "</div>";
                 }
             }
         }
