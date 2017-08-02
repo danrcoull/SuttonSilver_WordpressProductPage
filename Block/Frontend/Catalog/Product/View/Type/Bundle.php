@@ -70,6 +70,8 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
 
     public function getInductionCollection($id)
     {
+    	var_dump($id);
+    	die;
          $collection = $this->_fishpig->getFactory('Post')->create()->getCollection()
             ->addTermIdFilter($id,'tribe_events_cat')
             ->addMetaFieldToSelect('_EventStartDate')
