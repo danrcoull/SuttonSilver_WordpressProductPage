@@ -74,8 +74,7 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
             ->addTermIdFilter($id,'tribe_events_cat')
             ->addMetaFieldToSelect('_EventStartDate')
             //->addMetaFieldToFilter('_EventStartDate', array('gteq' => date("Y-m-d H:i:s", strtotime('now'))))
-            ->addMetaFieldToSort('_EventStartDate','asc')
-            ->setCurPage(1)->setPageSize(4);
+            ->addMetaFieldToSort('_EventStartDate','asc');
 
         return $collection;
     }
