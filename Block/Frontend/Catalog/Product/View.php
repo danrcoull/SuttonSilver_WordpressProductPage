@@ -108,4 +108,17 @@ class View extends \Magento\Catalog\Block\Product\View {
             ]
         ];
     }
+
+
+	public function getInductionCollection($id)
+	{
+		$collection = $this->_fishpig->getFactory('Post')->create()->getCollection()
+		                             ->addTermIdFilter($id,'tribe_events_cat')
+		                             ->addMetaFieldToSelect('_EventStartDate')
+		                             ->addMetaFieldToFilter('_EventStartDate', array('gteq' => date("Y-m-d H:i:s", strtotime('now'))))
+		                             ->addMetaFieldToSort('_EventStartDate','asc')
+		                             ->setCurPage(1)->setPageSize(4);
+
+		return $collection;
+	}
 }
