@@ -10,35 +10,6 @@ namespace SuttonSilver\WordpressProductPage\Helper;
 
 class Filter extends \FishPig\WordPress\Helper\Filter
 {
-    protected $_config;
-
-	public function __construct(
-		\Magento\Framework\App\Helper\Context $context,
-		\FishPig\WordPress\Model\App $app,
-		\FishPig\WordPress\Model\Config $config
-	)
-	{
-		parent::__construct($context, $app, $config);
-
-		$this->_app = $app;
-		$this->_config = $config;
-	}
-
-	public function process($string, $object = null)
-	{
-		if ($shortcodes = $this->_config->getShortcodes()) {
-			foreach($shortcodes as $alias => $class) {
-				$string = (string)\Magento\Framework\App\ObjectManager::getInstance()
-					->get($class)
-					->setObject($object)
-					->setValue($string)
-					->process();
-			}
-		}
-
-		return $string;
-	}
-
 	public function clean($content)
     {
         $sanatize = str_replace(array('<br />'), '', $content);
