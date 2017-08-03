@@ -12,6 +12,18 @@ class Filter extends \FishPig\WordPress\Helper\Filter
 {
     protected $_config;
 
+	public function __construct(
+		\Magento\Framework\App\Helper\Context $context,
+		\FishPig\WordPress\Model\App $app,
+		\FishPig\WordPress\Model\Config $config
+	)
+	{
+		parent::__construct($context, $app, $config);
+
+		$this->_app = $app;
+		$this->_config = $config;
+	}
+
 	public function process($string, $object = null)
 	{
 		if ($shortcodes = $this->_config->getShortcodes()) {
