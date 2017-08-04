@@ -10,6 +10,12 @@
     <body>
         <attribute name="class" value="page-product-bundle"/>
 
+        <referenceBlock name="bundle.summary">
+            <action method='setTemplate'>
+                <argument name="template" xsi:type="string">Magento_Bundle::catalog/product/view/summary.phtml</argument>
+            </action>
+        </referenceBlock>
+
         <referenceBlock name="product.info.options.wrapper">
             <block class="Magento\Catalog\Block\Product\View" name="bundle.product.view.options.notice" template="Magento_Bundle::catalog/product/view/options/notice.phtml"/>
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="product.info.bundle.options" as="type_bundle_options" template="Magento_Bundle::catalog/product/view/type/bundle/options.phtml" before="-">

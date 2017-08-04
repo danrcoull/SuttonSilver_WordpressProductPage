@@ -3,6 +3,7 @@
 	<module name="SuttonSilver_WordpressProductPage" setup_version="1.0.0" data_version="1.0.0">
 		<sequence>
 			<module name="Magento_Catalog"/>
+			<module name="Magento_Bundle"/>
 			<module name="Fishpig_WordPress"/>
 		</sequence>
 	</module>

@@ -81,7 +81,7 @@
         $('.modal-child').on('hidden.bs.modal', function () {
             var modalParent = $(this).attr('data-modal-parent');
             $(modalParent).css('opacity', 1).show();
-            if ($('body').hasClass('modal-open') == false) {
+            if ($('body').hasClass('modal-open') === false) {
                 $('body').addClass('modal-open');
             };
         });
@@ -95,25 +95,31 @@
 
         });
 
+        var $addToCartModal =   $('#addtocartmodal .induction .yes-no-wrapper a');
+        var $datePicker = $('#datetimepicker12');
+
         $('.yes-no-wrapper-show-hide').hide();
-        $('#addtocartmodal .induction .yes-no-wrapper a').on('click',function(event){
+
+        $addToCartModal.on('click',function(event){
             event.preventDefault();
 
-            if($(this).hasClass('active') == false)
+            if($(this).hasClass('active') === false)
             {
                 $('.induction .yes-no-wrapper a').removeClass('active');
                 $(this).addClass('active');
                 $parent = $(this).parent().attr('data-options-id');
 
-                if($(this).text() == 'Yes')
+                var $options = $('#options-'+$parent+'-list');
+
+                if($(this).text() === 'Yes')
                 {
 
                     $('.yes-no-wrapper-show-hide').show();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':first').prop('checked',false).click();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':last').prop('checked',true).click();
+                    $options.find('input[type=checkbox]').filter(':first').prop('checked',false).click();
+                    $options.find('input[type=checkbox]').filter(':last').prop('checked',true).click();
 
-                    $('#datetimepicker12').datepicker('destroy');
-                    $('#datetimepicker12').datepicker({
+                    $datePicker.datepicker('destroy');
+                    $datePicker.datepicker({
                         inline: true,
                         format: "dd MM yyyy",
                         onSelect: function(date) {
@@ -125,10 +131,11 @@
 
                 }else{
                     $('.yes-no-wrapper-show-hide').hide();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':first').prop('checked',true).click();
-                    $('#options-'+$parent+'-list').find('input[type=checkbox]').filter(':last').prop('checked',false).click();
 
-                    $('#datetimepicker12').datepicker('destroy');
+                    $options.find('input[type=checkbox]').filter(':first').prop('checked',true).click();
+                    $options.find('input[type=checkbox]').filter(':last').prop('checked',false).click();
+
+                    $datePicker.datepicker('destroy');
 
                     $dateId = $('.induction-date').first().attr('data-date-options-id');
                     $locationId = $('.induction-date').first().attr('data-location-options-id');
@@ -138,13 +145,22 @@
             }
 
         });
-        $('#addtocartmodal .induction .yes-no-wrapper a').last()[0].click();
+
+
+        var $addToCartTermsAgreed =  $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed');
+        var $addToCartArrow = $('.add-to-cart.arrow');
+
+        $('#addtocartmodal').on('show.bs.modal', function () {
+            if ($addToCartModal.length) {
+                $addToCartModal.last()[0].click();
+            }
+        });
 
         $('.induction-date').on('click', function(){
             $dateId = $(this).attr('data-date-options-id');
             $date = $(this).attr('data-date');
             $('#options_'+$dateId+'_text').attr('value',$date);
-            $('#datetimepicker12').datepicker('setDate', $date);
+            $datePicker.datepicker('setDate', $date);
 
             $locationId = $(this).attr('data-location-options-id');
             $('#options_'+$locationId+'_text').attr('value', $(this).attr('data-location'));
@@ -154,12 +170,12 @@
         var acceptTerms = function(agreed){
             if(agreed)
             {
-                $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',0);
-                $('.add-to-cart.arrow').css('opacity',1);
+                $addToCartTermsAgreed.css('opacity',0);
+                $addToCartArrow.css('opacity',1);
                 $('.confirm-terms #confirm-terms').prop('checked',true);
             }else{
-                $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed').css('opacity',1);
-                $('.add-to-cart.arrow').css('opacity',0);
+                $addToCartTermsAgreed.css('opacity',1);
+                $addToCartArrow.css('opacity',0);
                 $('.confirm-terms #confirm-terms').prop('checked',false);
 
             }

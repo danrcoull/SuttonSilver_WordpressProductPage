@@ -57,7 +57,7 @@ if ( $id != 0 ) {
 }
 ?>
 
-<?php if ( $induction ) : ?>
+<?php if ( $inductionDate &&  count($levelTerm) > 0) : ?>
     <div class="white induction">
         <div class="add-to-cart-title">
             <div class="circle-with-text small pull-left">
@@ -73,9 +73,7 @@ if ( $id != 0 ) {
 
                 </h3>
                 <div class="content">
-					<?php
 
-                    if ( $inductionDate &&  count($levelTerm) > 0): ?>
                         <div class="row">
                             <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
                                 <a href="" data-induction="yes" class="active">Yes</a>
@@ -111,7 +109,6 @@ if ( $id != 0 ) {
                                 </div>
 							<?php endif; ?>
                         </div>
-					<?php endif; ?>
                 </div>
             </div>
         </div>
