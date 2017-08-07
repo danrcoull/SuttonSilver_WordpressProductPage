@@ -21,7 +21,11 @@ class Caldera extends \FishPig\WordPress\Shortcode\AbstractShortcode
 	{
 		return 'caldera_form';
 	}
-	
+
+	public function requiresAssetInjection()
+	{
+		return true;
+	}
 
 	protected function _process()
 	{

@@ -38,6 +38,10 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
         return 'product';
     }
 
+	public function requiresAssetInjection()
+	{
+		return true;
+	}
 
     protected function _process()
     {
