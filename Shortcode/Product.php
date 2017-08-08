@@ -73,19 +73,15 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
                     ["data" => ['price_render' => 'product.price.render.default.related', 'price_type_code'=>'final_price','zone'=>'item_view']]
                 )->setChild('child',$priceDefault);
 
-	            $childBlock = $this->_layout->createBlock('\Magento\Framework\View\Element\Template','outofstock.category')->setTemplate('SuttonSilver_OutOfStockNotification::catalog/product/view/outofstock-category-popup.phtml');
-
-
 
                 $html = $this->_layout->createBlock('\SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View')
                     ->setTemplate('SuttonSilver_WordpressProductPage::shortcode/product.phtml')
                     ->addData($params->getData())
                     ->setObject($this->getObject())
                     ->setProducts($products)
-					->addChild('outofstock.category',$childBlock)
                     ->toHtml();
 
-                $this->setValue(str_replace($shortcode['html'], $html, $value));
+	            $this->setValue(str_replace($shortcode['html'], $html, $value));
             }
         }
 
