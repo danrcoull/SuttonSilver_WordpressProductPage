@@ -82,7 +82,7 @@ class Product extends \FishPig\WordPress\Shortcode\AbstractShortcode
                     ->addData($params->getData())
                     ->setObject($this->getObject())
                     ->setProducts($products)
-					->addChild($childBlock)
+					->addChild('outofstock.category',$childBlock)
                     ->toHtml();
 
                 $this->setValue(str_replace($shortcode['html'], $html, $value));
