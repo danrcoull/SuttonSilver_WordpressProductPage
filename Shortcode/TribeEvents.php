@@ -19,10 +19,6 @@ class TribeEvents extends \FishPig\WordPress\Shortcode\AbstractShortcode
 		return 'tribe_events';
 	}
 
-	public function requiresAssetInjection()
-	{
-		return true;
-	}
 
 	protected function _process()
 	{

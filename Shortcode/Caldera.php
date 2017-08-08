@@ -22,15 +22,8 @@ class Caldera extends \FishPig\WordPress\Shortcode\AbstractShortcode
 		return 'caldera_form';
 	}
 
-	public function requiresAssetInjection()
-	{
-		return true;
-	}
-
 	protected function _process()
 	{
-
-
         $value = $this->getValue();
 		if (($shortcodes = $this->_getShortcodesByTag($this->getTag())) !== false) {
 			foreach($shortcodes as $it => $shortcode) {
