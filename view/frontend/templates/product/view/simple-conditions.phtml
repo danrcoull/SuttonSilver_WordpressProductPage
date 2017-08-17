@@ -9,38 +9,44 @@
                         <div class="text text-center">
                             <div class="terms">
                                 <?php
+
                                 if($_product = $this->getProduct()):
-	                                if($_product->getTypeId() != 'bundle') :
-		                                $contentBefore =  $wpPages->getMetaValue('product_blocks_before_units');
-		                                $contentAfter  =  $wpPages->getMetaValue('product_blocks_after_units');
+                                    $id = $_product->getData('associated_page');
+                                    if($id) :
+	                                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	                                    $wpPages = $objectManager->get('\FishPig\WordPress\Model\App\Factory')->getFactory('Post')->create()->load($id);
+                                        if($_product->getTypeId() != 'bundle') :
+                                            $contentBefore =  $wpPages->getMetaValue('product_blocks_before_units');
+                                            $contentAfter  =  $wpPages->getMetaValue('product_blocks_after_units');
 
-		                                $terms = "";
+                                            $terms = "";
 
-		                                if($contentBefore != null) {
-			                                foreach ($contentBefore as $row) {
-				                                foreach ($row as $field) {
-					                                if ($field instanceof WP_Post) {
-						                                $newPost = $this->getPostById($field->ID);
-						                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
-							                                $terms .= $newPost->getMainContent();
-						                                }
-					                                }
-				                                }
-			                                }
-		                                }
+                                            if($contentBefore != null) {
+                                                foreach ($contentBefore as $row) {
+                                                    foreach ($row as $field) {
+                                                        if ($field instanceof WP_Post) {
+                                                            $newPost = $this->getPostById($field->ID);
+                                                            if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                                                                $terms .= $newPost->getMainContent();
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
 
-		                                if($contentAfter != null) {
-			                                foreach ($contentAfter as $row) {
-				                                foreach ($row as $field) {
-					                                $newPost = $this->getPostById($field->ID);
-					                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
-						                                $terms .= $newPost->getMainContent();
-					                                }
-				                                }
-			                                }
-		                                }
+                                            if($contentAfter != null) {
+                                                foreach ($contentAfter as $row) {
+                                                    foreach ($row as $field) {
+                                                        $newPost = $this->getPostById($field->ID);
+                                                        if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                                                            $terms .= $newPost->getMainContent();
+                                                        }
+                                                    }
+                                                }
+                                            }
 
-		                                echo $post->clean($terms);
+                                            echo $post->clean($terms);
+                                        endif;
 	                                endif;
                                 endif;
                                 ?>
