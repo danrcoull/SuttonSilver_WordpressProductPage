@@ -8,6 +8,43 @@
                     <div class="content">
                         <div class="text text-center">
                             <div class="terms">
+                                <?php
+                                if($_product = $this->getProduct()):
+                                    die('i ama  product');
+	                                if($_product->getTypeId() != 'bundle') :
+		                                $contentBefore =  $wpPages->getMetaValue('product_blocks_before_units');
+		                                $contentAfter  =  $wpPages->getMetaValue('product_blocks_after_units');
+
+		                                $terms = "";
+
+		                                if($contentBefore != null) {
+			                                foreach ($contentBefore as $row) {
+				                                foreach ($row as $field) {
+					                                if ($field instanceof WP_Post) {
+						                                $newPost = $this->getPostById($field->ID);
+						                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+							                                $terms .= $newPost->getMainContent();
+						                                }
+					                                }
+				                                }
+			                                }
+		                                }
+
+		                                if($contentAfter != null) {
+			                                foreach ($contentAfter as $row) {
+				                                foreach ($row as $field) {
+					                                $newPost = $this->getPostById($field->ID);
+					                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+						                                $terms .= $newPost->getMainContent();
+					                                }
+				                                }
+			                                }
+		                                }
+
+		                                echo $post->clean($terms);
+	                                endif;
+                                endif;
+                                ?>
                             </div>
                             <div class="subtitle error terms-agreed">
                                 <span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i><?php echo __("These must be accepted by the user."); ?></span>

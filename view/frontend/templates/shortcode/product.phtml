@@ -123,15 +123,28 @@ $items = $this->getProducts();
                                 </div>
                                 <div class="hidden-terms hidden">
                                     <?php
-                                    $contentBefore =  $post->getMetaValue('product_blocks_before_units');
-                                    $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
+                                    if($_item->getTypeId() != 'bundle') :
+                                        $contentBefore =  $post->getMetaValue('product_blocks_before_units');
+                                        $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
 
-                                    $terms = "";
+                                        $terms = "";
 
-                                    if($contentBefore != null) {
-                                        foreach ($contentBefore as $row) {
-                                            foreach ($row as $field) {
-                                                if ($field instanceof WP_Post) {
+                                        if($contentBefore != null) {
+                                            foreach ($contentBefore as $row) {
+                                                foreach ($row as $field) {
+                                                    if ($field instanceof WP_Post) {
+                                                        $newPost = $this->getPostById($field->ID);
+                                                        if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
+                                                            $terms .= $newPost->getMainContent();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if($contentAfter != null) {
+                                            foreach ($contentAfter as $row) {
+                                                foreach ($row as $field) {
                                                     $newPost = $this->getPostById($field->ID);
                                                     if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
                                                         $terms .= $newPost->getMainContent();
@@ -139,20 +152,9 @@ $items = $this->getProducts();
                                                 }
                                             }
                                         }
-                                    }
 
-                                    if($contentAfter != null) {
-                                        foreach ($contentAfter as $row) {
-                                            foreach ($row as $field) {
-                                                $newPost = $this->getPostById($field->ID);
-                                                if(stripos(strtolower($newPost->getPostTitle()), 'terms and conditions') !== false) {
-                                                    $terms .= $newPost->getMainContent();
-                                                }
-                                            }
-                                        }
-                                    }
-
-                                    echo $post->clean($terms);
+                                        echo $post->clean($terms);
+                                    endif;
                                     ?>
                                 </div>
                             </div>
