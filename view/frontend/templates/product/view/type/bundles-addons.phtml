@@ -56,21 +56,22 @@ if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
 }
 
+$hasUnit1 = true;
 //stop all inductions if doesnt contain a unit 1
 if($_item->getTypeId() == 'bundle') {
+
+	$hasUnit1 = false;
 	$simples = $_item->getTypeInstance( true )->getSelectionsCollection( $_item->getTypeInstance( true )->getOptionsIds( $_item ), $_item );
 	foreach ( $simples as $simple ) {
 		if ( strpos( $simple->getName(), 'CILEx Level 3 Unit 01' ) !== false ) {
-			$inductionDate = true;
+			$hasUnit1 = true;
 			break;
-		}else {
-			$inductionDate = false;
-        }
+		}
 	}
 }
 ?>
 
-<?php if ( $inductionDate &&  count($levelTerm) > 0) : ?>
+<?php if ( $inductionDate &&  count($levelTerm) > 0 && $hasUnit1) : ?>
     <div class="white induction">
         <div class="add-to-cart-title">
             <div class="circle-with-text small pull-left">
