@@ -60,9 +60,12 @@ if ( $id != 0 ) {
 if($_item->getTypeId() == 'bundle') {
 	$simples = $_item->getTypeInstance( true )->getSelectionsCollection( $_item->getTypeInstance( true )->getOptionsIds( $_item ), $_item );
 	foreach ( $simples as $simple ) {
-		if ( strpos( $simple->getName(), 'CILEx Level 3 Unit 01' ) === false ) {
+		if ( strpos( $simple->getName(), 'CILEx Level 3 Unit 01' ) !== false ) {
+			$inductionDate = true;
+			break;
+		}else {
 			$inductionDate = false;
-		}
+        }
 	}
 }
 ?>
