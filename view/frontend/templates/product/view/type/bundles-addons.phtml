@@ -55,6 +55,17 @@ $levelTerm = [];
 if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
 }
+
+//stop all inductions if doesnt contain a unit 1
+if($_item->getTypeId() == 'bundle') {
+	$simples = $_item->getTypeInstance( true )->getSelectionsCollection( $_item->getTypeInstance( true )->getOptionsIds( $_item ), $_item );
+	foreach ( $simples as $simple ) {
+		if ( strpos( $simple->getName(), 'Unit 1' ) === false ) {
+			$inductionDate = false;
+			break;
+		}
+	}
+}
 ?>
 
 <?php if ( $inductionDate &&  count($levelTerm) > 0) : ?>
