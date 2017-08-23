@@ -87,7 +87,7 @@ $items = $this->getProducts();
                                         $stockItem = $objectManager->get('\Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($_item->getId());
                                         if ($_item->isSaleable() && $stockItem->getData('is_in_stock')): ?>
                                             <?php
-                                            var_dump($_item->getHasCustomOptions());
+                                            var_dump($_item->hasCustomOptions());
                                             $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
 
                                             if(filter_var($_item->getData('has_options'))){
