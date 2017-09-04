@@ -72,27 +72,32 @@ if($_item->getTypeId() == 'bundle') {
 ?>
 
 <?php if ( $inductionDate &&  count($levelTerm) > 0 && ($hasUnit1 || $id === $level6Id || $id === $gtfdId )) : ?>
-    <div class="white induction">
+    <?php if($id === $level6Id || $id === $gtfdId ) : ?>
+    <div class="white gtfd">
         <div class="add-to-cart-title">
-            <div class="circle-with-text small pull-left">
-                <span></span>
-            </div>
-            <?php if($id === $level6Id || $id === $gtfdId ) : ?>
-            <div class="text pull-left">
-                <h3 class="title"><span><?php echo __( 'Are you studying a GTFD?' ); ?></span>
-
-                </h3>
-                <div class="content">
-
-                    <div class="row">
-                        <div class="yes-no-wrapper">
-                            <a href="" data-gtfd="yes" class="active">Yes</a>
-                            <a href="" data-gtfd="no">No</a>
+                <div class="circle-with-text small pull-left">
+                    <span></span>
+                </div>
+                <div class="text pull-left">
+                    <h3 class="title"><span><?php echo __( 'Are you studying a GTFD?' ); ?></span></h3>
+                    <div class="content">
+                        <div class="row">
+                            <div class="yes-no-wrapper">
+                                <a href="" data-gtfd="yes" class="active">Yes</a>
+                                <a href="" data-gtfd="no">No</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+        </div>
+    </div>
+	<?php endif ;?>
+    <div class="white induction">
+        <div class="add-to-cart-title">
+
+            <div class="circle-with-text small pull-left">
+                <span></span>
             </div>
-            <?php endif ;?>
             <div class="text pull-left">
                 <h3 class="title"><span><?php echo __( 'Do you require an induction?' ); ?></span>
                     <span class="subtitle "><?php echo __( 'Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.' ); ?>

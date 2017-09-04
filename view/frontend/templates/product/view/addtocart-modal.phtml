@@ -71,8 +71,6 @@
         'domReady!'
     ], function ($) {
 
-
-
         $('.modal-child').on('show.bs.modal', function () {
             var modalParent = $(this).attr('data-modal-parent');
             $(modalParent).css('opacity', 0).hide();
@@ -95,12 +93,12 @@
 
         });
 
-        var $addToCartModal =   $('#addtocartmodal .induction .yes-no-wrapper a');
+        var $addToCartInction=   $('#addtocartmodal .induction .yes-no-wrapper a');
         var $datePicker = $('#datetimepicker12');
 
         $('.yes-no-wrapper-show-hide').hide();
 
-        $addToCartModal.on('click',function(event){
+        $addToCartInction.on('click',function(event){
             event.preventDefault();
 
             if($(this).hasClass('active') === false)
@@ -142,6 +140,22 @@
                     $('#options_'+$dateId+'_text').attr('value', '');
                     $('#options_'+$locationId+'_text').attr('value','');
                 }
+            }
+
+        });
+
+        var $addToCartGTFD =   $('#addtocartmodal .gtfd .yes-no-wrapper a');
+        $addToCartGTFD.on('click',function(event) {
+            event.preventDefault();
+
+            $('.gtfd .yes-no-wrapper a').removeClass('active');
+            $(this).addClass('active');
+
+            if($(this).text() === 'Yes')
+            {
+
+            }else{
+
             }
 
         });
