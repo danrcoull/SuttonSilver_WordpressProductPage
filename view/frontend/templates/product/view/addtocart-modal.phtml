@@ -165,8 +165,12 @@
         var $addToCartArrow = $('.add-to-cart.arrow');
 
         $('#addtocartmodal').on('show.bs.modal', function () {
-            if ($addToCartModal.length) {
-                $addToCartModal.last()[0].click();
+            if ($addToCartGTFD.length) {
+                $addToCartGTFD.last()[0].click();
+            }
+
+            if ($addToCartInction.length) {
+                $addToCartInction.last()[0].click();
             }
         });
 
