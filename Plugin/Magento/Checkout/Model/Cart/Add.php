@@ -38,6 +38,7 @@ class Add
     ];
 
     protected $seasons = ["Winter","Spring","Summer","Autumn"];
+
     /**
      * beforeAddProduct
      *
