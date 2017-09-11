@@ -215,33 +215,30 @@
 
             if ($gftdCheck.length > 0) {
                 $gftdCheck.on('click', function (event) {
-                    event.preventDefault();
-
-                    if ($(this).hasClass('active') === false) {
+                     if ($(this).hasClass('active') === false) {
 
                         $('.gftd-check .yes-no-wrapper a').removeClass('active');
                         $(this).addClass('active');
-
-                        if($addToCartInction.length > 0) {
-                            $addToCartInction.unbind('click');
-                        }
-
-                        if($addToCartGTFD.length > 0) {
-                            $addToCartGTFD.unbind("click");
-                        }
 
                         if ($.trim($(this).text()) === 'Yes') {
                             $('#addtocartmodal .induction').addClass('gftd').removeClass('induction');
                             $('.yes-no-wrapper-show-hide .gftd-date').parent('li').show();
                             $('.yes-no-wrapper-show-hide .induction-date').parent('li').hide();
+                            if($addToCartInction.length > 0) {
+                                $addToCartInction.unbind('click');
+                            }
                             gftdClick();
                         } else {
                             $('#addtocartmodal .gftd').addClass('induction').removeClass('gftd');
                             $('.yes-no-wrapper-show-hide .gftd-date').parent('li').hide();
                             $('.yes-no-wrapper-show-hide .induction-date').parent('li').show();
+                            if($addToCartGTFD.length > 0) {
+                                $addToCartGTFD.unbind("click");
+                            }
                             inductionClick();
                         }
                     }
+                    event.preventDefault();
                 });
             }
         }
