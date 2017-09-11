@@ -44,7 +44,7 @@ $level6Id = 95;
 $gtfdId   = 100;
 
 $type = strtolower($_item->getAttributeText( 'induction_type' ));
-
+var_dump($type);
 switch ( trim( $type ) ) {
 	case 'level 3 induction':
 		$id = $level3Id;
@@ -52,10 +52,12 @@ switch ( trim( $type ) ) {
 	case 'level 6 induction':
 		$id = $level6Id;
 		break;
-	case 'gtfd induction' || 'gftd induction':
+	case 'gtfd induction':
+    case 'gftd induction':
 		$id = $gtfdId;
 		break;
 }
+var_dump($id);
 $levelTerm = [];
 if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
