@@ -159,9 +159,10 @@ if($_item->getTypeId() == 'bundle') {
 													$date2          = date( "Y-m-d", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
 													$dateType = 'induction';
 
+													var_dump($event->getData());
 													foreach ($this->getTaxonomy()->getPostTermsCollection($event) as $term)
                                                     {
-	                                                    var_dump($this->getTaxonomy()->getPostTermsCollection($term));
+
                                                         if($term->getId() === 100)
                                                         {
 	                                                        $dateType = 'gftd';
