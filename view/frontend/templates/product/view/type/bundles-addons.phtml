@@ -25,8 +25,13 @@ foreach ( $customOptions as $option ):
 		$inductionId = $oid;
         foreach($option->getValues() as $value)
         {
-            var_dump($value->getTitle());
-	        $inductionGftd = strpos($value->getTitle(), 'GFTD' ) !== false ?  true : false;
+
+            $valueTitle = strtolower($value->getTitle());
+
+	        var_dump($valueTitle);
+	        var_dump(strpos($valueTitle, 'gftd' ));
+
+	        $inductionGftd = strpos($valueTitle, 'gftd' ) !== false ?  true : false;
         }
 	endif;
 
@@ -123,8 +128,6 @@ if($_item->getTypeId() == 'bundle') {
                             <span class="error inline"><i class="fa fa-exclamation-triangle"
                                                           aria-hidden="true"></i><?php echo __( "These are not course specific so please only select one date if you're enrolling on more than one course." ); ?></span>
                         </span>
-
-                        <span><?php echo __( 'Are you studying a gftd?' ); ?></span>
 
                 </h3>
                 <div class="content">
