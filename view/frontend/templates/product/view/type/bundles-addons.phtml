@@ -29,7 +29,7 @@ foreach ( $customOptions as $option ):
             $valueTitle = strtolower($value->getTitle());
 
 	        var_dump($valueTitle);
-	        var_dump(strpos($valueTitle, 'gftd' ));
+	        var_dump(strpos($valueTitle, strtolower('gftd' )));
 
 	        $inductionGftd = strpos($valueTitle, 'gftd' ) !== false ?  true : false;
         }
@@ -77,7 +77,7 @@ if($_item->getTypeId() == 'bundle') {
 	$hasUnit1 = false;
 	$simples = $_item->getTypeInstance( true )->getSelectionsCollection( $_item->getTypeInstance( true )->getOptionsIds( $_item ), $_item );
 	foreach ( $simples as $simple ) {
-		if ( strpos( strtolower($simple->getName()), 'cilex level 3 unit 01' ) !== false ) {
+		if ( strpos( strtolower($simple->getName()), strtolower('cilex level 3 unit 01') ) !== false ) {
 			$hasUnit1 = true;
 			break;
 		}
