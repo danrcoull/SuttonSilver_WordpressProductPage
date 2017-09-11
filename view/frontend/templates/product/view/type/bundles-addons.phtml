@@ -13,7 +13,7 @@ $inductionDateId = false;
 
 $inductionLocationId = false;
 $inductionLocation   = false;
-$inductionGftd = false;
+$inductionGftd = 0;
 
 foreach ( $customOptions as $option ):
 
@@ -26,7 +26,9 @@ foreach ( $customOptions as $option ):
         foreach($option->getValues() as $value)
         {
 
-	        $inductionGftd = strpos(strtolower($value->getTitle()), strtolower('GFTD') ) !== false ?  1 : 0;
+            if($inductionGftd === 0) {
+	            $inductionGftd = strpos( strtolower( $value->getTitle() ), strtolower( 'GFTD' ) ) !== false ? 1 : 0;
+            }
 	        echo 'Inside ' . $inductionGftd;
 
         }
