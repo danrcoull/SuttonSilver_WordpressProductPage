@@ -20,14 +20,13 @@ foreach ( $customOptions as $option ):
     $title = strtolower( $option->getTitle() );
     $oid = $option->getId();
 
-	if ($title  === strtolower( 'Induction Day' ) ):
+	if ( strpos($title ,strtolower( 'Induction Day' )) !== false ):
 		$induction   = true;
 		$inductionId = $oid;
         foreach($option->getValues() as $value)
         {
 
-            $valueTitle = strtolower($value->getTitle());
-	        $inductionGftd = strpos($valueTitle, 'gftd' ) !== false ?  true : false;
+	        $inductionGftd = strpos(strtolower($value->getTitle()), strtolower('GFTD') ) !== false ?  1 : 0;
 	        echo 'Inside ' . $inductionGftd;
 
         }
@@ -92,7 +91,7 @@ if($_item->getTypeId() == 'bundle') {
 
     <?php
 	echo 'before ' . $inductionGftd;
-    if($inductionGftd) :?>
+    if(filter_var($inductionGftd, FILTER_VALIDATE_BOOLEAN)) :?>
         <div class="white gftd-check">
             <div class="add-to-cart-title">
 
