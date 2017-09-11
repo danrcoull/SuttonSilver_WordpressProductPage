@@ -162,8 +162,7 @@ if($_item->getTypeId() == 'bundle') {
 													foreach ($event->getTermCollection('tribe_events_cat') as $term)
                                                     {
 
-                                                        var_dump($term->getId() );
-                                                        if($term->getId() === 100)
+                                                        if($term->getId() == '100')
                                                         {
 	                                                        $dateType = 'gftd';
                                                         }
