@@ -281,14 +281,16 @@
 
         $('#addtocartmodal').on('show.bs.modal', function () {
 
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
             if ($addToCartGTFD.length > 0) {
                 $addToCartGTFD.last().trigger( "click" );
             }
 
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
             if ($gftdCheck.length > 0) {
                 $gftdCheck.last().trigger( "click" );
             }
-
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a')
             if ($addToCartInction.length > 0) {
                 $addToCartInction.last().trigger( "click" );
             }
