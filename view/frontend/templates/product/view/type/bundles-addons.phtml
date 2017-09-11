@@ -14,28 +14,30 @@ $inductionDateId = false;
 $inductionLocationId = false;
 $inductionLocation   = false;
 
-$inductionType = 'induction';
-
+$inductionGftd = false;
 foreach ( $customOptions as $option ):
 
-	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Day' ) ):
+    $title = strtolower( $option->getTitle() );
+    $oid = $option->getId();
+
+	if ($title  === strtolower( 'Induction Day' ) ):
 		$induction   = true;
-		$inductionId = $option->getId();
+		$inductionId = $oid;
         foreach($option->getValues() as $value)
         {
-            var_dump(strpos( strtolower($value->getTitle()), 'GFTD' ));
-	        $inductionType = strpos( strtolower($value->getTitle()), 'GFTD' ) !== false ?  'gftd' : 'induction';
+            var_dump($value->getTitle());
+	        $inductionGftd = strpos($value->getTitle(), 'GFTD' ) !== false ?  true : false;
         }
 	endif;
 
-	if ( strpos(strtolower( $option->getTitle() ),strtolower( 'Induction Date' )) !== false ):
+	if ( strpos($title ,strtolower( 'Induction Date' )) !== false ):
 		$inductionDate   = true;
-		$inductionDateId = $option->getId();
+		$inductionDateId = $oid;
 	endif;
 
-	if ( strpos(strtolower(  $option->getTitle() ), strtolower( 'Induction Location' )) !== false ):
+	if ( strpos($title, strtolower( 'Induction Location' )) !== false ):
 		$inductionLocation   = true;
-		$inductionLocationId = $option->getId();
+		$inductionLocationId = $oid;
 	endif;
 endforeach;
 
@@ -58,7 +60,6 @@ switch ( trim( $type ) ) {
 		$id = $gtfdId;
 		break;
 }
-var_dump($id);
 $levelTerm = [];
 if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
@@ -83,7 +84,32 @@ if($_item->getTypeId() == 'bundle') {
            ($hasUnit1 || $id === $level6Id || $id === $gtfdId )) : ?>
 
 
-    <div class="white <?php echo $inductionType; ?>">
+    <?php if($inductionGftd) :?>
+        <div class="white gftd-check">
+            <div class="add-to-cart-title">
+
+                <div class="circle-with-text small pull-left">
+                    <span></span>
+                </div>
+                <div class="text pull-left">
+                    <h3 class="title">
+                        <span><?php echo __( 'Are you studying a gftd?' ); ?></span>
+                    </h3>
+                    <div class="content">
+
+                        <div class="row">
+                            <div class="yes-no-wrapper">
+                                <a href="" data-gftd="yes">Yes</a>
+                                <a href="" data-gftd="no" class="active">No</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="white induction">
         <div class="add-to-cart-title">
 
             <div class="circle-with-text small pull-left">
@@ -91,22 +117,22 @@ if($_item->getTypeId() == 'bundle') {
             </div>
             <div class="text pull-left">
                 <h3 class="title">
-                    <?php if($inductionType === 'induction') : ?>
+
                         <span><?php echo __( 'Do you require an induction?' ); ?></span>
                         <span class="subtitle "><?php echo __( 'Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.' ); ?>
                             <span class="error inline"><i class="fa fa-exclamation-triangle"
                                                           aria-hidden="true"></i><?php echo __( "These are not course specific so please only select one date if you're enrolling on more than one course." ); ?></span>
                         </span>
-                    <?php else:  ?>
+
                         <span><?php echo __( 'Are you studying a gftd?' ); ?></span>
-                    <?php endif; ?>
+
                 </h3>
                 <div class="content">
 
                         <div class="row">
                             <div class="yes-no-wrapper" data-options-id="<?php echo $inductionId; ?>">
-                                <a href="" data-<?php echo $inductionType; ?>="yes">Yes</a>
-                                <a href="" data-<?php echo $inductionType; ?>="no" class="active">No</a>
+                                <a href="" data-induction="yes">Yes</a>
+                                <a href="" data-induction="no" class="active">No</a>
                             </div>
                         </div>
 

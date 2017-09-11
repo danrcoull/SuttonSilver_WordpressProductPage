@@ -75,7 +75,6 @@
             var modalParent = $(this).attr('data-modal-parent');
             $(modalParent).css('opacity', 0).hide();
         });
-
         $('.modal-child').on('hidden.bs.modal', function () {
             var modalParent = $(this).attr('data-modal-parent');
             $(modalParent).css('opacity', 1).show();
@@ -83,7 +82,6 @@
                 $('body').addClass('modal-open');
             };
         });
-
         $("#addtocartmodal *[data-options-id]").each(function(){
             var optionsid = $(this).attr('data-options-id');
             $('.bundle-option-'+optionsid).find(':selected').each(function(){
@@ -93,138 +91,172 @@
 
         });
 
-        var $addToCartInction=   $('#addtocartmodal .induction .yes-no-wrapper a');
+
         var $datePicker = $('#datetimepicker12');
 
         $('.yes-no-wrapper-show-hide').hide();
 
-        if($addToCartInction.length > 0 ) {
-            $addToCartInction.on('click', function (event) {
-                event.preventDefault();
+        //create incudtion standard click
+        function inductionClick() {
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
+            if ($addToCartInction.length > 0) {
+                $addToCartInction.on('click', function (event) {
+                    event.preventDefault();
 
-                if ($(this).hasClass('active') === false) {
+                    if ($(this).hasClass('active') === false) {
 
-                    $('.induction .yes-no-wrapper a').removeClass('active');
-                    $(this).addClass('active');
+                        $('.induction .yes-no-wrapper a').removeClass('active');
+                        $(this).addClass('active');
 
-                    var $parent = $(this).parent().attr('data-options-id');
+                        var $parent = $(this).parent().attr('data-options-id');
 
-                    if ($.trim($(this).text()) === 'Yes') {
+                        if ($.trim($(this).text()) === 'Yes') {
 
-                        $('.yes-no-wrapper-show-hide').show();
+                            $('.yes-no-wrapper-show-hide').show();
 
-                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function() {
-                            var text = $.trim($(this).parent().find('label').text());
-                            console.log(text);
-                            console.log(text ==='Yes' || text==='Yes, Level 6');
-                            if(text==='Yes' || text==='Yes, Level 6') {
-                                $(this).click();
-                                $(this).prop('checked', true);
-                            }else if(text === 'No') {
-                                $(this).click();
-                                $(this).prop('checked', false);
-                            }
-                        });
+                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                                var text = $.trim($(this).parent().find('label').text());
+                                console.log(text);
+                                console.log(text === 'Yes' || text === 'Yes, Level 6');
+                                if (text === 'Yes' || text === 'Yes, Level 6') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                } else if (text === 'No') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                }
+                            });
 
-                        $datePicker.datepicker('destroy');
-                        $datePicker.datepicker({
-                            inline: true,
-                            format: "dd MM yyyy",
-                            onSelect: function (date) {
-                                //$dateId = $('#datetimepicker12').attr('data-options-id');
-                                //$('#options_'+$dateId+'_text').attr('value',date);
-                            },
-                        });
+                            $datePicker.datepicker('destroy');
+                            $datePicker.datepicker({
+                                inline: true,
+                                format: "dd MM yyyy",
+                                onSelect: function (date) {
+                                    //$dateId = $('#datetimepicker12').attr('data-options-id');
+                                    //$('#options_'+$dateId+'_text').attr('value',date);
+                                },
+                            });
 
 
-                    } else {
-                        $('.yes-no-wrapper-show-hide').hide();
+                        } else {
+                            $('.yes-no-wrapper-show-hide').hide();
 
-                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function() {
-                            var text = $.trim($(this).parent().find('label').text());
-                            if(text==='Yes' || text==='Yes, Level 6') {
-                                $(this).click();
-                                $(this).prop('checked', false);
-                            }else if(text === 'No') {
-                                $(this).click();
-                                $(this).prop('checked', true);
-                            }
-                        });
+                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                                var text = $.trim($(this).parent().find('label').text());
+                                if (text === 'Yes' || text === 'Yes, Level 6') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                } else if (text === 'No') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                }
+                            });
 
-                        $datePicker.datepicker('destroy');
+                            $datePicker.datepicker('destroy');
 
-                        $dateId = $('.induction-date').first().attr('data-date-options-id');
-                        $locationId = $('.induction-date').first().attr('data-location-options-id');
-                        $('#options_' + $dateId + '_text').attr('value', '');
-                        $('#options_' + $locationId + '_text').attr('value', '');
+                            $dateId = $('.induction-date').first().attr('data-date-options-id');
+                            $locationId = $('.induction-date').first().attr('data-location-options-id');
+                            $('#options_' + $dateId + '_text').attr('value', '');
+                            $('#options_' + $locationId + '_text').attr('value', '');
+                        }
                     }
-                }
 
-            });
+                });
+            }
         }
 
-        var $addToCartGTFD =   $('#addtocartmodal .gftd .yes-no-wrapper a');
-        if($addToCartGTFD.length > 0) {
-            $addToCartGTFD.on('click', function (event) {
-                event.preventDefault();
+        //create gftd click standard;
+        function gftdClick() {
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
+            if ($addToCartGTFD.length > 0) {
+                $addToCartGTFD.on('click', function (event) {
+                    event.preventDefault();
 
-                if ($(this).hasClass('active') === false) {
-                    $('.induction .yes-no-wrapper a').removeClass('active');
-                    $(this).addClass('active');
-                    var $parent = $(this).parent().attr('data-options-id');
+                    if ($(this).hasClass('active') === false) {
+                        $('.induction .yes-no-wrapper a').removeClass('active');
+                        $(this).addClass('active');
+                        var $parent = $(this).parent().attr('data-options-id');
 
-                    if ($.trim($(this).text()) === 'Yes') {
+                        if ($.trim($(this).text()) === 'Yes') {
 
-                        $('.yes-no-wrapper-show-hide').show();
+                            $('.yes-no-wrapper-show-hide').show();
 
-                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function() {
-                            var text = $.trim((this).parent().find('label').text());
-                            if(text==='Yes, GFTD') {
-                                $(this).click();
-                                $(this).prop('checked', true);
-                            }else if(text.contains('No')){
-                                $(this).click();
-                                $(this).prop('checked', false);
-                            }
-                        });
-
-
-                        $datePicker.datepicker('destroy');
-                        $datePicker.datepicker({
-                            inline: true,
-                            format: "dd MM yyyy",
-                            onSelect: function (date) {
-                                //$dateId = $('#datetimepicker12').attr('data-options-id');
-                                //$('#options_'+$dateId+'_text').attr('value',date);
-                            },
-                        });
+                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                                var text = $.trim((this).parent().find('label').text());
+                                if (text === 'Yes, GFTD') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                } else if (text.contains('No')) {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                }
+                            });
 
 
-                    } else {
-                        $('.yes-no-wrapper-show-hide').hide();
+                            $datePicker.datepicker('destroy');
+                            $datePicker.datepicker({
+                                inline: true,
+                                format: "dd MM yyyy",
+                                onSelect: function (date) {
+                                    //$dateId = $('#datetimepicker12').attr('data-options-id');
+                                    //$('#options_'+$dateId+'_text').attr('value',date);
+                                },
+                            });
 
-                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function() {
-                            var text = $.trim($(this).parent().find('label').text());
-                            if(text==='Yes, GFTD') {
-                                $(this).click();
-                                $(this).prop('checked', false);
-                            }else if(text.contains('No')){
-                                $(this).click();
-                                $(this).prop('checked', true);
-                            }
-                        });
 
-                        $datePicker.datepicker('destroy');
+                        } else {
+                            $('.yes-no-wrapper-show-hide').hide();
 
-                        $dateId = $('.induction-date').first().attr('data-date-options-id');
-                        $locationId = $('.induction-date').first().attr('data-location-options-id');
-                        $('#options_' + $dateId + '_text').attr('value', '');
-                        $('#options_' + $locationId + '_text').attr('value', '');
+                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                                var text = $.trim($(this).parent().find('label').text());
+                                if (text === 'Yes, GFTD') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                } else if (text.contains('No')) {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                }
+                            });
+
+                            $datePicker.datepicker('destroy');
+
+                            $dateId = $('.induction-date').first().attr('data-date-options-id');
+                            $locationId = $('.induction-date').first().attr('data-location-options-id');
+                            $('#options_' + $dateId + '_text').attr('value', '');
+                            $('#options_' + $locationId + '_text').attr('value', '');
+                        }
                     }
-                }
 
-            });
+                });
+            }
         }
+
+        //gftd check click
+        function gftdCheckClick() {
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
+            if ($gftdCheck.length > 0) {
+                $gftdCheck.on('click', function (event) {
+                    event.preventDefault();
+
+                    if ($(this).hasClass('active') === false) {
+                        $('.gftd-check .yes-no-wrapper a').removeClass('active');
+                        $(this).addClass('active');
+                        if ($.trim($(this).text()) === 'Yes') {
+                            $('#addtocartmodal .induction').addClass('gftd').removeClass('induction');
+                            gftdClick();
+                        } else {
+                            $('#addtocartmodal .gftd').addClass('induction').removeClass('gftd');
+                            inductionClick();
+                        }
+                    }
+                });
+            }
+        }
+
+        //initialize inductioin click and gftd load;
+        inductionClick();
+        gftdClick();
+        gftdCheckClick();
 
 
         var $addToCartTermsAgreed =  $('#addtocartmodal .terms-agreed, #termsModal .terms-agreed');
@@ -268,38 +300,22 @@
         };
 
         acceptTerms(agreed);
+
         $(document).on('click','#termsModal .agree',function(event){
             event.preventDefault();
             agreed = true;
             acceptTerms(agreed);
             $('#termsModal').bsmodal('hide');
         });
-
         $('.confirm-terms #confirm-terms').change(function(){
             var c = this.checked ?  agreed = true :  agreed = false;
             acceptTerms(agreed);
         });
-
         $(document).on('click','#addtocartmodal .add-to-cart.arrow', function(event){
              event.preventDefault();
              $('#addtocartmodal .box-tocart .tocart').click();
         });
 
-
-        /***$('#product_addtocart_form').on('submit', function(event)
-        {
-            if(agreed == false) {
-                $('#termsModalAdd').modal('show');
-                event.preventDefault();
-            }
-        });
-
-        $('#termsModalAdd .agree').on('click',function(event){
-            agreed = true;
-            event.preventDefault();
-            $('#product_addtocart_form').subm   it();
-            event.preventDefault();
-        });**/
 
     });
     // ]]>
