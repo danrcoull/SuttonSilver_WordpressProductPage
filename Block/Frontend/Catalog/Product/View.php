@@ -78,6 +78,8 @@ class View extends \Magento\Catalog\Block\Product\View {
         $post = $this->_fishpig->getFactory('Post')->create()->load($id);
         return $post;
     }
+
+
     public function getFilter()
     {
         return $this->_filter;
@@ -120,5 +122,10 @@ class View extends \Magento\Catalog\Block\Product\View {
 		                             ->setCurPage(1)->setPageSize(4);
 
 		return $collection;
+	}
+
+	public function getTaxonomy()
+	{
+		return  $this->_fishpig->getFactory('Taxonomy')->create();
 	}
 }

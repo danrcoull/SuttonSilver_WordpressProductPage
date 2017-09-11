@@ -158,7 +158,7 @@ if($_item->getTypeId() == 'bundle') {
 													$date           = date( "d/m/Y", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
 													$date2          = date( "Y-m-d", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
 													$dateType = 'induction';
-													foreach ($event->getPostTermsCollection() as $term)
+													foreach ($this->getTaxonomy()->getPostTermsCollection($event) as $term)
                                                     {
                                                         if($term->getId() === 100)
                                                         {
