@@ -23,7 +23,7 @@ foreach ( $customOptions as $option ):
 		$inductionId = $option->getId();
         foreach($option->getValues() as $value)
         {
-            var_dump($value->getTitle());
+            var_dump(strpos( strtolower($value->getTitle()), 'gftd' ));
 	        $inductionType = strpos( strtolower($value->getTitle()), 'gftd' ) !== false ?  'gftd' : 'induction';
         }
 	endif;
@@ -100,8 +100,6 @@ if($_item->getTypeId() == 'bundle') {
                     <?php else:  ?>
                         <span><?php echo __( 'Are you studying a gftd?' ); ?></span>
                     <?php endif; ?>
-
-
                 </h3>
                 <div class="content">
 
