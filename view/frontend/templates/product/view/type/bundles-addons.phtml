@@ -23,16 +23,16 @@ foreach ( $customOptions as $option ):
 		$inductionId = $option->getId();
         foreach($option->getValues() as $value)
         {
-	        $inductionType = strpos( strtolower($value->getTitle()), 'GFTD' ) !== false ?  'gftd' : 'induction';
+	        $inductionType = strpos( strtolower($value->getTitle()), 'gftd' ) !== false ?  'gftd' : 'induction';
         }
 	endif;
 
-	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Date' ) ):
+	if ( strpos(strtolower( $option->getTitle() ),strtolower( 'Induction Date' )) !== false ):
 		$inductionDate   = true;
 		$inductionDateId = $option->getId();
 	endif;
 
-	if ( strtolower( $option->getTitle() ) === strtolower( 'Induction Location' ) ):
+	if ( strpos(strtolower(  $option->getTitle() ), strtolower( 'Induction Location' )) !== false ):
 		$inductionLocation   = true;
 		$inductionLocationId = $option->getId();
 	endif;
@@ -43,22 +43,23 @@ $level3Id = 99;
 $level6Id = 95;
 $gtfdId   = 100;
 
-$type = $_item->getAttributeText( 'induction_type' );
+$type = strtolower($_item->getAttributeText( 'induction_type' ));
 
 switch ( trim( $type ) ) {
-	case 'Level 3 induction':
+	case 'level 3 induction':
 		$id = $level3Id;
 		break;
-	case 'Level 6 induction':
+	case 'level 6 induction':
 		$id = $level6Id;
 		break;
-	case 'GTFD induction':
+	case 'gtfd induction' || 'gftd induction':
 		$id = $gtfdId;
 		break;
 }
 $levelTerm = [];
 if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
+	var_dump($levelTerm);
 }
 
 $hasUnit1 = true;
@@ -68,7 +69,7 @@ if($_item->getTypeId() == 'bundle') {
 	$hasUnit1 = false;
 	$simples = $_item->getTypeInstance( true )->getSelectionsCollection( $_item->getTypeInstance( true )->getOptionsIds( $_item ), $_item );
 	foreach ( $simples as $simple ) {
-		if ( strpos( $simple->getName(), 'CILEx Level 3 Unit 01' ) !== false ) {
+		if ( strpos( strtolower($simple->getName()), 'cilex level 3 unit 01' ) !== false ) {
 			$hasUnit1 = true;
 			break;
 		}
