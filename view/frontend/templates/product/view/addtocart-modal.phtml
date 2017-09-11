@@ -160,8 +160,10 @@
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
+
                         $('.gftd .yes-no-wrapper a').removeClass('active');
                         $(this).addClass('active');
+
                         var $parent = $(this).parent().attr('data-options-id');
 
                         if ($.trim($(this).text()) === 'Yes') {
