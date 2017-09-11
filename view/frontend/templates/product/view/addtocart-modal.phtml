@@ -264,6 +264,12 @@
             }
         }
 
+        var $gftdDate = $('.yes-no-wrapper-show-hide .gftd-date');
+        if($gftdDate.length > 0 )
+        {
+            $gftdDate.parent().hide();
+        }
+
         //initialize inductioin click and gftd load;
         inductionClick();
         gftdClick();
