@@ -24,7 +24,7 @@ foreach ( $customOptions as $option ):
         foreach($option->getValues() as $value)
         {
             var_dump(strpos( strtolower($value->getTitle()), 'gftd' ));
-	        $inductionType = strpos( strtolower($value->getTitle()), 'gftd' ) !== false ?  'gftd' : 'induction';
+	        $inductionType = strpos( strtolower($value->getTitle()), 'GFTD' ) !== false ?  'gftd' : 'induction';
         }
 	endif;
 
