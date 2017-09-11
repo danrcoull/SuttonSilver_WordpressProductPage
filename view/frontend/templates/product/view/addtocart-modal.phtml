@@ -114,6 +114,7 @@
 
                             $('.yes-no-wrapper-show-hide').show();
 
+
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim($(this).parent().find('label').text());
                                 toggleCheckbox($(this), text, ['Yes','Yes, Level 6'], true)
@@ -220,11 +221,17 @@
                         $('.gftd-check .yes-no-wrapper a').removeClass('active');
                         $(this).addClass('active');
 
+
+
                         if ($.trim($(this).text()) === 'Yes') {
                             $('#addtocartmodal .induction').addClass('gftd').removeClass('induction');
+                            $('.yes-no-wrapper-show-hide .gftd-date').show();
+                            $('.yes-no-wrapper-show-hide .induction-date').hide();
                             gftdClick();
                         } else {
                             $('#addtocartmodal .gftd').addClass('induction').removeClass('gftd');
+                            $('.yes-no-wrapper-show-hide .gftd-date').hide();
+                            $('.yes-no-wrapper-show-hide .induction-date').show();
                             inductionClick();
                         }
                     }

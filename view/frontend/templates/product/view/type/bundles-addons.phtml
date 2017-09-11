@@ -157,8 +157,17 @@ if($_item->getTypeId() == 'bundle') {
 													<?php $location = $_objectManager->get( 'FishPig\WordPress\Model\Post' )->load( $event->getMetaValue( '_EventVenueID' ) );
 													$date           = date( "d/m/Y", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
 													$date2          = date( "Y-m-d", strtotime( $event->getMetaValue( '_EventStartDate' ) ) );
+													$dateType = 'induction';
+													foreach ($event->getPostTermsCollection() as $term)
+                                                    {
+                                                        if($term->getId() === 100)
+                                                        {
+	                                                        $dateType = 'gftd';
+                                                        }
+                                                    }
+
 													?>
-                                                    <input type="radio" name="date-location" class='induction-date'
+                                                    <input type="radio" name="date-location" class='<?php echo $dateType;?>-date'
                                                            data-date-options-id="<?php echo $inductionDateId; ?>"
                                                            data-location-options-id="<?php echo $inductionLocationId; ?>"
                                                            data-location="<?php echo $location->getName(); ?>"
