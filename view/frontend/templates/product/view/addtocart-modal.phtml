@@ -187,7 +187,7 @@
                         $('.yes-no-wrapper-show-hide').show();
 
                         $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
-                            var text = $.trim((this).parent().find('label').text());
+                            var text = $.trim($(this).parent().find('label').text());
                             if (text === 'Yes, GFTD') {
                                 $(this).click();
                                 $(this).prop('checked', true);
