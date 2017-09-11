@@ -100,7 +100,8 @@
         var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper');
         function inductionClick() {
             if ($addToCartInction.length > 0) {
-                $($addToCartInction).off('click','a').on('click','a', function (event) {
+                $('#addtocartmodal .gftd .yes-no-wrapper').off('click','a');
+                $($addToCartInction).on('click','a', function (event) {
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
@@ -171,7 +172,8 @@
         function gftdClick() {
 
             if ($addToCartGTFD.length > 0) {
-                $($addToCartGTFD).off('click','a').on('click','a', function (event) {
+                $('#addtocartmodal .induction .yes-no-wrapper').off('click','a');
+                $($addToCartGTFD).on('click','a', function (event) {
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
