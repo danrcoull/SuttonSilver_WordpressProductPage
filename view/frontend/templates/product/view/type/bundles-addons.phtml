@@ -23,6 +23,7 @@ foreach ( $customOptions as $option ):
 		$inductionId = $option->getId();
         foreach($option->getValues() as $value)
         {
+            var_dump($value->getTitle());
 	        $inductionType = strpos( strtolower($value->getTitle()), 'gftd' ) !== false ?  'gftd' : 'induction';
         }
 	endif;
