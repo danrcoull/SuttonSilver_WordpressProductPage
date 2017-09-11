@@ -117,7 +117,15 @@
 
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim($(this).parent().find('label').text());
-                                toggleCheckbox($(this), text, ['Yes','Yes, Level 6'], true)
+                                console.log(text);
+                                console.log(text === 'Yes' || text === 'Yes, Level 6');
+                                if (text === 'Yes' || text === 'Yes, Level 6') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                } else if (text === 'No') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                }
                             });
 
                             $datePicker.datepicker('destroy');
@@ -136,7 +144,13 @@
 
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim($(this).parent().find('label').text());
-                                toggleCheckbox($(this), text, ['Yes','Yes, Level 6'], false);
+                                if (text === 'Yes' || text === 'Yes, Level 6') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                } else if (text === 'No') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                }
                             });
 
                             $datePicker.datepicker('destroy');
@@ -173,7 +187,13 @@
 
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim((this).parent().find('label').text());
-                                toggleCheckbox($(this), text, ['Yes, GFTD'], true)
+                                if (text === 'Yes, GFTD') {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                } else if (text.contains('No')) {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                }
                             });
 
 
@@ -193,13 +213,19 @@
 
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim($(this).parent().find('label').text());
-                                toggleCheckbox($(this), text, ['Yes, GFTD'], false)
+                                if (text === 'Yes, GFTD') {
+                                    $(this).click();
+                                    $(this).prop('checked', false);
+                                } else if (text.contains('No')) {
+                                    $(this).click();
+                                    $(this).prop('checked', true);
+                                }
                             });
 
                             $datePicker.datepicker('destroy');
 
-                            $dateId = $('.induction-date').first().attr('data-date-options-id');
-                            $locationId = $('.induction-date').first().attr('data-location-options-id');
+                            $dateId = $('.gftd-date').first().attr('data-date-options-id');
+                            $locationId = $('.gftd-date').first().attr('data-location-options-id');
                             $('#options_' + $dateId + '_text').attr('value', '');
                             $('#options_' + $locationId + '_text').attr('value', '');
                         }
@@ -234,17 +260,6 @@
                     }
                     event.preventDefault();
                 });
-            }
-        }
-
-        function toggleCheckbox(element, text, compare ,show)
-        {
-            if ($.inArray(text,compare)) {
-                element.trigger('click');
-                element.prop('checked', show);
-            } else if (text.contains('No')) {
-                element.trigger('click');
-                element.prop('checked', !show);
             }
         }
 
