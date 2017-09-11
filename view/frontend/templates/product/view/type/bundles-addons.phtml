@@ -26,8 +26,9 @@ foreach ( $customOptions as $option ):
         {
             $valueTitle = strtolower($value->getTitle());
 	        $inductionGftd = strpos($valueTitle, 'gftd' ) !== false ?  true : false;
-	        echo $inductionGftd;
+
         }
+		echo 'Inside ' . $inductionGftd;
 	endif;
 
 	if ( strpos($title ,strtolower( 'Induction Date' )) !== false ):
@@ -39,6 +40,7 @@ foreach ( $customOptions as $option ):
 		$inductionLocation   = true;
 		$inductionLocationId = $oid;
 	endif;
+	echo 'outside ' . $inductionGftd;
 endforeach;
 
 $id       = 0;
@@ -86,7 +88,7 @@ if($_item->getTypeId() == 'bundle') {
 
 
     <?php
-    var_dump($inductionGftd);
+	echo 'before ' . $inductionGftd;
     if($inductionGftd) :?>
         <div class="white gftd-check">
             <div class="add-to-cart-title">
