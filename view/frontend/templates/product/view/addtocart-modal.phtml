@@ -97,8 +97,9 @@
         $('.yes-no-wrapper-show-hide').hide();
 
         //create incudtion standard click
-        var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper');
+
         function inductionClick() {
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper');
             if ($addToCartInction.length > 0) {
                 $('#addtocartmodal .gftd .yes-no-wrapper').off('click','a');
                 $($addToCartInction).on('click','a', function (event) {
@@ -168,9 +169,8 @@
         }
 
         //create gftd click standard;
-        var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper');
         function gftdClick() {
-
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper');
             if ($addToCartGTFD.length > 0) {
                 $('#addtocartmodal .induction .yes-no-wrapper').off('click','a');
                 $($addToCartGTFD).on('click','a', function (event) {
@@ -238,9 +238,9 @@
         }
 
         //gftd check click
-        var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
-        function gftdCheckClick() {
 
+        function gftdCheckClick() {
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
             if ($gftdCheck.length > 0) {
                 $($gftdCheck).off('click','a').on('click', 'a' , function (event) {
                      if ($(this).hasClass('active') === false) {
