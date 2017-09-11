@@ -28,8 +28,6 @@ foreach ( $customOptions as $option ):
 
             $valueTitle = strtolower($value->getTitle());
 
-	        var_dump($valueTitle);
-	        var_dump(strpos($valueTitle, strtolower('gftd' )));
 
 	        $inductionGftd = strpos($valueTitle, 'gftd' ) !== false ?  true : false;
         }
@@ -52,7 +50,7 @@ $level6Id = 95;
 $gtfdId   = 100;
 
 $type = strtolower($_item->getAttributeText( 'induction_type' ));
-var_dump($type);
+
 switch ( trim( $type ) ) {
 	case 'level 3 induction':
 		$id = $level3Id;
@@ -65,6 +63,7 @@ switch ( trim( $type ) ) {
 		$id = $gtfdId;
 		break;
 }
+
 $levelTerm = [];
 if ( $id != 0 ) {
 	$levelTerm = $this->getInductionCollection( $id );
@@ -89,7 +88,9 @@ if($_item->getTypeId() == 'bundle') {
            ($hasUnit1 || $id === $level6Id || $id === $gtfdId )) : ?>
 
 
-    <?php if($inductionGftd) :?>
+    <?php
+    var_dump($inductionGftd);
+    if($inductionGftd) :?>
         <div class="white gftd-check">
             <div class="add-to-cart-title">
 
