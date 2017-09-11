@@ -100,7 +100,7 @@
         var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
         function inductionClick() {
             if ($addToCartInction.length > 0) {
-                $(document).on($addToCartInction,'click', function (event) {
+                $(document).on('click',$addToCartInction, function (event) {
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
@@ -157,7 +157,7 @@
         function gftdClick() {
 
             if ($addToCartGTFD.length > 0) {
-                $(document).on($addToCartGTFD, 'click', function (event) {
+                $(document).on('click',$addToCartGTFD, function (event) {
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
@@ -214,7 +214,7 @@
         function gftdCheckClick() {
 
             if ($gftdCheck.length > 0) {
-                $(document).on($gftdCheck,'click', function (event) {
+                $(document).on('click', $gftdCheck, function (event) {
                      if ($(this).hasClass('active') === false) {
 
                         $('.gftd-check .yes-no-wrapper a').removeClass('active');
