@@ -160,6 +160,7 @@ if($_item->getTypeId() == 'bundle') {
 													$dateType = 'induction';
 													foreach ($this->getTaxonomy()->getPostTermsCollection($event) as $term)
                                                     {
+                                                        var_dump($term->getId());
                                                         if($term->getId() === 100)
                                                         {
 	                                                        $dateType = 'gftd';
