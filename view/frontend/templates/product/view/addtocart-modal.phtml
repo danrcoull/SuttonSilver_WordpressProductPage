@@ -97,8 +97,8 @@
         $('.yes-no-wrapper-show-hide').hide();
 
         //create incudtion standard click
+        var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
         function inductionClick() {
-            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
             if ($addToCartInction.length > 0) {
                 $addToCartInction.on('click', function (event) {
                     event.preventDefault();
@@ -166,8 +166,9 @@
         }
 
         //create gftd click standard;
+        var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
         function gftdClick() {
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
+
             if ($addToCartGTFD.length > 0) {
                 $addToCartGTFD.on('click', function (event) {
                     event.preventDefault();
@@ -232,8 +233,9 @@
         }
 
         //gftd check click
+        var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
         function gftdCheckClick() {
-            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
+
             if ($gftdCheck.length > 0) {
                 $gftdCheck.on('click', function (event) {
                     event.preventDefault();
@@ -241,6 +243,7 @@
                     if ($(this).hasClass('active') === false) {
                         $('.gftd-check .yes-no-wrapper a').removeClass('active');
                         $(this).addClass('active');
+
                         if ($.trim($(this).text()) === 'Yes') {
                             $('#addtocartmodal .induction').addClass('gftd').removeClass('induction');
                             gftdClick();
@@ -263,14 +266,17 @@
         var $addToCartArrow = $('.add-to-cart.arrow');
 
         $('#addtocartmodal').on('show.bs.modal', function () {
+
             if ($addToCartGTFD.length > 0) {
-                $addToCartGTFD.last().click();
-                $addToCartGTFD.last().prop('checked', true);
+                $addToCartGTFD.last().trigger( "click" );
+            }
+
+            if ($gftdCheck.length > 0) {
+                $gftdCheck.last().trigger( "click" );
             }
 
             if ($addToCartInction.length > 0) {
-                $addToCartInction.last().click();
-                $addToCartInction.last().prop('checked', true);
+                $addToCartInction.last().trigger( "click" );
             }
         });
 
