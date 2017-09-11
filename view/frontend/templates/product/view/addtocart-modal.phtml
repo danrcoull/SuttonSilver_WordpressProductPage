@@ -100,10 +100,9 @@
 
         function inductionClick() {
             var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper');
-            if ($addToCartInction.length > 0) {
-                $('#addtocartmodal .induction .yes-no-wrapper').off('click','a');
-                $('#addtocartmodal .gftd .yes-no-wrapper').off('click','a');
-                $($addToCartInction).on('click','a', function (event) {
+
+
+                $(document).on('click','#addtocartmodal .induction .yes-no-wrapper a', function (event) {
                     event.preventDefault();
 
                     if ($(this).hasClass('active') === false) {
@@ -166,77 +165,75 @@
                     }
 
                 });
-            }
-        }
+        };
 
         //create gftd click standard;
         function gftdClick() {
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper');
-            if ($addToCartGTFD.length > 0) {
-                $('#addtocartmodal .induction .yes-no-wrapper').off('click','a');
-                $('#addtocartmodal .gftd .yes-no-wrapper').off('click','a');
-                $($addToCartGTFD).on('click','a', function (event) {
-                    event.preventDefault();
-
-                    if ($(this).hasClass('active') === false) {
-
-                        $('.gftd .yes-no-wrapper a, .induction .yes-no-wrapper a').removeClass('active');
-                        $(this).addClass('active');
-
-                        var $parent = $(this).parent().attr('data-options-id');
-
-                        if ($.trim($(this).text()) === 'Yes') {
-
-                            $('.yes-no-wrapper-show-hide').show();
-
-                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
-                                var text = $.trim((this).parent().find('label').text());
-                                if (text === 'Yes, GFTD') {
-                                    $(this).click();
-                                    $(this).prop('checked', true);
-                                } else if (text.contains('No')) {
-                                    $(this).click();
-                                    $(this).prop('checked', false);
-                                }
-                            });
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
 
 
-                            $datePicker.datepicker('destroy');
-                            $datePicker.datepicker({
-                                inline: true,
-                                format: "dd MM yyyy",
-                                onSelect: function (date) {
-                                    //$dateId = $('#datetimepicker12').attr('data-options-id');
-                                    //$('#options_'+$dateId+'_text').attr('value',date);
-                                },
-                            });
+            $(document).on('click', '#addtocartmodal .gftd .yes-no-wrapper a', function (event) {
+                event.preventDefault();
+
+                if ($(this).hasClass('active') === false) {
+
+                    $('.gftd .yes-no-wrapper a, .induction .yes-no-wrapper a').removeClass('active');
+                    $(this).addClass('active');
+
+                    var $parent = $(this).parent().attr('data-options-id');
+
+                    if ($.trim($(this).text()) === 'Yes') {
+
+                        $('.yes-no-wrapper-show-hide').show();
+
+                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                            var text = $.trim((this).parent().find('label').text());
+                            if (text === 'Yes, GFTD') {
+                                $(this).click();
+                                $(this).prop('checked', true);
+                            } else if (text.contains('No')) {
+                                $(this).click();
+                                $(this).prop('checked', false);
+                            }
+                        });
 
 
-                        } else {
-                            $('.yes-no-wrapper-show-hide').hide();
+                        $datePicker.datepicker('destroy');
+                        $datePicker.datepicker({
+                            inline: true,
+                            format: "dd MM yyyy",
+                            onSelect: function (date) {
+                                //$dateId = $('#datetimepicker12').attr('data-options-id');
+                                //$('#options_'+$dateId+'_text').attr('value',date);
+                            },
+                        });
 
-                            $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
-                                var text = $.trim($(this).parent().find('label').text());
-                                if (text === 'Yes, GFTD') {
-                                    $(this).click();
-                                    $(this).prop('checked', false);
-                                } else if (text.contains('No')) {
-                                    $(this).click();
-                                    $(this).prop('checked', true);
-                                }
-                            });
 
-                            $datePicker.datepicker('destroy');
+                    } else {
+                        $('.yes-no-wrapper-show-hide').hide();
 
-                            $dateId = $('.gftd-date').first().attr('data-date-options-id');
-                            $locationId = $('.gftd-date').first().attr('data-location-options-id');
-                            $('#options_' + $dateId + '_text').attr('value', '');
-                            $('#options_' + $locationId + '_text').attr('value', '');
-                        }
+                        $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
+                            var text = $.trim($(this).parent().find('label').text());
+                            if (text === 'Yes, GFTD') {
+                                $(this).click();
+                                $(this).prop('checked', false);
+                            } else if (text.contains('No')) {
+                                $(this).click();
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+                        $datePicker.datepicker('destroy');
+
+                        $dateId = $('.gftd-date').first().attr('data-date-options-id');
+                        $locationId = $('.gftd-date').first().attr('data-location-options-id');
+                        $('#options_' + $dateId + '_text').attr('value', '');
+                        $('#options_' + $locationId + '_text').attr('value', '');
                     }
+                }
 
-                });
-            }
+            });
+
         }
 
         //gftd check click
