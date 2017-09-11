@@ -126,6 +126,6 @@ class View extends \Magento\Catalog\Block\Product\View {
 
 	public function getTaxonomy()
 	{
-		return  $this->_fishpig->getFactory('Taxonomy')->create();
+		return  $this->_fishpig->getFactory('Term\Taxonomy')->create();
 	}
 }

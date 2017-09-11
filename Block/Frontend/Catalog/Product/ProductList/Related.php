@@ -93,7 +93,7 @@ class Related extends \Magento\Catalog\Block\Product\ProductList\Related {
 
 	public function getTaxonomy()
 	{
-		return  $this->_fishpig->getFactory('Taxonomy')->create();
+		return  $this->_fishpig->getFactory('Term\Taxonomy')->create();
 	}
 
 }

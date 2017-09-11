@@ -83,6 +83,6 @@ class Bundle extends \Magento\Bundle\Block\Catalog\Product\View\Type\Bundle
 
 	public function getTaxonomy()
 	{
-		return  $this->_fishpig->getFactory('Taxonomy')->create();
+		return  $this->_fishpig->getFactory('Term\Taxonomy')->create();
 	}
 }
