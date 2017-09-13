@@ -12,5 +12,7 @@
 	<preference for="FishPig\WordPress\Model\Post" type="SuttonSilver\WordpressProductPage\Model\Post" />
 	<preference for="Magento\Catalog\Block\Product\ProductList\Related" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ProductList\Related" />
 	<preference for="Magento\Catalog\Block\Product\View" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View" />
+	<preference for="Magento\Catalog\Block\Product\ListProduct" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ListProduct" />
+	<preference for="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ListProduct" />
 	<preference for="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View\Type\Bundle" />
 </config>
