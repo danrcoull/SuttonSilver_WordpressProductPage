@@ -62,9 +62,7 @@ $items = $this->getProducts();
 
                                 <div class="ribbon ribbon-top-right">
                                     <?php   if ($simlePrice > $price) :?>
-                                        <?php echo $simlePrice; ?>
-                                        <?php echo $price; ?>
-                                        <span>£<?php echo round($simlePrice-$price); ?></span>
+                                        <span>£<?php echo ceil($simlePrice-$price); ?></span>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>

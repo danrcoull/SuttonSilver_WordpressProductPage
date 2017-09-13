@@ -201,7 +201,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
                             <div class="ribbon ribbon-top-right">
                                 <?php   if ($simlePrice > $price) :?>
-                                    <span>£<?php echo round($simlePrice-$price); ?></span>
+                                    <span>£<?php echo ceil($simlePrice-$price); ?></span>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
