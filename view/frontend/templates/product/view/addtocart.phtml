@@ -38,7 +38,7 @@ $buttonTitle = __("Add to Basket");
                     <button type="submit"
                             title="<?php /* @escapeNotVerified */
                             echo $buttonTitle ?>"
-                            class="action primary tocart <?php echo ($_product->getTypeId() == 'simple' && !filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>"
+                            class="action primary tocart <?php echo (!filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>"
                             id="product-addtocart-button">
                         <span><?php /* @escapeNotVerified */
                             echo $buttonTitle ?></span>
