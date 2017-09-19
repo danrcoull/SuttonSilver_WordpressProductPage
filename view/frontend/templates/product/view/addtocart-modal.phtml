@@ -268,12 +268,12 @@
 
             if($addToCartInction.length > 0 )
             {
-                $addToCartInction.last().trigger( "click" );
+                $addToCartInction.last()[0].click();
             }
 
             if($addToCartGTFD.length > 0 )
             {
-                $addToCartGTFD.last().trigger( "click" );
+                $addToCartGTFD.last()[0].click();
             }
         }
 
@@ -296,16 +296,16 @@
 
             var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
             if ($addToCartGTFD.length > 0) {
-                $addToCartGTFD.last().trigger( "click" );
+                $addToCartGTFD.last()[0].click();
             }
 
             var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
             if ($gftdCheck.length > 0) {
-                $gftdCheck.last().trigger( "click" );
+                $gftdCheck.last()[0].click();
             }
             var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a')
             if ($addToCartInction.length > 0) {
-                $addToCartInction.last().trigger( "click" );
+                $addToCartInction.last()[0].click();
             }
         });
 
