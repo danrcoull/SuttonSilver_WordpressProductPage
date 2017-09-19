@@ -42,7 +42,7 @@ class Add
 
     protected $seasons = ["Winter","Spring","Summer","Autumn"];
 
-    protected $gtfd = false;
+    private $gtfd = false;
 
     /**
      * beforeAddProduct
@@ -136,14 +136,11 @@ class Add
                 $p = $this->productRepository->get($this->skus[0]);
                 break;
             case 'Level 6 induction':
-            	if($this->gtfd === false) {
+            	if($this->gtfd == false) {
 		            $p = $this->productRepository->get( $this->skus[1] );
 	            }else{
 		            $p =  $this->productRepository->get($this->skus[2]);
 	            }
-                break;
-            case 'GTFD induction':
-                $p =  $this->productRepository->get($this->skus[2]);
                 break;
         }
 
