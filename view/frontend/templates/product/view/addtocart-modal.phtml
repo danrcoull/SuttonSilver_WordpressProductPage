@@ -124,7 +124,7 @@
                                 if (text === 'Yes' || text === 'Yes, Level 6') {
                                     $(this).click();
                                     $(this).prop('checked', true);
-                                } else if (text === 'No') {
+                                } else if (text === 'No' || text === 'Yes, GFTD') {
                                     $(this).click();
                                     $(this).prop('checked', false);
                                 }
@@ -146,7 +146,7 @@
 
                             $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                                 var text = $.trim($(this).parent().find('label').text());
-                                if (text === 'Yes' || text === 'Yes, Level 6') {
+                                if (text === 'Yes' || text === 'Yes, Level 6' || text === 'Yes, GFTD') {
                                     $(this).click();
                                     $(this).prop('checked', false);
                                 } else if (text === 'No') {
@@ -191,7 +191,7 @@
                             if (text === 'Yes, GFTD') {
                                 $(this).click();
                                 $(this).prop('checked', true);
-                            } else if (text === 'No') {
+                            } else if (text === 'No' || text === 'Yes' || text === 'Yes, Level 6') {
                                 $(this).click();
                                 $(this).prop('checked', false);
                             }
@@ -214,7 +214,7 @@
 
                         $('#options-' + $parent + '-list input[type="checkbox"]').each(function () {
                             var text = $.trim($(this).parent().find('label').text());
-                            if (text === 'Yes, GFTD') {
+                            if (text === 'Yes, GFTD' || text === 'Yes' || text === 'Yes, Level 6') {
                                 $(this).click();
                                 $(this).prop('checked', false);
                             } else if (text === 'No') {
