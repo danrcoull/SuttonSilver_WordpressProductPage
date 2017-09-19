@@ -240,8 +240,8 @@
 
         function gftdCheckClick() {
             var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
-            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-of-type');
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-of-type');
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-child');
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-child');
 
             if ($gftdCheck.length > 0) {
                 $($gftdCheck).off('click','a').on('click', 'a' , function (event) {
@@ -294,16 +294,16 @@
 
         $('#addtocartmodal').on('show.bs.modal', function () {
 
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-of-type');
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-child');
             if ($addToCartGTFD.length > 0) {
                 $addToCartGTFD.trigger( "click" );
             }
 
-            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a:last-of-type');
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a:last-child');
             if ($gftdCheck.length > 0) {
                 $gftdCheck.trigger( "click" );
             }
-            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-of-type')
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-child')
             if ($addToCartInction.length > 0) {
                 $addToCartInction.trigger( "click" );
             }
