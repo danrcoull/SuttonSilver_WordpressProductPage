@@ -70,7 +70,7 @@ class Add
                 $title = $productInfo->getOptionById($key)->getTitle();
 
 	            if (stripos(strtolower($title), 'induction day') !== false) {
-		            $yesNoValue = $productInfo->getOptionById($key)->getValueById($val);
+		            $yesNoValue = $productInfo->getOptionById($key)->getValueById($val[0]);
 		            $this->logger->addInfo(print_r($yesNoValue, true));
 		            if($yesNoValue === 'Yes, GFTD')
 		            {
