@@ -296,7 +296,7 @@
             }
         });
 
-        $('.induction-date').on('click', function(){
+        $('.induction-date, .gftd-date').on('click', function(){
             $dateId = $(this).attr('data-date-options-id');
             $date = $(this).attr('data-date');
             $('#options_'+$dateId+'_text').attr('value',$date);
