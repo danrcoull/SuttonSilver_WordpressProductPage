@@ -42,6 +42,8 @@ class Add
 
     protected $seasons = ["Winter","Spring","Summer","Autumn"];
 
+    protected $gtfd = false;
+
     /**
      * beforeAddProduct
      *
@@ -63,7 +65,19 @@ class Add
         if(isset($requestInfo['options']) && !in_array($productInfo->getSku(),$this->skus))
         {
             foreach($requestInfo['options'] as $key => $val) {
+
+	            $this->logger->addInfo(print_r($requestInfo['options'], true));
                 $title = $productInfo->getOptionById($key)->getTitle();
+
+	            if (stripos(strtolower($title), 'induction day') !== false) {
+		            $yesNoValue = $productInfo->getOptionById($key)->getValueById($val);
+		            $this->logger->addInfo(print_r($yesNoValue, true));
+		            if($yesNoValue === 'Yes, GFTD')
+		            {
+		            	$this->gtfd = true;
+		            }
+	            }
+
                 if (stripos(strtolower($title), 'induction') !== false) {
                     if (stripos(strtolower($title), 'date') !== false) {
                         $induction['date'] = $val;
@@ -117,7 +131,11 @@ class Add
                 $p = $this->productRepository->get($this->skus[0]);
                 break;
             case 'Level 6 induction':
-                $p =$this->productRepository->get($this->skus[1]);
+            	if($this->gtfd === false) {
+		            $p = $this->productRepository->get( $this->skus[1] );
+	            }else{
+		            $p =  $this->productRepository->get($this->skus[2]);
+	            }
                 break;
             case 'GTFD induction':
                 $p =  $this->productRepository->get($this->skus[2]);
