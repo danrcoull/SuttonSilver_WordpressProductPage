@@ -68,7 +68,8 @@ class Add
 
 	            $this->logger->addInfo(print_r($requestInfo['options'], true));
                 $title = $productInfo->getOptionById($key)->getTitle();
-
+	            $this->logger->addInfo( print_r( $productInfo->getOptionById( $key ), true ) );
+	            $this->logger->addInfo( print_r( $val, true ) );
 
                 if (stripos(strtolower($title), 'induction') !== false) {
 
@@ -76,7 +77,7 @@ class Add
 	                if (stripos(strtolower($title), 'day') !== false) {
 	                	if(isset($val[0])) {
 			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
-			                $this->logger->addInfo( print_r( $yesNoValue, true ) );
+
 			                if ( $yesNoValue === 'Yes, GFTD' ) {
 				                $this->gtfd = true;
 			                }
