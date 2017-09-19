@@ -240,6 +240,9 @@
 
         function gftdCheckClick() {
             var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
+
             if ($gftdCheck.length > 0) {
                 $($gftdCheck).off('click','a').on('click', 'a' , function (event) {
                      if ($(this).hasClass('active') === false) {
@@ -261,6 +264,16 @@
                     }
                     event.preventDefault();
                 });
+            }
+
+            if($addToCartInction.length > 0 )
+            {
+                $addToCartInction.last().trigger( "click" );
+            }
+
+            if($addToCartGTFD.length > 0 )
+            {
+                $addToCartGTFD.last().trigger( "click" );
             }
         }
 
@@ -286,7 +299,7 @@
                 $addToCartGTFD.last().trigger( "click" );
             }
 
-            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
             if ($gftdCheck.length > 0) {
                 $gftdCheck.last().trigger( "click" );
             }
