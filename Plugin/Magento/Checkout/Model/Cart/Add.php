@@ -1,6 +1,6 @@
 <?php
 namespace SuttonSilver\WordpressProductPage\Plugin\Magento\Checkout\Model\Cart;
-
+use Psr\Log\LoggerInterface;
 class Add
 {
     /**
@@ -11,6 +11,7 @@ class Add
     protected $cartItem;
     protected $productRepository;
     protected $formKey;
+    protected $logger;
 
 
 
@@ -22,11 +23,13 @@ class Add
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-        \Magento\Framework\Data\Form\FormKey $formKey
+        \Magento\Framework\Data\Form\FormKey $formKey,
+	    LoggerInterface $logger
     ) {
         $this->quote = $checkoutSession->getQuote();
         $this->productRepository =$productRepository;
         $this->formKey =$formKey;
+        $this->logger =$logger;
     }
 
     protected $ids;
@@ -56,7 +59,7 @@ class Add
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
-        //die(var_dump($requestInfo['options']));
+        $this->logger->addInfo(print_r($requestInfo['options'], true));
         if(isset($requestInfo['options']) && !in_array($productInfo->getSku(),$this->skus))
         {
             foreach($requestInfo['options'] as $key => $val) {
@@ -85,6 +88,7 @@ class Add
 
             if((isset($induction['date']) && $induction['date'] != '') &&
                 (isset($induction['location']) && $induction['location'] != '')) {
+
                 $this->addInductionToCart($productInfo, $subject, $induction);
             }
 
