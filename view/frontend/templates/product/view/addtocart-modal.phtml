@@ -240,8 +240,8 @@
 
         function gftdCheckClick() {
             var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper');
-            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a');
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-of-type');
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-of-type');
 
             if ($gftdCheck.length > 0) {
                 $($gftdCheck).off('click','a').on('click', 'a' , function (event) {
@@ -268,12 +268,12 @@
 
             if($addToCartInction.length > 0 )
             {
-                $addToCartInction.last()[0].click();
+                $addToCartInction.trigger( "click" );
             }
 
             if($addToCartGTFD.length > 0 )
             {
-                $addToCartGTFD.last()[0].click();
+                $addToCartGTFD.trigger( "click" );
             }
         }
 
@@ -294,18 +294,18 @@
 
         $('#addtocartmodal').on('show.bs.modal', function () {
 
-            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a');
+            var $addToCartGTFD = $('#addtocartmodal .gftd .yes-no-wrapper a:last-of-type');
             if ($addToCartGTFD.length > 0) {
-                $addToCartGTFD.last()[0].click();
+                $addToCartGTFD.trigger( "click" );
             }
 
-            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a');
+            var $gftdCheck = $('#addtocartmodal .gftd-check .yes-no-wrapper a:last-of-type');
             if ($gftdCheck.length > 0) {
-                $gftdCheck.last()[0].click();
+                $gftdCheck.trigger( "click" );
             }
-            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a')
+            var $addToCartInction = $('#addtocartmodal .induction .yes-no-wrapper a:last-of-type')
             if ($addToCartInction.length > 0) {
-                $addToCartInction.last()[0].click();
+                $addToCartInction.trigger( "click" );
             }
         });
 
