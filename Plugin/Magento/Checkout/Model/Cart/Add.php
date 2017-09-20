@@ -74,8 +74,8 @@ class Add
 		                if(isset($val[0])) {
 			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
 			                $this->logger->addInfo($yesNoValue);
-			                $this->logger->addInfo($productInfo->getOptionById( $key )->getValues());
-			                $this->logger->addInfo($productInfo->getOptionById( $key )->getValueById( $val[0] ));
+			                $this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
+			                $this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValueById( $val[0] ), true));
 			                if ( $yesNoValue === 'Yes, GFTD' ) {
 				                $this->gtfd = true;
 			                }
