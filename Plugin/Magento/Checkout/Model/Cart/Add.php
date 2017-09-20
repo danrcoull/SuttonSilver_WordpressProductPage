@@ -128,7 +128,7 @@ class Add
 
 	public function getItemByProduct($product, $subject)
 	{
-		$this->logger->addInfo($subject->getItems());
+		$this->logger->addInfo(print_r($subject->getItems(),true));
 		foreach ($subject->getItems() as $item) {
 
 			if ($item->representProduct($product)) {
