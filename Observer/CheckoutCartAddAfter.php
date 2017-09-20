@@ -4,7 +4,7 @@
 namespace SuttonSilver\CustomCheckout\Observer;
 use Psr\Log\LoggerInterface;
 
-class CustomcheckoutQuestionSaveBefore implements \Magento\Framework\Event\ObserverInterface
+class CheckoutCartAddAfter implements \Magento\Framework\Event\ObserverInterface
 {
 
 
