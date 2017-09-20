@@ -67,7 +67,7 @@ class Add
             foreach($requestInfo['options'] as $key => $val) {
 
 	            $this->logger->addInfo(print_r($requestInfo['options'], true));
-                $title = $productInfo->getOptionV($key)->getTitle();
+                $title = $productInfo->getOptionById($key)->getTitle();
 
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if (stripos(strtolower($title), 'day') !== false) {
