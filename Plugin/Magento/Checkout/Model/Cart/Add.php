@@ -132,10 +132,10 @@ class Add
 		return $helper->getCustomOptions($product);
 	}
 
-	public function getItemByProduct($product, $subject)
+	public function getItemByProduct($product, $items)
 	{
-		foreach ($subject->getItems() as $item) {
-
+		foreach ($items as $item) {
+			$this->logger->addInfo($item->getSku());
 			if ($item->representProduct($product)) {
 				return $item;
 			}
