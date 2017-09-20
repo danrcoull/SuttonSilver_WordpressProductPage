@@ -76,8 +76,7 @@ class Add
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if ( stripos( strtolower( $title ), 'day' ) !== false ) {
 		                if ( isset( $val[0] ) ) {
-			                $this->logger->addInfo(print_r($val[0],true));
-			                $yesNoValue = $productInfo->getOptionById( $val[0] )->getTitle();
+			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] )->getTitle();
 			                $this->logger->addInfo(print_r($yesNoValue,true));
 
 			                if ( $yesNoValue === 'Yes, GFTD' ) {
