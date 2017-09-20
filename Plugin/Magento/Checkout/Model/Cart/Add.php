@@ -66,16 +66,15 @@ class Add
         {
             foreach($requestInfo['options'] as $key => $val) {
 
-	            $this->logger->addInfo(print_r($requestInfo['options'], true));
                 $title = $productInfo->getOptionById($key)->getTitle();
-
+	            $this->logger->addInfo( print_r( $productInfo->getOptionById($key)->getValues(), true ) );
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if ( stripos( strtolower( $title ), 'day' ) !== false ) {
 		                if ( isset( $val[0] ) ) {
 			                //$yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
 			                //$this->logger->addInfo(print_r($yesNoValue,true));
 			                //$this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
-			                $this->logger->addInfo( print_r( $productInfo->getProductOptions(), true ) );
+
 			                //if ( $yesNoValue === 'Yes, GFTD' ) {
 			                //    $this->gtfd = true;
 			                //}
