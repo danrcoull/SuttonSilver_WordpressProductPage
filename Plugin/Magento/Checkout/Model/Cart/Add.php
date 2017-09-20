@@ -67,13 +67,15 @@ class Add
             foreach($requestInfo['options'] as $key => $val) {
 
 	            $this->logger->addInfo(print_r($requestInfo['options'], true));
-                $title = $productInfo->getOptionById($key)->getTitle();
+                $title = $productInfo->getOptionV($key)->getTitle();
 
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if (stripos(strtolower($title), 'day') !== false) {
 		                if(isset($val[0])) {
 			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
 			                $this->logger->addInfo($yesNoValue);
+			                $this->logger->addInfo($productInfo->getOptionById( $key )->getValues());
+			                $this->logger->addInfo($productInfo->getOptionById( $key )->getValueById( $val[0] ));
 			                if ( $yesNoValue === 'Yes, GFTD' ) {
 				                $this->gtfd = true;
 			                }
