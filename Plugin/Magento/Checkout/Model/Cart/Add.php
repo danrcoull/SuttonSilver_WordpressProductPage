@@ -57,7 +57,7 @@ class Add
      * @return array
      * @throws LocalizedException
      */
-	public function beforeAddProduct(
+	public function afterAddProduct(
 		\Magento\Checkout\Model\Cart $subject,
 		$productInfo,
 		$requestInfo = null
