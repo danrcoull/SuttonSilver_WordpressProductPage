@@ -72,13 +72,13 @@ class Add
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if (stripos(strtolower($title), 'day') !== false) {
 		                if(isset($val[0])) {
-			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
-			                $this->logger->addInfo(print_r($yesNoValue,true));
-			                $this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
-			                $this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValueById( $val[0] ), true));
-			                if ( $yesNoValue === 'Yes, GFTD' ) {
-				                $this->gtfd = true;
-			                }
+			                //$yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
+			                //$this->logger->addInfo(print_r($yesNoValue,true));
+			                //$this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
+			                $this->logger->addInfo(print_r($productInfo->getProductOptions( ), true));
+			                //if ( $yesNoValue === 'Yes, GFTD' ) {
+				            //    $this->gtfd = true;
+			                //}
 		                }
 	                }
                     if (stripos(strtolower($title), 'date') !== false) {
