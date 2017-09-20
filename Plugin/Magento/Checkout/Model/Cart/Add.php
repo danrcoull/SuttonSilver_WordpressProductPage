@@ -60,7 +60,7 @@ class Add
     public function beforeAddProduct($subject, $productInfo, $requestInfo = null)
     {
 
-	    $this->logger->addInfo( print_r( $this->getProductOptions($productInfo ), true ) );
+	    $this->logger->addInfo( print_r( $this->getProductOptions($this->getItemByProduct($productInfo, $subject )), true ) );
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
@@ -124,6 +124,16 @@ class Add
 		/* @var $helper \Magento\Catalog\Helper\Product\Configuration */
 		$helper = $this->productConfig;
 		return $helper->getCustomOptions($product);
+	}
+
+	public function getItemByProduct($product, $subject)
+	{
+		foreach ($subject->getItems() as $item) {
+			if ($item->representProduct($product)) {
+				return $item;
+			}
+		}
+		return false;
 	}
 
     public function addRevisionToCart($product)
