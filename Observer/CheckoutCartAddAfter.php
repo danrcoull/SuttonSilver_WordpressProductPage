@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SuttonSilver\CustomCheckout\Observer;
+namespace SuttonSilver\WordpressProductPage\Observer;
 use Psr\Log\LoggerInterface;
 
 class CheckoutCartAddAfter implements \Magento\Framework\Event\ObserverInterface
