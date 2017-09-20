@@ -12,6 +12,7 @@ class Add
     protected $productRepository;
     protected $formKey;
     protected $logger;
+    protected $productConfig;
 
 
 
@@ -24,12 +25,14 @@ class Add
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Framework\Data\Form\FormKey $formKey,
+	    \Magento\Catalog\Helper\Product\Configuration $productConfig,
 	    LoggerInterface $logger
     ) {
         $this->quote = $checkoutSession->getQuote();
         $this->productRepository =$productRepository;
         $this->formKey =$formKey;
         $this->logger =$logger;
+	    $this->productConfig = $productConfig;
     }
 
     protected $ids;
@@ -57,7 +60,7 @@ class Add
     public function beforeAddProduct($subject, $productInfo, $requestInfo = null)
     {
 
-
+	    $this->logger->addInfo( print_r( $this->getProductOptions($productInfo ), true ) );
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
@@ -67,7 +70,7 @@ class Add
             foreach($requestInfo['options'] as $key => $val) {
 
                 $title = $productInfo->getOptionById($key)->getTitle();
-	            $this->logger->addInfo( print_r( $productInfo->getOptionById($key)->getValues(), true ) );
+
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if ( stripos( strtolower( $title ), 'day' ) !== false ) {
 		                if ( isset( $val[0] ) ) {
@@ -115,6 +118,13 @@ class Add
 
         return array($productInfo, $requestInfo);
     }
+
+	public function getProductOptions($product)
+	{
+		/* @var $helper \Magento\Catalog\Helper\Product\Configuration */
+		$helper = $this->productConfig;
+		return $helper->getCustomOptions($product);
+	}
 
     public function addRevisionToCart($product)
     {
