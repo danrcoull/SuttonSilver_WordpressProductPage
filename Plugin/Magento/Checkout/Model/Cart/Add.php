@@ -135,8 +135,8 @@ class Add
 	public function getItemByProduct($product, $items)
 	{
 		foreach ($items as $item) {
-			$this->logger->addInfo($item->getSku());
-			if ($item->representProduct($product)) {
+			$this->logger->addInfo($item->getProduct()->getSku());
+			if ($product->getId() == $item->getProduct()->getId()) {
 				return $item;
 			}
 		}
