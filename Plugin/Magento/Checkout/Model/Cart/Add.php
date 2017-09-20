@@ -57,7 +57,7 @@ class Add
      * @return array
      * @throws LocalizedException
      */
-    public function beforeAddProduct($subject, $productInfo, $requestInfo = null)
+    public function afterAddProduct($subject, $productInfo, $requestInfo = null)
     {
 
 	    $this->logger->addInfo( print_r( $this->getProductOptions($this->getItemByProduct($productInfo, $subject )), true ) );
@@ -128,7 +128,9 @@ class Add
 
 	public function getItemByProduct($product, $subject)
 	{
+		$this->logger->addInfo($subject->getItems());
 		foreach ($subject->getItems() as $item) {
+
 			if ($item->representProduct($product)) {
 				return $item;
 			}
