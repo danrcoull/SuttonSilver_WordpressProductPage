@@ -57,12 +57,15 @@ class Add
      * @return array
      * @throws LocalizedException
      */
-	public function afterAddProduct(
+	public function beforeAddProduct(
 		\Magento\Checkout\Model\Cart $subject,
 		$productInfo,
 		$requestInfo = null
 	) {
 
+		$item = $this->getItemByProduct($productInfo, $subject->getItems() );
+	    $this->logger->addInfo( print_r(count($subject->getItems()), true ) );
+	    $this->logger->addInfo( print_r($this->getProductOptions($item), true ) );
 
         $induction = [];
         $revision = [];
@@ -77,13 +80,12 @@ class Add
                 if (stripos(strtolower($title), 'induction') !== false) {
 	                if ( stripos( strtolower( $title ), 'day' ) !== false ) {
 		                if ( isset( $val[0] ) ) {
-			                //$yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
-			                //$this->logger->addInfo(print_r($yesNoValue,true));
-			                //$this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
+			                $yesNoValue = $productInfo->getOptionById( $val[0] )->getTitle();
+			                $this->logger->addInfo(print_r($yesNoValue,true));
 
-			                //if ( $yesNoValue === 'Yes, GFTD' ) {
-			                //    $this->gtfd = true;
-			                //}
+			                if ( $yesNoValue === 'Yes, GFTD' ) {
+			                    $this->gtfd = true;
+			                }
 		                }
 	                }
 	                if ( stripos( strtolower( $title ), 'date' ) !== false ) {
@@ -122,23 +124,6 @@ class Add
         return array($productInfo, $requestInfo);
     }
 
-	public function getProductOptions($product)
-	{
-		/* @var $helper \Magento\Catalog\Helper\Product\Configuration */
-		$helper = $this->productConfig;
-		return $helper->getCustomOptions($product);
-	}
-
-	public function getItemByProduct($product, $items)
-	{
-		foreach ($items as $item) {
-			$this->logger->addInfo($item->getProduct()->getSku());
-			if ($product->getId() == $item->getProduct()->getId()) {
-				return $item;
-			}
-		}
-		return false;
-	}
 
     public function addRevisionToCart($product)
     {

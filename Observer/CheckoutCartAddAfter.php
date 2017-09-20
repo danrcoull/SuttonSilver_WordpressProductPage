@@ -48,9 +48,8 @@ class CheckoutCartAddAfter implements \Magento\Framework\Event\ObserverInterface
     public function execute(
         \Magento\Framework\Event\Observer $observer
     ) {
-	    var_dump($observer->getEvent()->getQuoteItem());
-	    var_dump($this->getProductOptions($observer->getEvent()->getQuoteItem()));
-	    die;
+	    //var_dump($this->getProductOptions($observer->getEvent()->getQuoteItem()));
+	    //die;
     }
 
 	public function getProductOptions($product)
