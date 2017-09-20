@@ -70,24 +70,24 @@ class Add
                 $title = $productInfo->getOptionById($key)->getTitle();
 
                 if (stripos(strtolower($title), 'induction') !== false) {
-	                if (stripos(strtolower($title), 'day') !== false) {
-		                if(isset($val[0])) {
+	                if ( stripos( strtolower( $title ), 'day' ) !== false ) {
+		                if ( isset( $val[0] ) ) {
 			                //$yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] );
 			                //$this->logger->addInfo(print_r($yesNoValue,true));
 			                //$this->logger->addInfo(print_r($productInfo->getOptionById( $key )->getValues()),true);
-			                $this->logger->addInfo(print_r($productInfo->getProductOptions( ), true));
+			                $this->logger->addInfo( print_r( $productInfo->getProductOptions(), true ) );
 			                //if ( $yesNoValue === 'Yes, GFTD' ) {
-				            //    $this->gtfd = true;
+			                //    $this->gtfd = true;
 			                //}
 		                }
 	                }
-                    if (stripos(strtolower($title), 'date') !== false) {
-                        $induction['date'] = $val;
-                        unset($requestInfo['options'][$key]);
-                    } elseif (stripos(strtolower($title), 'location') !== false) {
-                        $induction['location'] = $val;
-                        unset($requestInfo['options'][$key]);
-                    }
+	                if ( stripos( strtolower( $title ), 'date' ) !== false ) {
+		                $induction['date'] = $val;
+		                unset( $requestInfo['options'][ $key ] );
+	                } elseif ( stripos( strtolower( $title ), 'location' ) !== false ) {
+		                $induction['location'] = $val;
+		                unset( $requestInfo['options'][ $key ] );
+	                }
                 }
 
                 if (stripos(strtolower($title), 'revision') !== false) {
