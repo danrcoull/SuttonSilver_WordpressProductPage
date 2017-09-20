@@ -57,10 +57,13 @@ class Add
      * @return array
      * @throws LocalizedException
      */
-    public function afterAddProduct($subject, $productInfo, $requestInfo = null)
-    {
+	public function beforeAddProduct(
+		\Magento\Checkout\Model\Cart $subject,
+		$productInfo,
+		$requestInfo = null
+	) {
 
-	    $this->logger->addInfo( print_r( $this->getProductOptions($this->getItemByProduct($productInfo, $subject )), true ) );
+	    $this->logger->addInfo( print_r($this->getItemByProduct($productInfo, $subject ), true ) );
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
@@ -128,8 +131,6 @@ class Add
 
 	public function getItemByProduct($product, $subject)
 	{
-		print_r($subject->getItems(),true);
-		die;
 		foreach ($subject->getItems() as $item) {
 
 			if ($item->representProduct($product)) {
