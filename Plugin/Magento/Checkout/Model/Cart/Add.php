@@ -63,7 +63,10 @@ class Add
 		$requestInfo = null
 	) {
 
-	    $this->logger->addInfo( print_r($this->getItemByProduct($productInfo, $subject ), true ) );
+		$item = $this->getItemByProduct($productInfo, $subject );
+	    $this->logger->addInfo( print_r($item, true ) );
+	    $this->logger->addInfo( print_r($this->getProductOptions($item), true ) );
+
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
