@@ -235,7 +235,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                         <?php echo $block->getBlockHtml('formkey')?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard  <?php echo (!filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
+                                                                class="action tocart primary btn-blue-standard  <?php echo ($_product->getTypeId() === 'simple' && !filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>

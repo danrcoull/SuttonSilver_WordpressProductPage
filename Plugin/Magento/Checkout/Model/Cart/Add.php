@@ -132,48 +132,53 @@ class Add
     {
         $inductionType = $product->getAttributeText('induction_type');
 
-        switch (trim($inductionType)) {
-            case 'Level 3 induction':
-                $p = $this->productRepository->get($this->skus[0]);
-                break;
-            case 'Level 6 induction':
-            	if($this->gtfd == false) {
-		            $p = $this->productRepository->get( $this->skus[1] );
-	            }else{
-		            $p =  $this->productRepository->get($this->skus[2]);
-	            }
-                break;
-        }
+        if($inductionType) {
+	        switch ( trim( $inductionType ) ) {
+		        case 'Level 3 induction':
+			        $p = $this->productRepository->get( $this->skus[0] );
+			        break;
+		        case 'Level 6 induction':
+			        if ( $this->gtfd == false ) {
+				        $p = $this->productRepository->get( $this->skus[1] );
+			        } else {
+				        $p = $this->productRepository->get( $this->skus[2] );
+			        }
+			        break;
+	        }
 
 
-        try {
-            $poptions = $p->getOptions();
+	        try {
+		        $poptions = $p->getOptions();
 
-            $options = [];
-            foreach($poptions as $key => $val) {
-                $title=  $val->getTitle();
-                if (stripos(strtolower($title), 'induction') !== false) {
-                    if (stripos(strtolower($title), 'date') !== false) {
-                        $options[$val->getId()] = $induction['date'];
-                    } elseif (stripos(strtolower($title), 'location') !== false) {
-                        $options[$val->getId()] = $induction['location'];
-                    }
-                }
-            }
+		        $options = [];
+		        foreach ( $poptions as $key => $val ) {
+			        $title = $val->getTitle();
+			        if ( stripos( strtolower( $title ), 'induction' ) !== false ) {
+				        if ( stripos( strtolower( $title ), 'date' ) !== false ) {
+					        $options[ $val->getId() ] = $induction['date'];
+				        } elseif ( stripos( strtolower( $title ), 'location' ) !== false ) {
+					        $options[ $val->getId() ] = $induction['location'];
+				        }
+			        }
+		        }
 
 
-            if(!in_array($p->getId(),$this->ids)) {
-                    $subject->addProduct($p, ['form_key' => $this->formKey->getFormKey(), 'qty' => 1, 'options' => $options]);
-            }else{
-                $item = $subject->getItems()->addFieldToFilter('product_id', $p->getId())->getFirstItem();
-                $data = [$item->getId()];
+		        if ( ! in_array( $p->getId(), $this->ids ) ) {
+			        $subject->addProduct( $p, [
+				        'form_key' => $this->formKey->getFormKey(),
+				        'qty'      => 1,
+				        'options'  => $options
+			        ] );
+		        } else {
+			        $item = $subject->getItems()->addFieldToFilter( 'product_id', $p->getId() )->getFirstItem();
+			        $data = [ $item->getId() ];
 
-                array_push($data[$item->getId()]['options'],$options);
-                $subject->updateItems($data);
-            }
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            //die;
+			        array_push( $data[ $item->getId() ]['options'], $options );
+			        $subject->updateItems( $data );
+		        }
+	        } catch ( \Exception $e ) {
+		        $this->logger->addException( $e->getMessage() );
+	        }
         }
 
     }
