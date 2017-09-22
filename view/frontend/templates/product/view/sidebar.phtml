@@ -84,9 +84,12 @@ $product = $this->getProduct();
                 function resize() {
                     if (win.width() >= 768) {
                         scrollNav._init();
-                        $('.sidebar-main .jumpto').removeClass('collapsed');
+                        $('maincontent .sidebar-main .jumpto').removeClass('collapsed');
+                        $('#maincontent #productScroll').removeClass('collapse');
                     } else {
-                        $('.sidebar-main .jumpto').addClass('collapsed');
+                        $('maincontent .sidebar-main .jumpto').addClass('collapsed');
+                        $('#maincontent #productScroll').addClass('collapse');
+
                         $('#maincontent .siderbar-cart').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                         $('#maincontent #productScroll').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                     }
