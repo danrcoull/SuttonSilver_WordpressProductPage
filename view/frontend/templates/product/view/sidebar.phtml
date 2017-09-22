@@ -86,7 +86,7 @@ $product = $this->getProduct();
                         scrollNav._init();
                         $('.siderbar-cart .jumpto').removeClass('collapsed');
                     } else {
-                        $('.siderbar-cart .jumpto').addClass('collapsed');
+                        $('.sidebar-main.jumpto').addClass('collapsed');
                         $('#maincontent .siderbar-cart').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                         $('#maincontent #productScroll').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                     }
