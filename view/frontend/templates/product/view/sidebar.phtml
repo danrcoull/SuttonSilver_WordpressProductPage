@@ -70,9 +70,28 @@ $product = $this->getProduct();
     ], function ($,scrollNav) {
             $(document).ready(function(){
                 var win = $(window); //this = window
-                if (win.width() >= 720) {
-                    scrollNav._init();
+
+                $.fn.resized = function (callback, timeout) {
+                    $(this).resize(function () {
+                        var $this = $(this);
+                        if ($this.data('resizeTimeout')) {
+                            clearTimeout($this.data('resizeTimeout'));
+                        }
+                        $this.data('resizeTimeout', setTimeout(callback, timeout));
+                    });
+                };
+
+                function resize() {
+                    if (win.width() >= 768) {
+                        scrollNav._init();
+                    } else {
+                        $('#maincontent .siderbar-cart').off('.affix');
+                        $('#maincontent #productScroll').off('.affix');
+                    }
                 }
+
+                $(window).resized(resize, 300);
+
             })
     });
     // ]]>
