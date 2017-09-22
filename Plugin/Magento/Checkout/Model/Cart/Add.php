@@ -66,9 +66,10 @@ class Add
         $induction = [];
         $revision = [];
         $this->ids = $subject->getQuoteProductIds();
-        $this->logger->addInfo(print_r($requestInfo['options'], true));
+
         if(isset($requestInfo['options']) && !in_array($productInfo->getSku(),$this->skus))
         {
+
             foreach($requestInfo['options'] as $key => $val) {
 
                 $title = $productInfo->getOptionById($key)->getTitle();
