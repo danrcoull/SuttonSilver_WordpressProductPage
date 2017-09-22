@@ -85,8 +85,8 @@ $product = $this->getProduct();
                     if (win.width() >= 768) {
                         scrollNav._init();
                     } else {
-                        $('#maincontent .siderbar-cart').off('.affix');
-                        $('#maincontent #productScroll').off('.affix');
+                        $('#maincontent .siderbar-cart').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
+                        $('#maincontent #productScroll').removeData('bs.affix').removeClass('affix affix-top affix-bottom');
                     }
                 }
 
