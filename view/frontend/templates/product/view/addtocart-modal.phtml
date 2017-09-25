@@ -257,7 +257,7 @@
                             $('#addtocartmodal .induction').addClass('gftd').removeClass('induction');
                             $('.yes-no-wrapper-show-hide .gftd-date').parent().show();
                             $('.yes-no-wrapper-show-hide .induction-date').parent().hide();
-                            if($('.yes-no-wrapper-show-hide .gftd-date').length > 0){
+                            if($('.yes-no-wrapper-show-hide .gftd-date').length == 0){
                                 $('.hidden.no-inductions').removeClass('hidden').addClass('show');
                             }
                             gftdClick();
@@ -265,7 +265,7 @@
                             $('#addtocartmodal .gftd').addClass('induction').removeClass('gftd');
                             $('.yes-no-wrapper-show-hide .gftd-date').parent().hide();
                             $('.yes-no-wrapper-show-hide .induction-date').parent().show();
-                            if($('.yes-no-wrapper-show-hide .induction-date').length > 0){
+                            if($('.yes-no-wrapper-show-hide .induction-date').length == 0){
                                 $('.hidden.no-inductions').removeClass('hidden').addClass('show');
                             }
                             inductionClick();
