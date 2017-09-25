@@ -258,9 +258,7 @@ if ( $id != 0 ) {
                             </div>
 							<?php if ( $revisionLocation ): ?>
                                 <div class="col-xs-12 col-md-6  no-padding-right">
-                                    <?php if(count( $levelTerm ) == 0) : ?>
-                                        <p><?php echo __('There are no revision dates available'); ?></p>
-                                    <?php endif; ?>
+
                                     <ul>
 										<?php foreach ( $levelTerm as $event ) :
 
@@ -283,6 +281,9 @@ if ( $id != 0 ) {
                                 </div>
 							<?php endif; ?>
                         </div>
+
+                     <?php else : ?>
+                        <p><?php echo __('There are no revision dates available'); ?></p>
 					<?php endif; ?>
                 </div>
             </div>
