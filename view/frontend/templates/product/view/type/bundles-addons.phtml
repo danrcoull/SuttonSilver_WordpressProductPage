@@ -148,6 +148,9 @@ if($_item->getTypeId() == 'bundle') {
                             </div>
 							<?php if ( $inductionLocation ): ?>
                                 <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
+	                                <?php if(count( $levelTerm ) == 0) : ?>
+                                        <p class="hidden"><?php echo __('There are no induction dates available'); ?></p>
+	                                <?php endif; ?>
                                     <ul>
 										<?php foreach ( $levelTerm as $event ) :
 
@@ -221,13 +224,14 @@ $level6Id = 104;
 $gtfdId   = 0;
 
 switch ( trim( $type ) ) {
-	case 'CILEx Level 3 revision':
+	case 'level 3 induction':
 		$id = $level3Id;
 		break;
-	case 'CILEx Level 6 revision':
+	case 'level 6 induction':
 		$id = $level6Id;
 		break;
-	case 'GTFD induction':
+	case 'gtfd induction':
+	case 'gftd induction':
 		$id = $gtfdId;
 		break;
 }
@@ -245,7 +249,7 @@ if ( $id != 0 ) {
                 <span></span>
             </div>
             <div class="text pull-left">
-                <h3 class="title"><span><?php echo __( 'Please Select a Revision Location?' ); ?></span></h3>
+                <h3 class="title"><span><?php echo __( 'Please Select a Revision Date?' ); ?></span></h3>
                 <div class="content">
 					<?php if ( $revisionDate && count( $levelTerm ) > 0 ): ?>
                         <div class="row">
@@ -254,6 +258,9 @@ if ( $id != 0 ) {
                             </div>
 							<?php if ( $revisionLocation ): ?>
                                 <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
+                                    <?php if(count( $levelTerm ) == 0) : ?>
+                                        <p><?php echo __('There are no revision dates available'); ?></p>
+                                    <?php endif; ?>
                                     <ul>
 										<?php foreach ( $levelTerm as $event ) :
 
