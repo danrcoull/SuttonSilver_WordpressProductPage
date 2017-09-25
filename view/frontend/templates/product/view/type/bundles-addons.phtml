@@ -143,14 +143,13 @@ if($_item->getTypeId() == 'bundle') {
                         </div>
 
                         <div class="row">
+
                             <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-left ">
                                 <div id="datetimepicker12" data-options-id="<?php echo $inductionDateId; ?>"></div>
                             </div>
-							<?php if ( $inductionLocation ): ?>
+							<?php if ( $inductionLocation  ): ?>
                                 <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-right">
-	                                <?php if(count( $levelTerm ) == 0) : ?>
-                                        <p class="hidden"><?php echo __('There are no induction dates available'); ?></p>
-	                                <?php endif; ?>
+                                    <p class="hidden no-inductions"><?php echo __('There are no induction dates available'); ?></p>
                                     <ul>
 										<?php foreach ( $levelTerm as $event ) :
 
