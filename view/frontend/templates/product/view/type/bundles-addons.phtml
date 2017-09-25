@@ -194,7 +194,7 @@ endif;
 $revision   = false;
 $revisionId = false;
 
-$revisionData   = false;
+$revisionDate   = false;
 $revisionDateId = false;
 
 $revisionLocationId = false;
@@ -203,19 +203,15 @@ $revisionLocation   = false;
 
 foreach ( $customOptions as $option ):
 
-	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Day' ) ):
-		$induction   = true;
-		$inductionId = $option->getId();
-	endif;
-
 	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Date' ) ):
-		$inductionDate   = true;
-		$inductionDateId = $option->getId();
+		$revision   = true;
+		$revisionDate   = true;
+		$revisionDateId = $option->getId();
 	endif;
 
 	if ( strtolower( $option->getTitle() ) === strtolower( 'Revision Location' ) ):
-		$inductionLocation   = true;
-		$inductionLocationId = $option->getId();
+		$revisionLocation   = true;
+		$revisionLocationId = $option->getId();
 	endif;
 endforeach;
 
@@ -225,10 +221,10 @@ $level6Id = 104;
 $gtfdId   = 0;
 
 switch ( trim( $type ) ) {
-	case 'Level 3 induction':
+	case 'CILEx Level 3 revision':
 		$id = $level3Id;
 		break;
-	case 'Level 6 induction':
+	case 'CILEx Level 6 revision':
 		$id = $level6Id;
 		break;
 	case 'GTFD induction':
@@ -249,22 +245,9 @@ if ( $id != 0 ) {
                 <span></span>
             </div>
             <div class="text pull-left">
-                <h3 class="title"><span><?php echo __( 'Do you Require a revision day?' ); ?></span>
-                    <span class="subtitle "><?php echo __( 'Inductions are optional and are an introduction to CILEx Law School, rather than being course specific.' ); ?>
-                        <span class="error inline"><i class="fa fa-exclamation-triangle"
-                                                      aria-hidden="true"></i><?php echo __( "These are not course specific so please only select one date if you're enrolling on more than one course." ); ?></span>
-                    </span>
-
-                </h3>
+                <h3 class="title"><span><?php echo __( 'Please Select a Revision Location?' ); ?></span></h3>
                 <div class="content">
-					<?php if ( $revisionData && count( $levelTerm ) > 0 ): ?>
-                        <div class="row">
-                            <div class="yes-no-wrapper" data-options-id="<?php echo $revisionId; ?>">
-                                <a href="" data-induction="yes" class="active">Yes</a>
-                                <a href="" data-induction="no">No</a>
-                            </div>
-                        </div>
-
+					<?php if ( $revisionDate && count( $levelTerm ) > 0 ): ?>
                         <div class="row">
                             <div class="col-xs-12 col-md-6 yes-no-wrapper-show-hide no-padding-left ">
                                 <div id="datetimepicker12" data-options-id="<?php echo $revisionDateId; ?>"></div>
