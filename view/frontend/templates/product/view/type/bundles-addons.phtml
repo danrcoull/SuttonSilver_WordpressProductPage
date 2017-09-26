@@ -292,6 +292,7 @@ if ( $id != 0 ) {
 	<?php
 endif;
 ?>
+<?php if ($inductionDate ||  $revisionDate && count( $levelTerm ) > 0 ): ?>
 <div class="white">
     <div class="add-to-cart-title">
         <div class="circle-with-text small pull-left">
@@ -317,3 +318,7 @@ endif;
 
 <div class="add-to-cart arrow" style="opacity:0;">
     <span><?php echo __( 'Thank you. Please proceed to payment.' ); ?></span></div>
+<?php else: ?>
+    <div class="add-to-cart-failed arrow" style="opacity:0;">
+        <span><?php echo __( 'Sorry, we can not proceed, please contact us.' ); ?></span></div>
+<?php endif; ?>
