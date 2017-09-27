@@ -63,10 +63,20 @@ class View extends \Magento\Catalog\Block\Product\View {
 
     }
 	
-    public function getIdentities()
+  public function getIdentities()
     {
-        $this->_prepareData();
-    }
+        $identities = [];
+
+        if (is_array($this->getItems()) || is_object($this->getItems()))
+        {
+            foreach ($this->getItems() as $item)
+            {
+                $identities = array_merge($identities, $item->getIdentities());
+            }
+        }
+        return $identities;
+
+}
 	
     public function getPost() {
         if($this->getProductId()) {
