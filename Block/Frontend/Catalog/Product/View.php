@@ -62,6 +62,12 @@ class View extends \Magento\Catalog\Block\Product\View {
         $this->urlHelper = $urlHelper;
 
     }
+	
+    public function getIdentities()
+    {
+        $this->_prepareData();
+    }
+	
     public function getPost() {
         if($this->getProductId()) {
             $product = $this->productRepository->getById($this->getProductId());
