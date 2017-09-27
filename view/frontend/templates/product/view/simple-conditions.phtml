@@ -15,7 +15,7 @@
                                     if($id) :
 	                                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 	                                    $wpPages = $objectManager->get('\FishPig\WordPress\Model\App\Factory')->getFactory('Post')->create()->load($id);
-                                        if($_product->getTypeId() == 'simple' && $_product->getData('has_options')) :
+                                        if($_product->getTypeId() == 'simple' && !$_product->getData('has_options')) :
                                             $contentBefore =  $wpPages->getMetaValue('product_blocks_before_units');
                                             $contentAfter  =  $wpPages->getMetaValue('product_blocks_after_units');
 
