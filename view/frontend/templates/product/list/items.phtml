@@ -262,7 +262,6 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                             </div>
                             <div class="hidden-terms hidden">
 		                        <?php
-		                        if($_item->getTypeId() != 'bundle') :
 			                        $contentBefore =  $post->getMetaValue('product_blocks_before_units');
 			                        $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
 
@@ -293,7 +292,6 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 			                        }
 
 			                        echo $post->clean($terms);
-		                        endif;
 		                        ?>
                             </div>
                         </div>
