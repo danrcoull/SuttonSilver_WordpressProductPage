@@ -101,7 +101,7 @@ $items = $this->getProducts();
                                                 <?php $simpleVirtual = ($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual') ? true : false; var_dump($simpleVirtual); ?>
                                                 <button type="submit"
                                                         title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                        class="action tocart primary btn-blue-standard <?php echo ($simpleVirtual  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
+                                                        class="action tocart primary btn-blue-standard <?php echo ($simpleVirtual  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : 'bundle-addtocart'; ?>">
                                                     <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                 </button>
                                             </form>
@@ -124,7 +124,6 @@ $items = $this->getProducts();
                                 </div>
                                 <div class="hidden-terms hidden">
                                     <?php
-                                    if($_item->getTypeId() != 'bundle') :
                                         $contentBefore =  $post->getMetaValue('product_blocks_before_units');
                                         $contentAfter  =  $post->getMetaValue('product_blocks_after_units');
 
@@ -155,7 +154,7 @@ $items = $this->getProducts();
                                         }
 
                                         echo $post->clean($terms);
-                                    endif;
+
                                     ?>
                                 </div>
                             </div>
