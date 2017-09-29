@@ -1,4 +1,5 @@
 <?php
+$items = $block->getItems();
 switch ($type = $block->getType()) {
 
     case 'related-rule':
@@ -142,7 +143,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
 
 ?>
-this is a test
+
 <?php if ($exist):?>
 
     <div class="block-title title">
@@ -233,10 +234,10 @@ this is a test
                                                     ?>
                                                     <form data-role="tocart-form" data-product-id="<?php echo $_item->getId();?>" action="<?php echo $addToCartUrl; ?>" method="post">
                                                         <?php echo $block->getBlockHtml('formkey')?>
-	                                                    <?php $simpleVirtual = ($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual') ? true : false; var_dump($simpleVirtual); ?>
+	                                                    <?php $simpleVirtual = ($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual') ? true : false; ?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard  <?php echo (!filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : 'bundle-addtocart'; ?>">
+                                                                class="action tocart primary btn-blue-standard  <?php echo ($simpleVirtual  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : 'bundle-addtocart'; ?>">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>
