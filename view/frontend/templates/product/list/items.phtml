@@ -1,4 +1,5 @@
 <?php
+$items = $block->getItems();
 switch ($type = $block->getType()) {
 
     case 'related-rule':
@@ -235,7 +236,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                         <?php echo $block->getBlockHtml('formkey')?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard  <?php echo ($_item->getTypeId() === 'simple' && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
+                                                                class="action tocart primary btn-blue-standard  <?php echo (($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual')  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>
