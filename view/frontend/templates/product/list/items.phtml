@@ -234,9 +234,10 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                     ?>
                                                     <form data-role="tocart-form" data-product-id="<?php echo $_item->getId();?>" action="<?php echo $addToCartUrl; ?>" method="post">
                                                         <?php echo $block->getBlockHtml('formkey')?>
+	                                                    <?php $simpleVirtual = ($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual') ? true : false; var_dump($simpleVirtual); ?>
                                                         <button type="submit"
                                                                 title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
-                                                                class="action tocart primary btn-blue-standard  <?php echo (($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual')  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
+                                                                class="action tocart primary btn-blue-standard  <?php echo ($simpleVirtual  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : ''; ?>">
                                                             <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
                                                         </button>
                                                     </form>
