@@ -74,8 +74,6 @@
         currentAddToCart = null;
         $('.simple-addtocart').on('click', function(event)
         {
-            console.log(currentAddToCart);
-            console.log($(this));
             if(currentAddToCart !== null) {
                 if (!currentAddToCart.is($(this))) {
                     agreed = false;
@@ -89,6 +87,7 @@
             if(agreed === false) {
                 terms = $(this).closest('.inner').find('.hidden-terms').html();
                 $('.termsModalSimple .terms').html(terms);
+                addReveal();
                 $('.termsModalSimple').bsmodal('show');
                 event.preventDefault();
             }
@@ -101,6 +100,36 @@
             currentAddToCart.trigger('click');
             event.preventDefault();
         });
+
+        function addReveal() {
+
+            var overflow = $('.text-overflow');
+            if(overflow.length > 0) {
+                var h = overflow[0].scrollHeight;
+                overflow.animate({
+                    'height': '100px'
+                });
+
+                $(document).on('click', '.btn-overflow.more', function (e) {
+                    e.preventDefault();
+                    overflow.animate({
+                        'height': h
+                    });
+
+                    $(this).removeClass('more').addClass('less');
+                });
+
+                $(document).on('click', '.btn-overflow.less', function (e) {
+                    e.preventDefault();
+                    overflow.animate({
+                        'height': '100px'
+                    });
+                    $(this).removeClass('less').addClass('more');
+                });
+            }
+        }
+
+
 
     });
     // ]]>
