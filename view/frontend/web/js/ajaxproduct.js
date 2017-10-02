@@ -6,11 +6,11 @@ define([
 
 
     var ajaxproduct = {
+        showloader: false,
         options: {
             ajaxButton: '.open-simple-product',
             productModal: '#simple-product-modal',
-            loading: '.custom-overlay',
-            showloader: false
+            loading: '.custom-overlay'
         },
         _create: function () {
 
@@ -22,7 +22,7 @@ define([
         _loading: function () {
             var $loading = $(ajaxproduct.options.loading);
             $loading.removeClass('in');
-            if (this.showloader) {
+            if (ajaxproduct.showloader) {
                 $(document)
                     .ajaxStart(function () {
                         $('body').addClass('modal-open');
@@ -30,7 +30,7 @@ define([
                     })
                     .ajaxComplete(function () {
                         $loading.removeClass('in');
-                        this.showloader = false;
+                        ajaxproduct.showloader = false;
                     });
             }
         },
@@ -69,7 +69,7 @@ define([
                 var html = template(ajaxproduct.options.productModal, {content: data});
                 $(ajaxproduct.options.productModal).html(html);
                 $(ajaxproduct.options.productModal).bsmodal('show').css('opacity', 1);
-                this.showloader = false;
+                ajaxproduct.showloader = false;
             });
         }
     };
