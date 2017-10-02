@@ -14,12 +14,13 @@ define([
         },
         _create: function () {
 
-            ajaxproduct._loading();
+
             $(document).on('click', ajaxproduct.options.ajaxButton,  ajaxproduct._runAjax );
             $(document).on('hidden.bs.modal', ajaxproduct.options.productModal, ajaxproduct._resetBox);
 
         },
         _loading: function () {
+            ajaxproduct.showloader = true;
             var $loading = $(ajaxproduct.options.loading);
             $loading.removeClass('in');
             if (ajaxproduct.showloader) {
@@ -51,7 +52,8 @@ define([
         },
         _runAjax: function (event) {
 
-            this.showloader = true;
+            ajaxproduct._loading();
+
 
             if($('#addtocartmodal').hasClass('in')) {
                 $('#addtocartmodal').css('opacity', 0).hide();
