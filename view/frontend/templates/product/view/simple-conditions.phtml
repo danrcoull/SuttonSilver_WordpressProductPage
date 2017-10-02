@@ -96,7 +96,6 @@
 
         $('.termsModalSimple .agree').on('click',function(event){
             agreed=true;
-            console.log(currentAddToCart);
             currentAddToCart.trigger('click');
             event.preventDefault();
         });
@@ -116,19 +115,18 @@
                         'height': h
                     });
 
-                    $(this).removeClass('more').addClass('less');
+                    $(this).removeClass('more').addClass('less').text('Show Less');
                 });
 
                 $(document).on('click', '.btn-overflow.less', function (e) {
                     e.preventDefault();
                     overflow.animate({
-                        'height': '100px'
+                        'height': '200px'
                     });
-                    $(this).removeClass('less').addClass('more');
+                    $(this).removeClass('less').addClass('more').text('Show More');
                 });
             }
         }
-
 
 
     });
