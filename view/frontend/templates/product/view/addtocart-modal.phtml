@@ -93,6 +93,15 @@
 
 
         var $datePicker = $('#datetimepicker12');
+        $datePicker.datepicker('destroy');
+        $datePicker.datepicker({
+            inline: true,
+            format: "dd MM yyyy",
+            onSelect: function (date) {
+                //$dateId = $('#datetimepicker12').attr('data-options-id');
+                //$('#options_'+$dateId+'_text').attr('value',date);
+            },
+        });
 
         $('.yes-no-wrapper-show-hide').hide();
 
