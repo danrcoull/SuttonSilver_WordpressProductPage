@@ -107,7 +107,7 @@
              var h = -1;
 
   $('.text-overflow').each(function() {
-    h = h > $(this).height() ? h :     $(this).height();
+    h = h > $(this).scrollHeight() ? h :     $(this).scrollHeight();
  });
                 overflow.animate({
                     'height': '100px'
