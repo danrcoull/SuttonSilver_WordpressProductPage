@@ -104,7 +104,11 @@
 
             var overflow = $('.text-overflow');
             if(overflow.length > 0) {
-                var h = overflow[0].scrollHeight;
+             var h = -1;
+
+  $('.text-overflow').each(function() {
+    h = h > $(this).height() ? h :     $(this).height();
+ });
                 overflow.animate({
                     'height': '100px'
                 });
@@ -115,7 +119,8 @@
                         'height': h
                     });
 
-                    $(this).removeClass('more').addClass('less').text('Show Less');
+                    $(this).removeClass('more').addClass('less');
+			$(this).html('Show Less');
                 });
 
                 $(document).on('click', '.btn-overflow.less', function (e) {
@@ -123,7 +128,8 @@
                     overflow.animate({
                         'height': '200px'
                     });
-                    $(this).removeClass('less').addClass('more').text('Show More');
+                    $(this).removeClass('less').addClass('more');
+			$(this).html('Show More');
                 });
             }
         }
