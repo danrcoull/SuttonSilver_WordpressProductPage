@@ -72,9 +72,9 @@ $hasOptions =  filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOO
                             <?php endif; ?>
                             <div class="actions">
                                 <button type="submit"
-                                        title="<?php echo $block->escapeHtml(__('Add to Basket')); ?>"
+                                        title="<?php echo $block->escapeHtml(__('Add to basket')); ?>"
                                         class="action primary tocart <?php echo ($type == 'bundle' || $hasOptions) ? 'bundle-addtocart' : 'simple-addtocart'; ?>">
-                                    <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
+                                    <span><?php /* @escapeNotVerified */ echo __('Add to basket') ?></span>
                                 </button>
                             </div>
                         </form>

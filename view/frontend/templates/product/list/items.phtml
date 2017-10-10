@@ -237,9 +237,9 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                                                         <?php echo $block->getBlockHtml('formkey')?>
 	                                                    <?php $simpleVirtual = ($_item->getTypeId() === 'simple' || $_item->getTypeId() === 'virtual') ? true : false; ?>
                                                         <button type="submit"
-                                                                title="<?php /* @escapeNotVerified */ echo __('Add to Basket') ?>"
+                                                                title="<?php /* @escapeNotVerified */ echo __('Add to basket') ?>"
                                                                 class="action tocart primary btn-blue-standard  <?php echo ($simpleVirtual  && !filter_var($_item->getData('has_options'), FILTER_VALIDATE_BOOLEAN)) ? 'simple-addtocart' : 'bundle-addtocart'; ?>">
-                                                            <span><?php /* @escapeNotVerified */ echo __('Add to Basket') ?></span>
+                                                            <span><?php /* @escapeNotVerified */ echo __('Add to basket') ?></span>
                                                         </button>
                                                     </form>
                                                 <?php else: ?>
