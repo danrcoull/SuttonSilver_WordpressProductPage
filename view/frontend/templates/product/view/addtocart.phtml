@@ -60,9 +60,9 @@ $buttonTitle = __("Add to Basket");
             <?php endif; ?>
         </div>
         <?php if($_product->getTypeId() === 'bundle'): ?>
-        <div class="cart-footer">
-            <a class="single-units btn-blue-standard" href="#"><?php /* @escapeNotVerified */ echo __('Single Units From £120'); ?></a>
-        </div>
+            <div class="cart-footer">
+                <a class="single-units btn-blue-standard" href="<?php echo $lowestUrl; ?>"><?php /* @escapeNotVerified */ echo __('Single units from £'.($lowest*1.2)); ?></a>
+            </div>
         <?php endif; ?>
     </div>
 <?php endif; ?>

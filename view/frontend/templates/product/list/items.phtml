@@ -198,11 +198,12 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                             {
                                 $simlePrice += $simple->getFinalPrice();
                             }
+                            $discount = ($simlePrice-$price) * 1.2;
                             ?>
 
                             <div class="ribbon ribbon-top-right">
                                 <?php   if ($simlePrice > $price) :?>
-                                    <span>£<?php echo ceil($simlePrice-$price); ?></span>
+                                    <span>£<?php echo ceil($discount); ?></span>
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>

@@ -30,10 +30,11 @@ $hasOptions =  filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOO
             }
 
         }
+        $discount = ($simlePrice-$price) * 1.2;
         ?>
         <div class="ribbon ribbon-top-right">
             <?php   if ($simlePrice > $price) :?>
-                <span>£<?php echo round($simlePrice-$price); ?></span>
+                <span>£<?php echo ceil($discount); ?></span>
             <?php endif; ?>
         </div>
     <?php endif; ?>
@@ -100,7 +101,7 @@ $hasOptions =  filter_var($_product->getData('has_options'), FILTER_VALIDATE_BOO
             </div>
             <?php if($_product->getTypeId() === 'bundle'): ?>
                 <div class="cart-footer">
-                    <a class="single-units btn-blue-standard" href="<?php echo $lowestUrl; ?>"><?php /* @escapeNotVerified */ echo __('Single Units From £'.$lowest); ?></a>
+                    <a class="single-units btn-blue-standard" href="<?php echo $lowestUrl; ?>"><?php /* @escapeNotVerified */ echo __('Single units from £'.($lowest*1.2)); ?></a>
                 </div>
             <?php endif; ?>
         </div>
