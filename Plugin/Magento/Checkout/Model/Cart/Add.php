@@ -80,7 +80,7 @@ class Add
 			                $yesNoValue = $productInfo->getOptionById( $key )->getValueById( $val[0] )->getTitle();
 			                $this->logger->addInfo(print_r($yesNoValue,true));
 
-			                if ( $yesNoValue === 'Yes, GFTD' ) {
+			                if ( strtolower($yesNoValue) == strtolower('Yes, GFTD')) {
 			                    $this->gtfd = true;
 			                }
 		                }
