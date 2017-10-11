@@ -119,8 +119,8 @@
                         'height': h
                     });
 
-                    $(this).removeClass('more').addClass('less');
-			$(this).html('Show Less');
+                    $(this).removeClass('more').addClass('less test');
+			$(this).html('Show less');
                 });
 
                 $(document).on('click', '.btn-overflow.less', function (e) {
@@ -129,7 +129,7 @@
                         'height': '200px'
                     });
                     $(this).removeClass('less').addClass('more');
-			$(this).html('Show More');
+			$(this).html('Show more');
                 });
             }
         }
