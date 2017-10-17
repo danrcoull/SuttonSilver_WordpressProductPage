@@ -15,6 +15,6 @@
 	<preference for="Magento\Catalog\Block\Product\ListProduct" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ListProduct" />
 	<preference for="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\ListProduct" />
 	<preference for="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" type="SuttonSilver\WordpressProductPage\Block\Frontend\Catalog\Product\View\Type\Bundle" />
-	<preference for="FishPig\WordPress\Block\Archive\View" type="SuttonSilver\WordpressProductPage\Block\Block\Fishpig\Archive\View" />
+	<preference for="FishPig\WordPress\Block\Archive\View" type="SuttonSilver\WordpressProductPage\Block\Fishpig\Archive\View" />
 	<preference for="FishPig\WordPress\Model\ResourceModel\Archive" type="SuttonSilver\WordpressProductPage\Model\Fishpig\ResourceModel\Archive" />
 </config>
