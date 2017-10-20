@@ -68,7 +68,7 @@ $items = $this->getProducts();
                                 </div>
                             <?php endif; ?>
 
-                            <div class="inner">
+                            <div class="inner <?php echo ($_item->getFinalPrice() <= 0) ? "view-only" : ""; ?> ">
                                 <?php if($_item->getFinalPrice() > 0) : ?>
                                     <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
                                 <?php endif; ?>
